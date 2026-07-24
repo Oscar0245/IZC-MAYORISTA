@@ -27,33 +27,14 @@
 
       <!-- Buscador principal -->
       <form class="search-bar" action="#" method="GET">
-        <div class="cat-select">
-          <button type="button" class="cat-select-btn" id="catSelectBtn">
-            <span id="catSelectLabel">Todas las categorías</span>
-            <span class="cat-select-arrow">▼</span>
-          </button>
-          
-          <div class="cat-select-panel" id="catSelectPanel">
-            <div class="cat-tree-wrap">
-              <ul class="cat-tree">
-                <li class="cat-node"><a href="#" class="cat-link">Todas las categorías</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Punto de Venta</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Marcación y Etiquetado</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Seguridad Electrónica</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Cables y Conectividad</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Movilidad</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
+        <div class="cat-select"></div>
         <input type="text" placeholder="Buscar en toda la tienda...">
         <button type="submit">🔍︎</button>
       </form>
 
       <!-- Acciones de usuario -->
       <div class="header-actions">
-        <a href="#" class="action"><span class="icon">♡</span><span>Deseos</span></a>
+        <a href="#" class="action"><span class="icon">♡</span><span>Lista de Deseos</span></a>
         <a href="#" class="action"><span class="icon">🛒</span><span>Carrito</span></a>
       </div>
     </div>
@@ -224,13 +205,22 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
-          <a href="marcas.html">Marcas</a>
-        </li>
-        
+                  <li class="nav-item has-flyout"><a href="#">Categorías</a>
+          <div class="flyout">
+            <div class="flyout-sidebar">
+              <ul>
+                <li class="flyout-cat active" data-panel="pos">Equipos todo en uno</li>
+                <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
+                <li class="flyout-cat" data-panel="seguridad">Cámaras</li>
+                <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
+                <li class="flyout-cat" data-panel="movilidad">Routers Wifi</li>
+              </ul>
+            </div>
+            <li class="nav-item"><a href="marcas.html">Marcas</a></li>
         <li class="nav-item"><a href="#">Promociones</a></li>
-        <li class="nav-item"><a href="#">Eventos</a></li>
-        <li class="nav-item"><a href="#">Pague Aquí</a></li>
+      </ul>
+    </div>
+  </nav>
       </ul>
     </div>
   </nav>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IZC MAYORISTA - Marcas</title>
-    <link rel="stylesheet" href="assets/css/marcas.css">
-    <script src="assets/js/marcas.js" defer></script>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZC MAYORISTA - Marcas</title>
+  <link rel="stylesheet" href="assets/css/marcas.css">
+  <script src="assets/js/marcas.js" defer></script>
 </head>
 <body>
 
@@ -25,33 +25,14 @@
 
       <!-- Buscador principal -->
       <form class="search-bar" action="#" method="GET">
-        <div class="cat-select">
-          <button type="button" class="cat-select-btn" id="catSelectBtn">
-            <span id="catSelectLabel">Todas las categorías</span>
-            <span class="cat-select-arrow">▼</span>
-          </button>
-          
-          <div class="cat-select-panel" id="catSelectPanel">
-            <div class="cat-tree-wrap">
-              <ul class="cat-tree">
-                <li class="cat-node"><a href="#" class="cat-link">Todas las categorías</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Punto de Venta</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Marcación y Etiquetado</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Seguridad Electrónica</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Cables y Conectividad</a></li>
-                <li class="cat-node"><a href="#" class="cat-link">Movilidad</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
+        <div class="cat-select"></div>
         <input type="text" placeholder="Buscar en toda la tienda...">
         <button type="submit">🔍︎</button>
       </form>
 
       <!-- Acciones de usuario -->
       <div class="header-actions">
-        <a href="#" class="action"><span class="icon">♡</span><span>Deseos</span></a>
+        <a href="#" class="action"><span class="icon">♡</span><span>Lista de Deseos</span></a>
         <a href="#" class="action"><span class="icon">🛒</span><span>Carrito</span></a>
       </div>
     </div>
@@ -60,21 +41,21 @@
   <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-inner">
+      <ul>
         <li class="nav-item">
-            <a href="index.html">🏠︎</a>
+          <a href="index.html">🏠︎</a>
         </li>
-        <ul>
-            <li class="nav-item has-flyout">
-            <a href="#">☰ Nuestros Productos</a>
-            <div class="flyout">
+        <li class="nav-item has-flyout">
+          <a href="#">☰ Nuestros Productos</a>
+          <div class="flyout">
             <div class="flyout-sidebar">
-                <ul>
+              <ul>
                 <li class="flyout-cat active" data-panel="pos">Punto de Venta</li>
                 <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
                 <li class="flyout-cat" data-panel="seguridad">Seguridad Electrónica</li>
                 <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
                 <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
-                </ul>
+              </ul>
             </div>
 
             <div class="flyout-panel">
@@ -222,13 +203,19 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
-          <a href="marcas.html">Marcas</a>
-        </li>
-        
+          <li class="nav-item has-flyout"><a href="#">Categorías</a>
+          <div class="flyout">
+            <div class="flyout-sidebar">
+              <ul>
+                <li class="flyout-cat active" data-panel="pos">Equipos todo en uno</li>
+                <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
+                <li class="flyout-cat" data-panel="seguridad">Cámaras</li>
+                <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
+                <li class="flyout-cat" data-panel="movilidad">Routers Wifi</li>
+              </ul>
+            </div>
+            <li class="nav-item"><a href="marcas.html">Marcas</a></li>
         <li class="nav-item"><a href="#">Promociones</a></li>
-        <li class="nav-item"><a href="#">Eventos</a></li>
-        <li class="nav-item"><a href="#">Pague Aquí</a></li>
       </ul>
     </div>
   </nav>
@@ -243,15 +230,33 @@
         
         <div class="carousel-track-container">
           <ul class="carousel-track" id="brandsTrack">
-            <li class="brand-card"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/Elo.png" alt="Elo" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/HID.png" alt="HID" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/IMOU.png" alt="IMOU" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/Topaz.png" alt="Topaz" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/Zebra.png" alt="Zebra" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
-            <li class="brand-card"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/Elo.png" alt="Elo" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/HID.png" alt="HID" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/IMOU.png" alt="IMOU" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/Topaz.png" alt="Topaz" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/Zebra.png" alt="Zebra" class="brand-logo"></a>
+            </li>
+            <li class="brand-card">
+              <a href="#"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco" class="brand-logo"></a>
+            </li>
           </ul>
         </div>
         
