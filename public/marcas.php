@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IZC MAYORISTA - Marcas</title>
+    <link rel="stylesheet" href="assets/css/marcas.css">
+    <script src="assets/js/marcas.js" defer></script>
+</head>
+<body>
+
+  <!-- Top utility bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+
+  <!-- Main header -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.php">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+
+      <!-- Buscador principal -->
+      <form class="search-bar" action="#" method="GET">
+        <div class="cat-select">
+          <button type="button" class="cat-select-btn" id="catSelectBtn">
+            <span id="catSelectLabel">Todas las categorías</span>
+            <span class="cat-select-arrow">▼</span>
+          </button>
+          
+          <div class="cat-select-panel" id="catSelectPanel">
+            <div class="cat-tree-wrap">
+              <ul class="cat-tree">
+                <li class="cat-node"><a href="#" class="cat-link">Todas las categorías</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Punto de Venta</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Marcación y Etiquetado</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Seguridad Electrónica</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Cables y Conectividad</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Movilidad</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <input type="text" placeholder="Buscar en toda la tienda...">
+        <button type="submit">🔍︎</button>
+      </form>
+
+      <!-- Acciones de usuario -->
+      <div class="header-actions">
+        <a href="#" class="action"><span class="icon">♡</span><span>Deseos</span></a>
+        <a href="#" class="action"><span class="icon">🛒</span><span>Carrito</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+        <li class="nav-item">
+            <a href="index.php">🏠︎</a>
+        </li>
+        <ul>
+            <li class="nav-item has-flyout">
+            <a href="#">☰ Nuestros Productos</a>
+            <div class="flyout">
+            <div class="flyout-sidebar">
+                <ul>
+                <li class="flyout-cat active" data-panel="pos">Punto de Venta</li>
+                <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
+                <li class="flyout-cat" data-panel="seguridad">Seguridad Electrónica</li>
+                <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
+                <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
+                </ul>
+            </div>
+
+            <div class="flyout-panel">
+              <!-- Punto de Venta -->
+              <div class="flyout-panel-content active" data-panel="pos">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</div>
+                    <ul>
+                      <li><a href="#">De Mano</a></li>
+                      <li><a href="#">Inalámbricos</a></li>
+                      <li><a href="#">De Mesa</a></li>
+                      <li><a href="#">Empotrables</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</div>
+                    <ul>
+                      <li><a href="#">Digitalizadoras de Firmas</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</div>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</div>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🖨</span>Mini PC</div>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">⚖</span>Balanzas</div>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Marcación y Etiquetado -->
+              <div class="flyout-panel-content" data-panel="marcacion">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</div>
+                    <ul>
+                      <li><a href="#">De escritorio</a></li>
+                      <li><a href="#">Semi industriales</a></li>
+                      <li><a href="#">Industriales</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</div>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</div>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">▭</span>Consumibles</div>
+                    <ul>
+                      <li><a href="#">Etiquetas adhesivas</a></li>
+                      <li><a href="#">Ribbons o Cintas</a></li>
+                      <li><a href="#">Manillas para identificación</a></li>
+                      <li><a href="#">Kits de limpieza</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">▭</span>Flexografia</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Seguridad Electrónica -->
+              <div class="flyout-panel-content" data-panel="seguridad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</div>
+                    <ul>
+                      <li><a href="#">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="#">Accesorios de Control de Acceso</a></li>
+                      <li><a href="#">Lectores de Huella Biometricos</a></li>
+                      <li><a href="#">Alarmas</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">📷</span>CAMARAS CCTV</div>
+                    <ul>
+                      <li><a href="#">Biometría</a></li>
+                      <li><a href="#">Cerraduras electrónicas</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</div>
+                    <ul>
+                      <li><a href="#">Grabadores Análogos</a></li>
+                      <li><a href="#">Grabadores IP</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">⚙</span>ACCESORIOS</div>
+                    <ul>
+                      <li><a href="#">Accesorios para CCTV</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cables y conectividad -->
+              <div class="flyout-panel-content" data-panel="conectividad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</div>
+                    <ul>
+                      <li><a href="#">Access Point</a></li>
+                      <li><a href="#">Radio Enlaces</a></li>
+                      <li><a href="#">Routers</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Movilidad -->
+              <div class="flyout-panel-content" data-panel="movilidad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</div>
+                    <ul>
+                      <li><a href="#">Impresoras Portátiles</a></li>
+                      <li><a href="#">Terminales Móviles</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="marcas.php">Marcas</a>
+        </li>
+        
+        <li class="nav-item"><a href="#">Promociones</a></li>
+        <li class="nav-item"><a href="#">Eventos</a></li>
+        <li class="nav-item"><a href="#">Pague Aquí</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sección Carrusel de Marcas -->
+  <section class="brands-section">
+    <div class="brands-container">
+      <h2 class="brands-title">Nuestras Marcas</h2>
+      
+      <div class="carousel-wrapper">
+        <button type="button" class="carousel-btn prev-btn" id="prevBrandBtn">❮</button>
+        
+        <div class="carousel-track-container">
+          <ul class="carousel-track" id="brandsTrack">
+            <li class="brand-card"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/Elo.png" alt="Elo" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/HID.png" alt="HID" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/IMOU.png" alt="IMOU" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/Topaz.png" alt="Topaz" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/Zebra.png" alt="Zebra" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+            <li class="brand-card"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco" class="brand-logo"><a href="#"><span class="brand-name"></span></a></li>
+          </ul>
+        </div>
+        
+        <button type="button" class="carousel-btn next-btn" id="nextBrandBtn">❯</button>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

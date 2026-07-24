@@ -1,42 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IZC MAYORISTA</title>
+    <title>IZC MAYORISTA - Marcas</title>
+      <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+
     <link rel="stylesheet" href="assets/css/index.css">
+    <script src="assets/js/index.js" defer></script>
 </head>
 <body>
 
   <!-- Top utility bar -->
   <div class="top-bar">
     <div class="top-bar-inner">
-
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
     </div>
   </div>
 
   <!-- Main header -->
   <header class="main-header">
     <div class="main-header-inner">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-          <img src="assets/logo/logoizc.png" alt="#" class="#">
-        </a>
+      <a class="logo" href="index.php">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
 
-      <form class="search-bar" onsubmit="return false;">
-        <select>
-          <option>Todas las categorías</option>
-          <option>Punto de Venta</option>
-          <option>Seguridad Electrónica</option>
-          <option>Cableado y Conectividad</option>
-        </select>
+      <!-- Buscador principal -->
+      <form class="search-bar" action="#" method="GET">
+        <div class="cat-select">
+          <button type="button" class="cat-select-btn" id="catSelectBtn">
+            <span id="catSelectLabel">Todas las categorías</span>
+            <span class="cat-select-arrow">▼</span>
+          </button>
+          
+          <div class="cat-select-panel" id="catSelectPanel">
+            <div class="cat-tree-wrap">
+              <ul class="cat-tree">
+                <li class="cat-node"><a href="#" class="cat-link">Todas las categorías</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Punto de Venta</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Marcación y Etiquetado</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Seguridad Electrónica</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Cables y Conectividad</a></li>
+                <li class="cat-node"><a href="#" class="cat-link">Movilidad</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <input type="text" placeholder="Buscar en toda la tienda...">
-        <button type="submit">🔍</button>
+        <button type="submit">🔍︎</button>
       </form>
 
+      <!-- Acciones de usuario -->
       <div class="header-actions">
-        <a href="#" class="action"><span class="icon">♡</span>Deseos</a>
-        <a href="#" class="action"><span class="icon">⇄</span>Comparar</a>
-        <a href="#" class="action"><span class="icon">🛒</span>Carrito</a>
+        <a href="#" class="action"><span class="icon">♡</span><span>Deseos</span></a>
+        <a href="#" class="action"><span class="icon">🛒</span><span>Carrito</span></a>
       </div>
     </div>
   </header>
@@ -44,8 +62,11 @@
   <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-inner">
-      <ul>
-        <li class="nav-item categories has-flyout">
+      <li class="nav-item">
+          <a href="index.php">🏠︎</a>
+        </li> 
+      <ul>  
+        <li class="nav-item has-flyout">
           <a href="#">☰ Nuestros Productos</a>
           <div class="flyout">
             <div class="flyout-sidebar">
@@ -57,8 +78,9 @@
                 <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
               </ul>
             </div>
-            <div class="flyout-panel">
 
+            <div class="flyout-panel">
+              <!-- Punto de Venta -->
               <div class="flyout-panel-content active" data-panel="pos">
                 <div class="flyout-col">
                   <div class="flyout-group">
@@ -87,138 +109,133 @@
                   <div class="flyout-group">
                     <div class="flyout-group-title"><span class="icon">🖨</span>Mini PC</div>
                   </div>
-                   <div class="flyout-group">
+                  <div class="flyout-group">
                     <div class="flyout-group-title"><span class="icon">⚖</span>Balanzas</div>
                   </div>
-                   <div class="flyout-group">
+                  <div class="flyout-group">
                     <div class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</div>
                   </div>
                 </div>
               </div>
 
+              <!-- Marcación y Etiquetado -->
               <div class="flyout-panel-content" data-panel="marcacion">
                 <div class="flyout-col">
                   <div class="flyout-group">
                     <div class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</div>
                     <ul>
-                      <li><a href="#">Térmicas</a></li>
-                      <li><a href="#">Transferencia térmica</a></li>
-                      <li><a href="#">Portátiles</a></li>
+                      <li><a href="#">De escritorio</a></li>
+                      <li><a href="#">Semi industriales</a></li>
                       <li><a href="#">Industriales</a></li>
                     </ul>
+                  </div>
                   <div class="flyout-group">
                     <div class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</div>
                   </div>
-                   <div class="flyout-group">
+                  <div class="flyout-group">
                     <div class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</div>
                   </div>
-                </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
                     <div class="flyout-group-title"><span class="icon">▭</span>Consumibles</div>
                     <ul>
                       <li><a href="#">Etiquetas adhesivas</a></li>
-                      <li><a href="#">Cintas de transferencia</a></li>
-                      <li><a href="#">Papel para POS</a></li>
+                      <li><a href="#">Ribbons o Cintas</a></li>
+                      <li><a href="#">Manillas para identificación</a></li>
+                      <li><a href="#">Kits de limpieza</a></li>
                     </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">▭</span>Flexografia</div>
                   </div>
                 </div>
               </div>
 
-              <div class="flyout-panel-content" data-panel="movilidad">
-                <div class="flyout-col">
-                  <div class="flyout-group">
-                    <div class="flyout-group-title"><span class="icon">📱</span>Terminales Portátiles</div>
-                    <ul>
-                      <li><a href="#">Colectores de datos</a></li>
-                      <li><a href="#">Tablets industriales</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="flyout-col">
-                  <div class="flyout-group">
-                    <div class="flyout-group-title"><span class="icon">🔋</span>Accesorios</div>
-                    <ul>
-                      <li><a href="#">Baterías y cargadores</a></li>
-                      <li><a href="#">Fundas y protectores</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
+              <!-- Seguridad Electrónica -->
               <div class="flyout-panel-content" data-panel="seguridad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <div class="flyout-group-title"><span class="icon">📷</span>Videovigilancia</div>
+                    <div class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</div>
                     <ul>
-                      <li><a href="#">Cámaras IP</a></li>
-                      <li><a href="#">Grabadores NVR/DVR</a></li>
+                      <li><a href="#">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="#">Accesorios de Control de Acceso</a></li>
+                      <li><a href="#">Lectores de Huella Biometricos</a></li>
+                      <li><a href="#">Alarmas</a></li>
                     </ul>
                   </div>
-                </div>
-                <div class="flyout-col">
                   <div class="flyout-group">
-                    <div class="flyout-group-title"><span class="icon">🔒</span>Control de Acceso</div>
+                    <div class="flyout-group-title"><span class="icon">📷</span>CAMARAS CCTV</div>
                     <ul>
                       <li><a href="#">Biometría</a></li>
                       <li><a href="#">Cerraduras electrónicas</a></li>
                     </ul>
                   </div>
                 </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</div>
+                    <ul>
+                      <li><a href="#">Grabadores Análogos</a></li>
+                      <li><a href="#">Grabadores IP</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">⚙</span>ACCESORIOS</div>
+                    <ul>
+                      <li><a href="#">Accesorios para CCTV</a></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
+              <!-- Cables y conectividad -->
               <div class="flyout-panel-content" data-panel="conectividad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <div class="flyout-group-title"><span class="icon">📡</span>Redes</div>
+                    <div class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</div>
                     <ul>
-                      <li><a href="#">Switches</a></li>
-                      <li><a href="#">Puntos de acceso</a></li>
+                      <li><a href="#">Access Point</a></li>
+                      <li><a href="#">Radio Enlaces</a></li>
+                      <li><a href="#">Routers</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <div class="flyout-group-title"><span class="icon">🔌</span>Cableado</div>
+                    <div class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Movilidad -->
+              <div class="flyout-panel-content" data-panel="movilidad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <div class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</div>
                     <ul>
-                      <li><a href="#">Cable de red</a></li>
-                      <li><a href="#">Conectores</a></li>
+                      <li><a href="#">Impresoras Portátiles</a></li>
+                      <li><a href="#">Terminales Móviles</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </li>
         <li class="nav-item">
-          <a href="#">Marcas</a>
-          <ul class="dropdown">
-            <li><a href="datalogic.html">Datalogic</a></li>
-            <li><a href="#">Elo</a></li>
-            <li><a href="#">HID</a></li>
-            <li><a href="#">Honeywell</a></li>
-            <li><a href="#">Imou</a></li>
-            <li><a href="#">Ruijie</a></li>
-            <li><a href="#">Topaz</a></li>
-            <li><a href="#">Zebra</a></li>
-            <li><a href="#">ZKTeco</a></li>
-          </ul>
+          <a href="marcas.php">Marcas</a>
         </li>
-        <li class="nav-item">
-          <a href="#">Promociones</a>
-        </li>
-        <li class="nav-item">
-          <a href="#">Eventos</a>
-        </li>
-        <li class="nav-item">
-          <a href="#">Pague Aquí</a>
-        </li>
+        
+        <li class="nav-item"><a href="#">Promociones</a></li>
+        <li class="nav-item"><a href="#">Eventos</a></li>
+        <li class="nav-item"><a href="#">Pague Aquí</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero banner placeholder -->
+  <!-- Hero banner -->
   <section class="hero">
     <div class="hero-banner">
       <div class="hero-text">
@@ -228,6 +245,5 @@
     </div>
   </section>
 
-  <script src="assets/js/index.js"></script>
 </body>
 </html>
