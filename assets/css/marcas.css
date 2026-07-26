@@ -2,20 +2,13 @@
    1. VARIABLES GLOBALES Y RESET
    ========================================== */
 :root {
-  --blue-deep:   #1653a0;
-  --blue-mid:    #1653a0;
-  --blue-bright: #1d72db; 
-  --ink:         #16233f;
-  --paper:       #ffffff;
-  --line:        #e7f0e3;
-  --border-color:#e0e0e0;
-}
-
-.nav-item.active > a,
-.nav-item.active > a:hover {
-  background-color: #1d72db !important; 
-  color: #ffffff !important;
-  font-weight: 700;
+  --blue-deep:    #1653a0;
+  --blue-mid:     #1653a0;
+  --blue-bright:  #1d72db; 
+  --ink:          #16233f;
+  --paper:        #ffffff;
+  --line:         #e7f0e3;
+  --border-color: #e0e0e0;
 }
 
 * { 
@@ -106,71 +99,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   background: #f1f3f7;
   flex-shrink: 0;
 }
-.cat-select-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  height: 100%;
-  min-height: 42px;
-  border: none;
-  background: transparent;
-  padding: 0 14px;
-  font-size: 13.5px;
-  color: var(--ink);
-  cursor: pointer;
-  white-space: nowrap;
-  width: 190px;
-  text-align: left;
-}
-.cat-select-btn span:first-child {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.cat-select-arrow {
-  font-size: 10px;
-  color: #666;
-  transition: transform .15s;
-}
-.cat-select.open .cat-select-arrow { transform: rotate(180deg); }
-
-.cat-select-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 250px;
-  max-height: 0;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid transparent;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-  z-index: 60;
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-.cat-select.open .cat-select-panel {
-  max-height: 320px;
-  overflow-y: auto;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  border-color: #c2d1e5;
-}
-
-.cat-tree-wrap { padding: 6px 0; }
-.cat-link {
-  display: block;
-  padding: 8px 16px;
-  font-size: 13.5px;
-  color: var(--ink);
-}
-.cat-link:hover {
-  background: #eef4ff;
-  color: var(--blue-mid);
-}
 
 .search-bar input {
   flex: 1;
@@ -189,26 +117,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   transition: background .15s;
 }
 .search-bar button:hover { background: var(--blue-deep); }
-
-/* Acciones de usuario */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
-}
-.header-actions .action {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 11px;
-  color: var(--ink);
-  gap: 2px;
-}
-.header-actions .icon {
-  font-size: 20px;
-  color: var(--blue-mid);
-}
 
 /* ==========================================
    4. NAVEGACIÓN PRINCIPAL
@@ -242,6 +150,13 @@ nav.main-nav { background: var(--blue-deep); }
   color: #fff;
 }
 
+.nav-item.active > a,
+.nav-item.active > a:hover {
+  background-color: var(--blue-bright) !important; 
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
 /* Flyout Menu */
 .flyout {
   position: absolute;
@@ -256,7 +171,7 @@ nav.main-nav { background: var(--blue-deep); }
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px);
-  transition: all .3s ease;
+  transition: all .2s ease;
   z-index: 50;
 }
 .nav-item.has-flyout:hover .flyout {
@@ -284,9 +199,15 @@ nav.main-nav { background: var(--blue-deep); }
   transition: background .15s, color .15s;
 }
 .flyout-cat::after { content: "›"; opacity: .6; }
-.flyout-cat:hover, .flyout-cat.active {
-  background: var(--blue-bright);
-  color: #fff;
+
+.flyout-cat:not(.active):hover {
+  background: #eef4ff;
+  color: var(--blue-mid);
+}
+
+.flyout-cat.active {
+  background: var(--blue-bright) !important;
+  color: #fff !important;
 }
 
 .flyout-panel { flex: 1; padding: 24px; }
@@ -325,10 +246,10 @@ nav.main-nav { background: var(--blue-deep); }
 }
 
 .brands-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   color: var(--blue-deep);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border-bottom: 2px solid var(--blue-bright);
   display: inline-block;
   padding-bottom: 4px;
@@ -344,7 +265,7 @@ nav.main-nav { background: var(--blue-deep); }
   overflow: hidden;
   width: 100%;
   padding: 10px 0;
-  touch-action: pan-y; /* Permite scroll vertical pero previene interferencias en horizontal */
+  touch-action: pan-y;
 }
 
 .carousel-track {

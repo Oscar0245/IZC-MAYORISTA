@@ -1,5 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+  // Redirección y validación del buscador hacia IZC Mayorista
+  var searchForm = document.getElementById('searchForm');
+  var searchInput = document.getElementById('searchInput');
+
+  if (searchForm && searchInput) {
+    searchForm.addEventListener('submit', function (e) {
+      var query = searchInput.value.trim();
+      if (!query) {
+        e.preventDefault(); // Evita enviar búsquedas vacías o con puros espacios
+      }
+    });
+  }
+
   // Menu desplegable del filtro de categorías en el buscador
   var catSelect = document.querySelector('.cat-select');
   if (catSelect) {
@@ -7,10 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var catLabel = document.getElementById('catSelectLabel');
     var catPanel = document.getElementById('catSelectPanel');
 
-    catBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      catSelect.classList.toggle('open');
-    });
+    if (catBtn) {
+      catBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        catSelect.classList.toggle('open');
+      });
+    }
 
     document.addEventListener('click', function (e) {
       if (!catSelect.contains(e.target)) {
@@ -18,13 +33,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    catPanel.querySelectorAll('.cat-link').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        catLabel.textContent = link.textContent.trim();
-        catSelect.classList.remove('open');
+    if (catPanel && catLabel) {
+      catPanel.querySelectorAll('.cat-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          catLabel.textContent = link.textContent.trim();
+          catSelect.classList.remove('open');
+        });
       });
-    });
+    }
   }
 
   // Comportamiento del menú Flyout de "Nuestros Productos"
@@ -34,24 +51,34 @@ document.addEventListener('DOMContentLoaded', function () {
     var cats = flyout.querySelectorAll('.flyout-cat');
     var panels = flyout.querySelectorAll('.flyout-panel-content');
 
-    cats.forEach(function (cat) {
-      cat.addEventListener('mouseenter', function () {
-        activatePanel(cat.dataset.panel);
-      });
-      cat.addEventListener('click', function (e) {
-        e.preventDefault();
-        activatePanel(cat.dataset.panel);
-      });
-    });
-
     function activatePanel(panelId) {
       cats.forEach(function (c) {
-        c.classList.toggle('active', c.dataset.panel === panelId);
+        if (c.dataset.panel === panelId) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
       });
+
       panels.forEach(function (p) {
-        p.classList.toggle('active', p.dataset.panel === panelId);
+        if (p.dataset.panel === panelId) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
       });
     }
+
+    cats.forEach(function (cat) {
+      cat.addEventListener('mouseenter', function () {
+        activatePanel(this.dataset.panel);
+      });
+
+      cat.addEventListener('click', function (e) {
+        e.preventDefault();
+        activatePanel(this.dataset.panel);
+      });
+    });
   });
 
 });

@@ -1,50 +1,56 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // ==========================================
-  // 1. SELECTOR DE CATEGORÍAS (Buscador)
+  // 1. REDIRECCIÓN DEL BUSCADOR
   // ==========================================
-  const catBtn = document.getElementById('catSelectBtn');
-  const catSelect = document.querySelector('.cat-select');
-  const catLabel = document.getElementById('catSelectLabel');
-  const catLinks = document.querySelectorAll('.cat-link');
+  var searchForm = document.getElementById('searchForm');
+  var searchInput = document.getElementById('searchInput');
 
-  if (catBtn && catSelect) {
-    catBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      catSelect.classList.toggle('open');
-    });
-
-    catLinks.forEach(function (link) {
-      link.addEventListener('click', function (e) {
+  if (searchForm && searchInput) {
+    searchForm.addEventListener('submit', function (e) {
+      var query = searchInput.value.trim();
+      if (!query) {
         e.preventDefault();
-        catLabel.textContent = this.textContent;
-        catSelect.classList.remove('open');
-      });
-    });
-
-    document.addEventListener('click', function () {
-      catSelect.classList.remove('open');
+      }
     });
   }
 
   // ==========================================
   // 2. MENÚ FLYOUT
   // ==========================================
-  const flyoutCats = document.querySelectorAll('.flyout-cat');
-  const flyoutPanels = document.querySelectorAll('.flyout-panel-content');
+  var flyouts = document.querySelectorAll('.flyout');
 
-  flyoutCats.forEach(function (cat) {
-    cat.addEventListener('mouseenter', function () {
-      const targetPanel = this.getAttribute('data-panel');
+  flyouts.forEach(function (flyout) {
+    var cats = flyout.querySelectorAll('.flyout-cat');
+    var panels = flyout.querySelectorAll('.flyout-panel-content');
 
-      flyoutCats.forEach(function (c) { c.classList.remove('active'); });
-      flyoutPanels.forEach(function (p) { p.classList.remove('active'); });
+    function activatePanel(panelId) {
+      cats.forEach(function (c) {
+        if (c.dataset.panel === panelId) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
 
-      this.classList.add('active');
-      const activePanel = document.querySelector('.flyout-panel-content[data-panel="' + targetPanel + '"]');
-      if (activePanel) {
-        activePanel.classList.add('active');
-      }
+      panels.forEach(function (p) {
+        if (p.dataset.panel === panelId) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+    }
+
+    cats.forEach(function (cat) {
+      cat.addEventListener('mouseenter', function () {
+        activatePanel(this.dataset.panel);
+      });
+
+      cat.addEventListener('click', function (e) {
+        e.preventDefault();
+        activatePanel(this.dataset.panel);
+      });
     });
   });
 
@@ -114,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Evita que los enlaces funcionen al arrastrar en táctil o mouse
+  // Previene clics accidentales si el usuario arrastra las tarjetas
   const brandLinks = track.querySelectorAll('a');
   brandLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -140,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     isDragging = true;
     hasDragged = false;
     startPos = getPositionX(event);
-    track.style.transition = 'none'; // Quita la transición para seguir el dedo instantáneamente
+    track.style.transition = 'none';
     animationID = requestAnimationFrame(animation);
   }
 
@@ -149,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentPosition = getPositionX(event);
     const diff = currentPosition - startPos;
     
-    // Marcar como arrastrado si el movimiento supera los 5px
     if (Math.abs(diff) > 5) {
       hasDragged = true;
     }
@@ -164,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const movedBy = currentTranslate - prevTranslate;
 
-    // Si se desplazó más de 50px se cambia de tarjeta
     if (movedBy < -50 && currentIndex < getMaxIndex()) {
       currentIndex += 1;
     } else if (movedBy > 50 && currentIndex > 0) {
@@ -187,6 +191,5 @@ document.addEventListener('DOMContentLoaded', function () {
     track.style.transform = `translateX(${currentTranslate}px)`;
   }
 
-  // Redimensionamiento dinámico
   window.addEventListener('resize', updateCarousel);
 });
