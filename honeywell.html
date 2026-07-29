@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZC MAYORISTA - Honeywell</title>
+  <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+
+  <link rel="stylesheet" href="assets/css/honeywell.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Scripts de lógica principal -->
+  <script src="assets/js/search.js" defer></script>
+  <script src="assets/js/honeywell.js" defer></script>
+  <script src="assets/js/index.js" defer></script>
+</head>
+<body>
+
+  <!-- Barra superior de utilidades -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+
+  <!-- Encabezado principal -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+
+      <!-- Buscador redirigido a IZC -->
+      <form class="search-bar" id="searchForm" action="#" method="GET">
+        <div class="cat-select"></div>
+        <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
+        <button type="submit">🔍︎</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Navegación -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <ul>
+        <li class="nav-item has-flyout">
+          <a href="#">☰ Nuestros Productos</a>
+          <div class="flyout">
+            <div class="flyout-sidebar">
+              <ul>
+                <li class="flyout-cat active" data-panel="pos">Punto de Venta</li>
+                <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
+                <li class="flyout-cat" data-panel="seguridad">Seguridad Electrónica</li>
+                <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
+                <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
+              </ul>
+            </div>
+
+            <div class="flyout-panel">
+              <!-- Punto de Venta -->
+              <div class="flyout-panel-content active" data-panel="pos">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras.html" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mano.html">De Mano</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/inalambricos.html">Inalámbricos</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mesa.html">De Mesa</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html">Empotrables</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos.html" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos/digitalizador-de-firmas.html">Digitalizadoras de Firmas</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/equipos-pos.html" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/monitores-touch.html" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/mini-pc.html" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/balanzas.html" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Marcación y Etiquetado -->
+              <div class="flyout-panel-content" data-panel="marcacion">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas.html" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/escritorio.html">De escritorio</a></li>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/semi-industriales.html">Semi industriales</a></li>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/industriales.html">Industriales</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-carnet.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-para-manillas.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/consumibles.html" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/consumibles/etiquetas-adhesivas.html">Etiquetas adhesivas</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/ribbons-o-cintas.html">Ribbons o Cintas</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/manillas.html">Manillas para identificación</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/kits-de-limpieza.html">Kits de limpieza</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/flexografia" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Seguridad Electrónica -->
+              <div class="flyout-panel-content" data-panel="seguridad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Accesorios de Control de Acceso</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores de Huella Biométricos</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/proveedores-de-alarmas-en-colombia.html">Alarmas</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv.html" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/ip.html">Cámaras IP</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/camaras-wifi.html">Cámaras WIFI</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv.html" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/analogo-pentahibrido.html">Grabadores Análogos</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/ip-nvr.html">Grabadores IP</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html">Accesorios para CCTV</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cables y conectividad -->
+              <div class="flyout-panel-content" data-panel="conectividad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica.html" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/access-point.html">Access Point</a></li>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/radio-enlaces.html">Radio Enlaces</a></li>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/routers.html">Routers</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/cableado-y-conectividad/switch.html" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Movilidad -->
+              <div class="flyout-panel-content" data-panel="movilidad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/movilidad.html" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/movilidad/impresoras-portatiles.html">Impresoras Portátiles</a></li>
+                      <li><a href="https://izc.com.co/es/movilidad/computadoras-moviles.html">Terminales Móviles</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
+        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Layout Principal -->
+  <div class="page-container">
+
+    <!-- Sidebar Izquierdo -->
+    <aside class="sidebar">
+      <div class="filter-box">
+        <div class="featured-header">
+          <span>COMPRAR POR</span>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Categoría</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Movilidad <span class="count">5</span></a></li>
+            <li><a href="#">&rsaquo; Punto de Venta POS <span class="count">16</span></a></li>
+            <li><a href="#">&rsaquo; Identificación y Marcación <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Productos en Remate <span class="count">6</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Memoria RAM</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 128 MB <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 256 MB <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 4 GB <span class="count">5</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Core</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 1 pulgada <span class="count">2</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Código de barras</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 1D / 2D <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 1D / 2D / QR <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Color</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list filter-color-list">
+            <li><span class="color-swatch" style="background:#000000" title="Negro"></span></li>
+            <li><span class="color-swatch" style="background:#ffffff" title="Blanco"></span></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Tamaño de la Pantalla</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 4 pulgadas <span class="count">3</span></a></li>
+            <li><a href="#">&rsaquo; 5.0 pulgadas <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 10.1 pulgadas <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Velocidad</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; - <span class="count">4</span></a></li>
+            <li><a href="#">&rsaquo; No Aplica <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Max.100 scans/seg <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Max.270 scans/seg <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 300 Scans/seg <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Max.1120 scans/seg <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Max.2250 scans/carga <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 254 cm/seg <span class="count">4</span></a></li>
+            <li><a href="#">&rsaquo; 270 cm/seg <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Tecnología</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Laser <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Laser Lineal <span class="count">3</span></a></li>
+            <li><a href="#">&rsaquo; Imager <span class="count">3</span></a></li>
+            <li><a href="#">&rsaquo; Imager de area <span class="count">5</span></a></li>
+            <li><a href="#">&rsaquo; Omnidireccional <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Imager Omnidireccional <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Activación</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Manual <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Automático <span class="count">6</span></a></li>
+            <li><a href="#">&rsaquo; Por gatillo <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Manual / Automático <span class="count">5</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Tipo de pantalla</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Pantalla Touch <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Pantalla Touch TFT / Transflectiva <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Capacitiva multitáctil <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>procesador</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Qualcomm Snapdragon SM6115 de cuatro nucleos <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 2.2 GHz Qualcomm 64-bit Snapdragon octa-core <span class="count">2</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Marcas Destacadas -->
+      <div class="featured-brands-box">
+        <div class="featured-header">
+          <span>MARCAS DESTACADAS</span>
+          <div class="nav-arrows">
+            <button class="arrow-btn" id="prevBrand">❮</button>
+            <button class="arrow-btn" id="nextBrand">❯</button>
+          </div>
+        </div>
+
+        <div class="brands-carousel-wrapper">
+          <div class="brands-carousel-track" id="brandsTrack">
+            <div class="brand-slide active">
+              <div class="featured-grid">
+                <a href="datalogic.html" class="brand-item"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic"></a>
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="elo.html" class="brand-item"><img src="assets/imgmarcas/Elo.png" alt="Elo"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="hid.html" class="brand-item"><img src="assets/imgmarcas/HID.png" alt="HID"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+              </div>
+            </div>
+            <div class="brand-slide">
+              <div class="featured-grid">
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="topaz.html" class="brand-item"><img src="assets/imgmarcas/Topaz.png" alt="Topaz Systems"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="zkteco.html" class="brand-item"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+                <a href="zebra.html" class="brand-item"><img src="assets/imgmarcas/Zebra.png" alt="Zebra"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      
+        <!-- Tarjeta banner Honeywell -->
+        <div class="product-carddatalogic">
+          <div class="product-imgdatalogic">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell Logo">
+            <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Honeywell.webp" alt="Honeywell Banner">
+          </div>
+          <div class="brand-banner"></div>
+          <div class="product-info">
+            <h4 class="product-title"></h4>
+          </div>
+        </div>
+      <!-- Descripción de Marca -->
+      <section class="brand-description">
+        <h2>IZC es un distribuidor mayorista autorizado de la marca Honeywell en Colombia</h2>
+        <p>Conozca nuestro portafolio de escáneres de códigos de barras versátiles que pueden usar como dispositivos de mano o escáneres de presentación manos libres con activación automática por infrarrojos.</p>
+        <p>Honeywell cuenta con una alta gama de impresoras de escritorio e industriales de códigos de barras, etiquetas, tickets y rótulos. También cuenta con un amplio portafolio de computadoras móviles e impresión móvil adecuada para usted.</p>
+        <h3 class="slogan">¡El futuro depende de nosotros!</h3>
+      </section>
+
+      <!-- Barra de Herramientas -->
+      <div class="toolbar">
+        <div class="view-mode">
+          <button class="grid-btn active">:::</button>
+          <button class="list-btn">☰</button>
+          <span class="item-count" id="itemCountDisplay">24 artículos</span>
+        </div>
+        <div class="sort-mode">
+          <select id="sortSelect">
+            <option value="all">Todas las Categorías</option>
+            <option value="lectores">Lectores de Código de Barras</option>
+            <option value="impresoras">Impresoras de Etiquetas</option>
+            <option value="movilidad">Computadoras Móviles</option>
+          </select>
+          <button class="sort-dir-btn">↑</button>
+        </div>
+      </div>
+
+      <!-- Grilla de Productos Honeywell (Extraídos de las imágenes) -->
+      <section class="product-grid" id="productGrid">
+        
+        <!-- ===== IMAGEN 1 ===== -->
+
+        <!-- Producto 1 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/b/a/base-honeywell-xenon-1900-1950-stand-stnd-22f00-001-6.webp" alt="Sku: 1448">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 1448</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">BASE FLEXIBLE HONEYWELL LECTOR XENON 1900 Y 1950 STND-22F00-001-6</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_base_flexible_lector_1300g_lector_1300.webp" alt="Sku: 2868">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 2868</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">BASE FLEXIBLE HONEYWELL LECTOR 1300G HFSTAND7E</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_pc42e-tb02200.webp" alt="Sku: 11797">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 11797</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Honeywell PC42E-TB02200</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_pd45s.webp" alt="Sku: 10275">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10275</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Honeywell PD45S PD4500C0010000200</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_1300g.webp" alt="Sku: 3389">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3389</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell 1300G 1300G-2USB-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_3320g.webp" alt="Sku: 4210">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 4210</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell 3320G 3320G-4USB-0-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 7 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_hh490_1.webp" alt="Sku: 7846">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 7846</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell HH490 HH490-R1-1USB-1-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 8 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_hh492-r1-1usb-5.webp" alt="Sku: 11873">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 11873</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell HH492-R1-1USB-5</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- ===== IMAGEN 2 ===== -->
+
+        <!-- Producto 9 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_mk7120-31a38.webp" alt="Sku: 3417">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3417</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell MK7120 MK7120-31A38</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 10 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_orbit_hf680.webp" alt="Sku: 7845">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 7845</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Orbit HF680 HF680-R1-2USB</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 11 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_solaris_7980g.webp" alt="Sku: 7487">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 7487</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Solaris 7980g 7980G-2USBX-0</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 12 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_voyager_1200g.webp" alt="Sku: 3381">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3381</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Voyager 1200G 1200G-2USB-1</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 13 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_voyager_1202g.webp" alt="Sku: 3385">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3385</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Voyager 1202G 1202G-2USB-5-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 14 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_voyager_1250g.webp" alt="Sku: 3386">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3386</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Voyager 1250G 1250G-2USB-1-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 15 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_voyager_1470g.webp" alt="Sku: 4795">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 4795</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Voyager 1470G 1470G2D-2USB-1-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 16 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_voyager_1472g.webp" alt="Sku: 7255">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 7255</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Código de Barras Honeywell Voyager 1472G 1472G2D-2USB-5-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- ===== IMAGEN 3 ===== -->
+
+        <!-- Producto 17 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_voyager_1602g.webp" alt="Sku: 3435">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3435</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Voyager 1602G 1602G2D-2USB-OS</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 18 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_xenon_1950g.webp" alt="Sku: 4953">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 4953</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Honeywell Xenon 1950G 1950GSR-2USB-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 19 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_xenon_ultra_1960g.webp" alt="Sku: 12710">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 12710</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Código de Barras Honeywell Xenon Ultra 1960G 1960GSR-2USB-N</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 20 -->
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_eda10a.webp" alt="Sku: 12828">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 12828</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Tablet Honeywell EDA10A EDA10A-00B061N21RK</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 21 -->
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_ck62.webp" alt="Sku: 14198">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 14198</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil Honeywell CK62 CK62-X00-37S1ACG</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 22 -->
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_ck65.webp" alt="Sku: 7486">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 7486</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil Honeywell CK65 CK65-L0N-ASN210F</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 23 -->
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_ck65-l0n-b8c214f.webp" alt="Sku: 14199">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 14199</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil Honeywell CK65 CK65-L0N-B8C214F</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Producto 24 -->
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_eda52.webp" alt="Sku: 10656">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Honeywell.png" alt="Honeywell">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10656</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil Honeywell EDA52 EDA52-11AE64N21RK</a>
+            </h4>
+          </div>
+        </div>
+
+      </section>     
+
+      <!-- Mensaje cuando no hay productos -->
+      <div id="noProductsMessage" style="display: none; padding: 40px; text-align: center; color: #666; font-size: 15px;">
+        No se encontraron productos disponibles para esta categoría en la marca Honeywell.
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Botón flotante -->
+  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
+    🎧
+  </a>
+
+</body>
+</html>

@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZC MAYORISTA - Zebra</title>
+  <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+
+  <link rel="stylesheet" href="assets/css/zebra.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Script principal de tu lógica -->
+  <script src="assets/js/search.js" defer></script>
+  <script src="assets/js/zebra.js" defer></script>
+  <script src="assets/js/index.js" defer></script>
+</head>
+<body>
+
+  <!-- Top utility bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+
+  <!-- Main header -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+
+      <!-- Buscador principal redirigido a IZC -->
+      <form class="search-bar" id="searchForm" action="#" method="GET">
+        <div class="cat-select"></div>
+        <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
+        <button type="submit">🔍︎</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <ul>
+        <li class="nav-item has-flyout">
+          <a href="#">☰ Nuestros Productos</a>
+          <div class="flyout">
+            <div class="flyout-sidebar">
+              <ul>
+                <li class="flyout-cat active" data-panel="pos">Punto de Venta</li>
+                <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
+                <li class="flyout-cat" data-panel="seguridad">Seguridad Electrónica</li>
+                <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
+                <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
+              </ul>
+            </div>
+
+            <div class="flyout-panel">
+              <!-- Punto de Venta -->
+              <div class="flyout-panel-content active" data-panel="pos">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras.html" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mano.html">De Mano</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/inalambricos.html">Inalámbricos</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mesa.html">De Mesa</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html">Empotrables</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos.html" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos/digitalizador-de-firmas.html">Digitalizadoras de Firmas</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/equipos-pos.html" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/monitores-touch.html" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/mini-pc.html" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/balanzas.html" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Marcación y Etiquetado -->
+              <div class="flyout-panel-content" data-panel="marcacion">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas.html" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/escritorio.html">De escritorio</a></li>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/semi-industriales.html">Semi industriales</a></li>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/industriales.html">Industriales</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-carnet.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-para-manillas.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/consumibles.html" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/consumibles/etiquetas-adhesivas.html">Etiquetas adhesivas</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/ribbons-o-cintas.html">Ribbons o Cintas</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/manillas.html">Manillas para identificación</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/kits-de-limpieza.html">Kits de limpieza</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/flexografia" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Seguridad Electrónica -->
+              <div class="flyout-panel-content" data-panel="seguridad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Accesorios de Control de Acceso</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores de Huella Biométricos</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/proveedores-de-alarmas-en-colombia.html">Alarmas</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv.html" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/ip.html">Cámaras IP</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/camaras-wifi.html">Cámaras WIFI</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv.html" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/analogo-pentahibrido.html">Grabadores Análogos</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/ip-nvr.html">Grabadores IP</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html">Accesorios para CCTV</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cables y conectividad -->
+              <div class="flyout-panel-content" data-panel="conectividad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica.html" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/access-point.html">Access Point</a></li>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/radio-enlaces.html">Radio Enlaces</a></li>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/routers.html">Routers</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/cableado-y-conectividad/switch.html" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Movilidad -->
+              <div class="flyout-panel-content" data-panel="movilidad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/movilidad.html" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/movilidad/impresoras-portatiles.html">Impresoras Portátiles</a></li>
+                      <li><a href="https://izc.com.co/es/movilidad/computadoras-moviles.html">Terminales Móviles</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
+        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <div class="page-container">
+
+    <!-- Sidebar Izquierdo (Filtros y Marcas Destacadas) -->
+    <aside class="sidebar">
+      <div class="filter-box">
+        <div class="featured-header">
+          <span>COMPRAR POR</span>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Categoría</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Consumibles para Impresora de Etiqueta - POS <span class="count">34</span></a></li>
+            <li><a href="#">&rsaquo; Movilidad <span class="count">10</span></a></li>
+            <li><a href="#">&rsaquo; Punto de Venta POS <span class="count">12</span></a></li>
+            <li><a href="#">&rsaquo; Identificación y Marcación <span class="count">22</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Método de impresión</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Térmico Directo <span class="count">5</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Memoria RAM</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 16 MB <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 128 MB <span class="count">7</span></a></li>
+            <li><a href="#">&rsaquo; 256 MB <span class="count">14</span></a></li>
+            <li><a href="#">&rsaquo; 1 GB <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 3 GB <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 4 GB <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 6 GB <span class="count">2</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Core</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 0.5 pulgadas <span class="count">4</span></a></li>
+            <li><a href="#">&rsaquo; 1 pulgada <span class="count">10</span></a></li>
+            <li><a href="#">&rsaquo; 3 pulgadas <span class="count">2</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Código de barras</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 1D / 2D <span class="count">18</span></a></li>
+            <li><a href="#">&rsaquo; 1D / 2D / QR <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Color</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list filter-color-list">
+            <li><span class="color-swatch" style="background:#000000" title="Negro"></span></li>
+            <li><span class="color-swatch" style="background:#1857f7" title="Azul"></span></li>
+            <li><span class="color-swatch" style="background:#8f8f8f" title="Gris"></span></li>
+            <li><span class="color-swatch" style="background:#53a828" title="Verde"></span></li>
+            <li><span class="color-swatch" style="background:#ff0000" title="Rojo"></span></li>
+            <li><span class="color-swatch" style="background:#ffffff" title="Blanco"></span></li>
+            <li><span class="color-swatch" style="background:#ffd500" title="Amarillo"></span></li>
+            <li><span class="color-swatch" style="background:#cccccc" title="YMCKO"></span></li>
+            <li><span class="color-swatch" style="background:#cccccc" title="YMCKOK"></span></li>
+            <li><span class="color-swatch" style="background:#cccccc" title="YMCKLL"></span></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Tamaño de la Pantalla</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 5.0 pulgadas <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 6.0 pulgadas <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; 6.5 pulgadas <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Material</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; PVC <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Térmico <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Polipropileno <span class="count">5</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Velocidad</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; - <span class="count">3</span></a></li>
+            <li><a href="#">&rsaquo; 100 scans/seg <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 123 scans/seg <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; 600 Scans/Seg <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 60 mm/seg <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Max.100 mm/s <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Max.115 mm/s <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 1000/1200/1500 Billetes por minuto <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 200 imágenes por un lado <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; 225 imágenes por ambos lados <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 300 imágenes por un lado <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 450 imágenes por ambos lados <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 254 cm/seg <span class="count">4</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Número de etiqueta por rollo</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 350 <span class="count">5</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Tecnología</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Imager <span class="count">6</span></a></li>
+            <li><a href="#">&rsaquo; Imager Lineal <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Imager de area <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Imager Omnidireccional <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Térmica Directa <span class="count">3</span></a></li>
+            <li><a href="#">&rsaquo; Transferencia Térmica <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Directa a la tarjeta <span class="count">5</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Activación</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Manual <span class="count">5</span></a></li>
+            <li><a href="#">&rsaquo; Automático <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Manual / Automático <span class="count">3</span></a></li>
+            <li><a href="#">&rsaquo; Manual / Continuo / Automático <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Impresoras compatibles</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; ZXP Series 3 <span class="count">7</span></a></li>
+            <li><a href="#">&rsaquo; ZXP Series 7 <span class="count">6</span></a></li>
+            <li><a href="#">&rsaquo; ZXP Serie 1 <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; ZC100 / ZC300 <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; ZC300 <span class="count">4</span></a></li>
+            <li><a href="#">&rsaquo; ZC100 / ZC300 / ZC350 <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; ZD510-HC <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; ZC100 <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Número de impresiones</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 100 impresiones <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 165 impresiones <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 200 impresiones <span class="count">5</span></a></li>
+            <li><a href="#">&rsaquo; 230 impresiones <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 240 impresiones <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 250 impresiones <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; 300 impresiones <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 350 impresiones <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 5000 impresiones <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; 1000 impresiones <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; 1500 impresiones <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 2000 impresiones <span class="count">2</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Tipo de pantalla</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; LED <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Pantalla Touch Capacitiva <span class="count">2</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>procesador</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Qualcomm Snapdragon™ 660 <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Qualcomm Snapdragon™ SM6375 <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Qualcomm QCM6490 Octa-Core 2.2 GHz <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Qualcomm 5430 hexa-core a 2.1 GHz <span class="count">1</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Marcas Destacadas con Carrusel -->
+      <div class="featured-brands-box">
+        <div class="featured-header">
+          <span>MARCAS DESTACADAS</span>
+          <div class="nav-arrows">
+            <button class="arrow-btn" id="prevBrand">❮</button>
+            <button class="arrow-btn" id="nextBrand">❯</button>
+          </div>
+        </div>
+
+        <div class="brands-carousel-wrapper">
+          <div class="brands-carousel-track" id="brandsTrack">
+            <div class="brand-slide active">
+              <div class="featured-grid">
+                <a href="datalogic.html" class="brand-item"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic"></a>
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="elo.html" class="brand-item"><img src="assets/imgmarcas/Elo.png" alt="Elo"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="hid.html" class="brand-item"><img src="assets/imgmarcas/HID.png" alt="HID"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+              </div>
+            </div>
+            <div class="brand-slide">
+              <div class="featured-grid">
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="topaz.html" class="brand-item"><img src="assets/imgmarcas/Topaz.png" alt="Topaz Systems"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="zkteco.html" class="brand-item"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+                <a href="zebra.html" class="brand-item"><img src="assets/imgmarcas/Zebra.png" alt="Zebra"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      
+        <!-- Tarjeta datalogic -->
+        <div class="product-carddatalogic">
+          <div class="product-imgdatalogic">
+            <img src="assets/imgmarcas/zebra.png" alt="Zebra Logo">
+            <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Zebra.webp" alt="Zebra Banner">
+          </div>
+          <div class="brand-banner"></div>
+          <div class="product-info">
+            <h4 class="product-title"></h4>
+          </div>
+        </div>
+      <!-- Descripción de Marca -->
+      <section class="brand-description">
+        <h2>Nos enorgullecemos de ser distribuidor mayorista autorizado de la marca Zebra Technologies en Colombia</h2>
+        <p>Con una amplia experiencia en el mercado y un profundo conocimiento de las necesidades de nuestros clientes, ofrecemos una gama completa de soluciones Zebra diseñadas para optimizar sus operaciones y aumentar su productividad.</p>
+        <h3 class="slogan">¡En toda gran industria, Zebra está presente!</h3>
+      </section>
+
+      <!-- Barra de Herramientas del Catálogo -->
+      <div class="toolbar">
+        <div class="view-mode">
+          <button class="grid-btn active">:::</button>
+          <button class="list-btn">☰</button>
+          <span class="item-count" id="itemCountDisplay">32 artículos</span>
+        </div>
+        <div class="sort-mode">
+          <select id="sortSelect">
+            <option value="all">Todas las Categorías</option>
+            <option value="lectores">Lectores de Código de Barras</option>
+            <option value="impresoras">Impresoras de Etiquetas</option>
+            <option value="movilidad">Terminales Móviles</option>
+            <option value="consumibles">Consumibles y Ribbons</option>
+          </select>
+          <button class="sort-dir-btn">↑</button>
+        </div>
+      </div>
+
+      <!-- Grilla de Productos -->
+      <section class="product-grid" id="productGrid">
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_ribbon_zebra_800033-301.webp" alt="Cinta Ribbon Zebra Negro Imp Carnet Series 3 2000 Img 800033-301" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10428</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Cinta Ribbon Zebra Negro Imp Carnet Series 3 2000 Img 800033-301</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_ribbon_zebra_800300-309la.webp" alt="Cinta Ribbon Zebra Blanca Series ZC100/ZC300 YMCKO 1500 Img 800300-309LA" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 5863</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Cinta Ribbon Zebra Blanca Series ZC100/ZC300 YMCKO 1500 Img 800300-309LA</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_tarjetas_pvc_104523-010.webp" alt="Tarjetas PVC Zebra Calibre 25 Mil X 500 Unidades 104523-010" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 11327</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Tarjetas PVC Zebra Calibre 25 Mil X 500 Unidades 104523-010</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_ribbon_zebra_800077-742.webp" alt="Cinta Ribbon Zebra Color 5 panel ZXP7 YMCKO 750 Img 800077-742" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 11853</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Cinta Ribbon Zebra Color 5 panel ZXP7 YMCKO 750 Img 800077-742</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_ribbon_800077-711.webp" alt="Cinta Ribbon Zebra Negro Imp Carnet Series 7 YMCKO 5000 Img 800077-711" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3337</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Cinta Ribbon Zebra Negro Imp Carnet Series 7 YMCKO 5000 Img 800077-711</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_ribbon_zebra_800077-740.webp" alt="Cinta Ribbon Zebra Color IX Series ZXP Series 7 YMCKO 250 Img 800077-740" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10993</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Cinta Ribbon Zebra Color IX Series ZXP Series 7 YMCKO 250 Img 800077-740</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_ribbon_color_imp_carnet_zc300_ymcpko-200-img-800300-562la-2.webp" alt="RIBBON ZEBRA COLOR IMP CARNET ZC300 YMCPKO 200 IMG 800300-562LA" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10326</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">RIBBON ZEBRA COLOR IMP CARNET ZC300 YMCPKO 200 IMG 800300-562LA</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_lector_zebra_ds3608_1.webp" alt="Lector de Codigo de Barras Zebra DS3608-SR" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 12285</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Zebra DS3608-SR</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_terminal_portatil_tc22.webp" alt="Terminal Movil Zebra TC22 WLMT0-T22B6ABC2-A6" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 12724</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil Zebra TC22 WLMT0-T22B6ABC2-A6</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_lector_de_codigos_de_barras_ds8178.webp" alt="Lector de Codigo de Barras ZEBRA DS8178 DS8178-SR7U2100SFW" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 14096</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras ZEBRA DS8178 DS8178-SR7U2100SFW</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_lector_de_codigos_de_barras_ds457.webp" alt="Lector de Codigo de Barras ZEBRA DS457" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10522</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras ZEBRA DS457</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_portatil_zq320_plus.webp" alt="Impresora Portatil Zebra ZQ320 Plus ZQ32-A0E04TL-00" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 13025</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora Portatil Zebra ZQ320 Plus ZQ32-A0E04TL-00</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_-_impresora_portatil_zq320_plus.webp" alt="Impresora Portatil Zebra ZQ320 Plus ZQ32-A0W03RL-00" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 11661</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora Portatil Zebra ZQ320 Plus ZQ32-A0W03RL-00</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_portatil_zq630_plus.webp" alt="Impresora Portatil Zebra ZQ630 Plus ZQ63-AUWAL04-00" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 13300</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora Portatil Zebra ZQ630 Plus ZQ63-AUWAL04-00</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_zt620.webp" alt="Impresora de Etiquetas Zebra ZT640 ZT62062-T010100Z" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 13133</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZT640 ZT62062-T010100Z</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_zt411.webp" alt="Impresora de Etiquetas Zebra ZT411 ZT41142-T410000Z" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 7205</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZT411 ZT41142-T410000Z</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_zt421.webp" alt="impresora de Etiquetas Zebra ZT421 ZT42162-T010000Z" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 5910</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">impresora de Etiquetas Zebra ZT421 ZT42162-T010000Z</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_zd620.webp" alt="Impresora de Etiquetas Zebra ZD620 ZD62042-T01F00EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 5378</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD620 ZD62042-T01F00EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/i/m/impresora_de_etiquetas_zebra_zd411_dt.webp" alt="Impresora de Etiquetas Zebra ZD411 DT ZD4A023- D01E00EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 12948</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD411 DT ZD4A023- D01E00EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_de_etiquetas_-_zd411_t_1.webp" alt="Impresora de Etiquetas Zebra ZD411 ZD4A022-T01M00EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 12852</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD411 ZD4A022-T01M00EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_impresora_de_etiquetas_-_zd411_t.webp" alt="Impresora de Etiquetas Zebra ZD411 ZD4A022-T01E00EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 11775</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD411 ZD4A022-T01E00EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_terminal_movil_tc27.webp" alt="Terminal Movil Zebra TC27 WCMTB-T27B6ABC2-A6" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 12284</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil Zebra TC27 WCMTB-T27B6ABC2-A6</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/i/m/impresora_de_etiquetas_-_zebra_zd220_-_3.webp" alt="Impresora de Etiquetas Zebra ZD220 USB DT ZD22042-D01G00EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10308</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD220 USB DT ZD22042-D01G00EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_serie_zd421_5.webp" alt="Impresora de Etiquetas Zebra ZD421 + Wifi + Bluetooth + NFC ZD4A042-301W02EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10296</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD421 + Wifi + Bluetooth + NFC ZD4A042-301W02EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_serie_zd421_3.webp" alt="Impresora de Etiquetas Zebra ZD421 ZD4A042-301M00EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10303</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD421 ZD4A042-301M00EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_serie_zd421_4.webp" alt="Impresora de Etiquetas Zebra ZD421 + Ethernet ZD4A042-301E00EZ" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10920</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Etiquetas Zebra ZD421 + Ethernet ZD4A042-301E00EZ</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="consumibles">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_zc100_ribbon_ymcko_200_img_200_tarjetas_pvc_1.webp" alt="Impresora de Carnet Zebra ZC100 + Ribbon YMCKO 200 Img + 200 Tarjetas PVC ZC11-0000Q00LA00" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 11185</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora de Carnet Zebra ZC100 + Ribbon YMCKO 200 Img + 200 Tarjetas PVC ZC11-0000Q00LA00</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_mp7000_1.webp" alt="Lector de C&#243;digo de Barras Balanza ZEBRA MP7000 MP7001-LCSLM00SG" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10927</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de C&#243;digo de Barras Balanza ZEBRA MP7000 MP7001-LCSLM00SG</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_tc15_1.webp" alt="Terminal Movil ZEBRA TC15 KT-TC15-ROLATAM" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10146</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil ZEBRA TC15 KT-TC15-ROLATAM</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_cs6080_bt_1.webp" alt="Lector de C&#243;digo de Barras ZEBRA CS6080 BT CS6080-SR40004VZWW" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 9908</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de C&#243;digo de Barras ZEBRA CS6080 BT CS6080-SR40004VZWW</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="movilidad">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_tc21bk_1.webp" alt="Terminal Movil ZEBRA TC21BK TC210K-01B212-A6" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10426</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Terminal Movil ZEBRA TC21BK TC210K-01B212-A6</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="impresoras">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_zq21_td_1.webp" alt="Impresora Portatil Zebra ZQ21 TD ZQ21-A0E01KL-00" onerror="this.src='assets/imgmarcas/Zebra.png'">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Zebra.png" alt="Zebra">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 10302</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Impresora Portatil Zebra ZQ21 TD ZQ21-A0E01KL-00</a>
+            </h4>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Mensaje cuando no hay productos -->
+      <div id="noProductsMessage" style="display: none; padding: 40px; text-align: center; color: #666; font-size: 15px;">
+        No se encontraron productos disponibles para esta categoría en la marca Datalogic.
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Botón flotante de ayuda / chat -->
+  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
+    🎧
+  </a>
+
+</body>
+</html>

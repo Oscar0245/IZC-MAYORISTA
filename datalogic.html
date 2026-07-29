@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZC MAYORISTA - Datalogic</title>
+  <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+
+  <link rel="stylesheet" href="assets/css/datalogic.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Script principal de tu lógica -->
+  <script src="assets/js/search.js" defer></script>
+  <script src="assets/js/datalogic.js" defer></script>
+  <script src="assets/js/index.js" defer></script>
+</head>
+<body>
+
+  <!-- Top utility bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+
+  <!-- Main header -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+
+      <!-- Buscador principal redirigido a IZC -->
+      <form class="search-bar" id="searchForm" action="#" method="GET">
+        <div class="cat-select"></div>
+        <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
+        <button type="submit">🔍︎</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <ul>
+        <li class="nav-item has-flyout">
+          <a href="#">☰ Nuestros Productos</a>
+          <div class="flyout">
+            <div class="flyout-sidebar">
+              <ul>
+                <li class="flyout-cat active" data-panel="pos">Punto de Venta</li>
+                <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
+                <li class="flyout-cat" data-panel="seguridad">Seguridad Electrónica</li>
+                <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
+                <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
+              </ul>
+            </div>
+
+            <div class="flyout-panel">
+              <!-- Punto de Venta -->
+              <div class="flyout-panel-content active" data-panel="pos">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras.html" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mano.html">De Mano</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/inalambricos.html">Inalámbricos</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mesa.html">De Mesa</a></li>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html">Empotrables</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos.html" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos/digitalizador-de-firmas.html">Digitalizadoras de Firmas</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/equipos-pos.html" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/monitores-touch.html" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/mini-pc.html" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/balanzas.html" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Marcación y Etiquetado -->
+              <div class="flyout-panel-content" data-panel="marcacion">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas.html" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/escritorio.html">De escritorio</a></li>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/semi-industriales.html">Semi industriales</a></li>
+                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/industriales.html">Industriales</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-carnet.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-para-manillas.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/consumibles.html" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/consumibles/etiquetas-adhesivas.html">Etiquetas adhesivas</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/ribbons-o-cintas.html">Ribbons o Cintas</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/manillas.html">Manillas para identificación</a></li>
+                      <li><a href="https://izc.com.co/es/consumibles/kits-de-limpieza.html">Kits de limpieza</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/flexografia" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Seguridad Electrónica -->
+              <div class="flyout-panel-content" data-panel="seguridad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Accesorios de Control de Acceso</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores de Huella Biométricos</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/proveedores-de-alarmas-en-colombia.html">Alarmas</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv.html" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/ip.html">Cámaras IP</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/camaras-wifi.html">Cámaras WIFI</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv.html" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/analogo-pentahibrido.html">Grabadores Análogos</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/ip-nvr.html">Grabadores IP</a></li>
+                    </ul>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html">Accesorios para CCTV</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cables y conectividad -->
+              <div class="flyout-panel-content" data-panel="conectividad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica.html" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/access-point.html">Access Point</a></li>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/radio-enlaces.html">Radio Enlaces</a></li>
+                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/routers.html">Routers</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/cableado-y-conectividad/switch.html" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Movilidad -->
+              <div class="flyout-panel-content" data-panel="movilidad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/movilidad.html" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/movilidad/impresoras-portatiles.html">Impresoras Portátiles</a></li>
+                      <li><a href="https://izc.com.co/es/movilidad/computadoras-moviles.html">Terminales Móviles</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
+        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <div class="page-container">
+
+    <!-- Sidebar Izquierdo (Filtros y Marcas Destacadas) -->
+    <aside class="sidebar">
+      <div class="filter-box">
+        <div class="featured-header">
+          <span>COMPRAR POR</span>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Color</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list filter-color-list">
+            <li><span class="color-swatch" style="background:#000000" title="Negro"></span></li>
+            <li><span class="color-swatch" style="background:#8f8f8f" title="Gris"></span></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Velocidad</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; - <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Max.400 scans/seg <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 6,7 mm/seg <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 254 cm/seg <span class="count">5</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Tecnología</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Imager <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Imager Lineal <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Imager de area <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Laser Omnidireccional <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; Imager Omnidireccional <span class="count">2</span></a></li>
+            <li><a href="#">&rsaquo; Omnidireccional / Imager <span class="count">1</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Activación</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Automático <span class="count">4</span></a></li>
+            <li><a href="#">&rsaquo; Por gatillo <span class="count">4</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Marcas Destacadas con Carrusel -->
+      <div class="featured-brands-box">
+        <div class="featured-header">
+          <span>MARCAS DESTACADAS</span>
+          <div class="nav-arrows">
+            <button class="arrow-btn" id="prevBrand">❮</button>
+            <button class="arrow-btn" id="nextBrand">❯</button>
+          </div>
+        </div>
+
+        <div class="brands-carousel-wrapper">
+          <div class="brands-carousel-track" id="brandsTrack">
+            <div class="brand-slide active">
+              <div class="featured-grid">
+                <a href="datalogic.html" class="brand-item"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic"></a>
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="elo.html" class="brand-item"><img src="assets/imgmarcas/Elo.png" alt="Elo"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="hid.html" class="brand-item"><img src="assets/imgmarcas/HID.png" alt="HID"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+              </div>
+            </div>
+            <div class="brand-slide">
+              <div class="featured-grid">
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="topaz.html" class="brand-item"><img src="assets/imgmarcas/Topaz.png" alt="Topaz Systems"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="zkteco.html" class="brand-item"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+                <a href="zebra.html" class="brand-item"><img src="assets/imgmarcas/Zebra.png" alt="Zebra"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      
+        <!-- Tarjeta datalogic -->
+        <div class="product-carddatalogic">
+          <div class="product-imgdatalogic">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic Logo">
+            <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Datalogic.webp" alt="Datalogic Banner">
+          </div>
+          <div class="brand-banner"></div>
+          <div class="product-info">
+            <h4 class="product-title"></h4>
+          </div>
+        </div>
+      <!-- Descripción de Marca -->
+      <section class="brand-description">
+        <h2>IZC es un distribuidor mayorista autorizado de la marca Datalogic en Colombia</h2>
+        <p><strong>Datalogic</strong> es un líder tecnológico global en los mercados de captura automática de datos, especializado en el diseño y fabricación de lectores de códigos de barras.</p>
+        <p>La cercanía y la rápida respuesta a las necesidades de cada cliente, junto con la continua innovación y la oferta de alta calidad, son los elementos distintivos en la base del éxito de <strong>Datalogic</strong> en más de 40 años. Sus soluciones de vanguardia ayudan a aumentar la eficiencia y la calidad de los procesos en las industrias Retail, Empresas Fabricacantes, Transporte &amp; Logística y Sanidad, a lo largo de toda la cadena de valor.</p>
+        <p>Datalogic hizo historia ese día al fabricar el primer escáner de código de barras comercial y el ahora famoso "pitido" de lectura correcta. Este primer "pitido" marcó el inicio de la industria de captura automática de datos. Desde su primera lectura, el código de barras revolucionó la industria retail y provocó una rápida adopción de la tecnología de códigos de barras para mejorar la productividad y avanzar en la gestión de inventario, al tiempo que permitió reducir los errores de gestión de precios y la tensión física en los cajeros.</p>
+        <h3 class="slogan">¡POTENCIA TU VISIÓN!</h3>
+      </section>
+
+      <!-- Barra de Herramientas del Catálogo -->
+      <div class="toolbar">
+        <div class="view-mode">
+          <button class="grid-btn active">:::</button>
+          <button class="list-btn">☰</button>
+          <span class="item-count" id="itemCountDisplay">9 artículos</span>
+        </div>
+        <div class="sort-mode">
+          <select id="sortSelect">
+            <option value="all">Todas las Categorías</option>
+            <option value="lectores">Lectores de Código de Barras</option>
+            <option value="balanzas">Balanzas y Escáner Balanza</option>
+            <option value="impresoras">Impresoras</option>
+            <option value="movilidad">Computadoras Móviles</option>
+          </select>
+          <button class="sort-dir-btn">↑</button>
+        </div>
+      </div>
+
+      <!-- Grilla de Productos con data-category -->
+      <section class="product-grid" id="productGrid">
+        
+        <!-- Tarjeta 1 -->
+        <div class="product-card" data-category="balanzas">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_magellan_9300.webp" alt="Magellan 9300">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 4031</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector Balanza Datalogic Magellan 9300 9320450110 020213</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_magellan_1500i.webp" alt="Magellan 1500">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 6513</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Datalogic Magellan 1500I MG1501-10211-0200</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_magellan_3510hsi_1.webp" alt="Magellan 3510">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 8289</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Datalogic Magellan 3510HSI M3511-010210-00604</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Tarjeta 4 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_magellan_9800.webp" alt="Magellan 9800">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3367</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Datalogic Magellan 9800</a>
+            </h4>
+          </div>
+        </div>
+
+        <!-- Tarjeta 5 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_quickscan_qd2430.webp" alt="Quickscan QD2430 ">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3461</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Datalogic Quickscan QD2430 QD2430 BKK1S</a>
+            </h4>
+          </div>
+        </div>
+        
+        <!-- Tarjeta 6 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_qw2120_1.webp" alt="Datalogic QW2121">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3376</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Datalogic QW2120 QW2120-BKK1S</a>
+            </h4>
+          </div>
+        </div>
+        
+        <!-- Tarjeta 7 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_td1120_bk_65k1.webp" alt="Datalogic TD1120">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3377</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Datalogic TD1120 BK 65K1</a>
+            </h4>
+          </div>
+        </div>
+        
+        <!-- Tarjeta 8 -->
+        <div class="product-card" data-category="lectores">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_quickscan_qd2590-bkk1s_2.webp" alt="Quickscan QD2590 ">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 9000</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Codigo de Barras Imafer Omnidireccional Datalogic Quickscan QD2590 QD2590-BKK1S</a>
+            </h4>
+          </div>
+        </div>
+        
+        <!-- Tarjeta 9 -->
+        <div class="product-card" data-category="balanzas">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/s/c/scanner-balanza-magellan-9550i-1.webp" alt="Magellan 9556">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/Datalogic.png" alt="Datalogic">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 15361</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">SCANER BALANZA IMAGER DATALOGIC MAGELLAN 9556</a>
+            </h4>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Mensaje cuando no hay productos -->
+      <div id="noProductsMessage" style="display: none; padding: 40px; text-align: center; color: #666; font-size: 15px;">
+        No se encontraron productos disponibles para esta categoría en la marca Datalogic.
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Botón flotante de ayuda / chat -->
+  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
+    🎧
+  </a>
+
+</body>
+</html>

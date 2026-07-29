@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZC MAYORISTA - HID Global</title>
+  <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+
+  <link rel="stylesheet" href="assets/css/hid.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Scripts principales -->
+  <script src="assets/js/search.js" defer></script>
+  <script src="assets/js/hid.js" defer></script>
+  <script src="assets/js/index.js" defer></script>
+</head>
+<body>
+
+  <!-- Top utility bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+
+  <!-- Main header -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+
+      <!-- Buscador principal -->
+      <form class="search-bar" id="searchForm" action="#" method="GET">
+        <div class="cat-select"></div>
+        <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
+        <button type="submit">🔍︎</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <ul>
+        <li class="nav-item has-flyout">
+          <a href="#">☰ Nuestros Productos</a>
+          <div class="flyout">
+            <div class="flyout-sidebar">
+              <ul>
+                <li class="flyout-cat active" data-panel="seguridad">Seguridad Electrónica</li>
+                <li class="flyout-cat" data-panel="pos">Punto de Venta</li>
+                <li class="flyout-cat" data-panel="marcacion">Marcación y Etiquetado</li>
+                <li class="flyout-cat" data-panel="conectividad">Cables y conectividad</li>
+                <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
+              </ul>
+            </div>
+
+            <div class="flyout-panel">
+              <!-- Seguridad Electrónica -->
+              <div class="flyout-panel-content active" data-panel="seguridad">
+                <div class="flyout-col">
+                  <div class="flyout-group">
+                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">🔒</span>CONTROL Y VIGILANCIA</a>
+                    <ul>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores Biométricos</a></li>
+                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Tarjetas y Lectores RFID</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
+        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <div class="page-container">
+
+    <!-- Sidebar Izquierdo (Filtros y Marcas Destacadas) -->
+    <aside class="sidebar">
+      <div class="filter-box">
+        <div class="featured-header">
+          <span>COMPRAR POR</span>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Color</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list filter-color-list">
+            <li><span class="color-swatch" style="background:#000000" title="Negro"></span></li>
+            <li><span class="color-swatch" style="background:#8f8f8f" title="Gris"></span></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Uso</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; Interior <span class="count">3</span></a></li>
+          </ul>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-header">
+            <span>Área de captura</span>
+            <span class="arrow">▲</span>
+          </div>
+          <ul class="filter-list">
+            <li><a href="#">&rsaquo; 14.6 mm x 18.1 mm <span class="count">1</span></a></li>
+            <li><a href="#">&rsaquo; 20.32 mm x 25.40 mm <span class="count">1</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Marcas Destacadas con Carrusel -->
+      <div class="featured-brands-box">
+        <div class="featured-header">
+          <span>MARCAS DESTACADAS</span>
+          <div class="nav-arrows">
+            <button class="arrow-btn" id="prevBrand">❮</button>
+            <button class="arrow-btn" id="nextBrand">❯</button>
+          </div>
+        </div>
+
+        <div class="brands-carousel-wrapper">
+          <div class="brands-carousel-track" id="brandsTrack">
+            <div class="brand-slide active">
+              <div class="featured-grid">
+                <a href="datalogic.html" class="brand-item"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic"></a>
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="elo.html" class="brand-item"><img src="assets/imgmarcas/Elo.png" alt="Elo"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="hid.html" class="brand-item"><img src="assets/imgmarcas/HID.png" alt="HID"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+              </div>
+            </div>
+            <div class="brand-slide">
+              <div class="featured-grid">
+                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+                <a href="topaz.html" class="brand-item"><img src="assets/imgmarcas/Topaz.png" alt="Topaz Systems"></a>
+                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+                <a href="zkteco.html" class="brand-item"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco"></a>
+                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+                <a href="zebra.html" class="brand-item"><img src="assets/imgmarcas/Zebra.png" alt="Zebra"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="content-area">
+      
+      <!-- Tarjeta Header HID -->
+      <div class="product-carddatalogic">
+        <div class="product-imgdatalogic">
+          <img src="assets/imgmarcas/HID.png" alt="HID Global Logo">
+          <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/HID.webp" alt="HID Banner">
+        </div>
+        <div class="brand-banner"></div>
+        <div class="product-info">
+          <h4 class="product-title"></h4>
+        </div>
+      </div>
+      <!-- Descripción de Marca -->
+      <section class="brand-description">
+        <h2>IZC es un distribuidor mayorista autorizado de la marca HID en Colombia</h2>
+        <p><strong>HID</strong> Hace posible la identificación confiable de personas, lugares y objetos alrededor del mundo.</p>
+        <p>Cada día millones de personas en más de 100 países emplean productos HID y servicios para acceder con seguridad a entornos físicos y digitales. Más de 2 mil millones de objetos, que necesitan ser identificados, verificados y rastreados, son conectados mediante tecnología de HID.</p>
+        <p>HID Global desarrolla las mejores soluciones de control de acceso y autenticación que ayudan a los gobiernos y organizaciones a anticiparse al entorno siempre cambiante de amenazas al que deben hacer frente. En aplicaciones donde es fundamental un mayor nivel de seguridad y confidencialidad</p>
+        <h3 class="slogan">¡Impulsando la identificación confiable!</h3>
+      </section>
+
+      <!-- Barra de Herramientas del Catálogo -->
+      <div class="toolbar">
+        <div class="view-mode">
+          <button class="grid-btn active">:::</button>
+          <button class="list-btn">☰</button>
+          <span class="item-count" id="itemCountDisplay">3 artículos</span>
+        </div>
+        <div class="sort-mode">
+          <select id="sortSelect">
+            <option value="all">Todas las Categorías</option>
+            <option value="biometricos">Lectores Biométricos</option>
+            <option value="rfid">Lectores RFID / Tarjetas</option>
+          </select>
+          <button class="sort-dir-btn">↑</button>
+        </div>
+      </div>
+
+      <!-- Grilla de Productos HID Global -->
+      <section class="product-grid" id="productGrid">
+        
+        <div class="product-card" data-category="biometricos">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/i/hid_uareu_5300.webp" alt="Lector de Huella HID U ARE U 5300">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/HID.png" alt="HID">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 3090</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Huella HID U ARE U 5300</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="biometricos">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/i/hid_uareu_4500.webp" alt="Lector de Huella HID Uareu 4500 4500U">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/HID.png" alt="HID">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 2942</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Huella HID Uareu 4500 4500U</a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="rfid">
+          <button class="wishlist-btn">♡</button>
+          <div class="product-img">
+            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/i/hid_omnikey_5427ck.webp" alt="Lector de Tarjetas RFID HID OMNIKEY 5427 G2">
+          </div>
+          <div class="brand-banner">
+            <img src="assets/imgmarcas/HID.png" alt="HID">
+          </div>
+          <div class="product-info">
+            <span class="sku">Sku: 7082</span>
+            <span class="price">$ 0.00</span>
+            <h4 class="product-title">
+              <a href="#">Lector de Tarjetas RFID HID OMNIKEY 5427 G2</a>
+            </h4>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Mensaje cuando no hay productos -->
+      <div id="noProductsMessage" style="display: none; padding: 40px; text-align: center; color: #666; font-size: 15px;">
+        No se encontraron productos disponibles para esta categoría en la marca HID.
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Botón flotante de soporte -->
+  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
+    🎧
+  </a>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+.page-container--search {
+  max-width: 1280px;
+  margin: 20px auto;
+  padding: 0 24px;
+}
+
+.search-results-header {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.search-results-header h1 {
+  font-size: 22px;
+  color: var(--blue-deep);
+  margin-bottom: 6px;
+}
+
+.search-results-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.search-type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.search-type-tags a {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 13px;
+  background: #fff;
+  transition: background 0.15s, color 0.15s;
+}
+
+.search-type-tags a:hover,
+.search-type-tags a.active {
+  background: var(--blue-deep);
+  color: #fff;
+  border-color: var(--blue-deep);
+}
+
+.page-container--search .content-area {
+  width: 100%;
+}
+
+.page-container--search .product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.page-container--search .product-card {
+  display: flex;
+  flex-direction: column;
+}
