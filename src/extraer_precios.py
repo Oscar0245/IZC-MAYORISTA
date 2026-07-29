@@ -1,5 +1,5 @@
 """Extrae precios USD (columna BM) por SKU (columna Stone / A) desde
-lista-precios-izc.xlsb y guarda public/assets/files/precios.json.
+lista-precios-izc.xlsb y guarda assets/files/precios.json.
 
 Actualización automática (recomendado):
   Al abrir una página vía XAMPP, precios.php detecta si el Excel es más nuevo
@@ -16,8 +16,8 @@ from pathlib import Path
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-RUTA_EXCEL = BASE_DIR / "public" / "assets" / "files" / "lista-precios-izc.xlsb"
-RUTA_JSON = BASE_DIR / "public" / "assets" / "files" / "precios.json"
+RUTA_EXCEL = BASE_DIR / "assets" / "files" / "lista-precios-izc.xlsb"
+RUTA_JSON = BASE_DIR / "assets" / "files" / "precios.json"
 
 STONE_COL = 0
 USD_COL = 64  # Columna BM

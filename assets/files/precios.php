@@ -9,7 +9,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 $dir = __DIR__;
 $excel = $dir . DIRECTORY_SEPARATOR . 'lista-precios-izc.xlsb';
 $json = $dir . DIRECTORY_SEPARATOR . 'precios.json';
-$script = dirname($dir, 3) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'extraer_precios.py';
+$script = dirname($dir, 2) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'extraer_precios.py';
 
 function find_python() {
     foreach (['py -3', 'py', 'python', 'python3'] as $bin) {
