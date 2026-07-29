@@ -389,6 +389,14 @@ nav.main-nav { background: var(--blue-deep); }
   padding: 6px;
 }
 
+.featured-brands-box .brand-item img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 .filter-list {
   max-height: 150px;
   overflow-y: auto;
@@ -416,6 +424,70 @@ nav.main-nav { background: var(--blue-deep); }
   border-radius: 50%;
   border: 1px solid #ccc;
   cursor: pointer;
+}
+
+/* Mobile: sidebar full width — larger brand logos + full-width banner */
+@media (max-width: 992px) {
+  .featured-brands-box .brands-carousel-wrapper {
+    min-height: 0;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .featured-brands-box .brand-item {
+    height: 110px;
+    padding: 14px;
+  }
+
+  .featured-brands-box .brand-item img {
+    max-height: 82px;
+    max-width: 95%;
+  }
+
+  .product-carddatalogic {
+    overflow: hidden;
+  }
+
+  .product-imgdatalogic {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    background: #fff;
+  }
+
+  /* Evita logo + banner lado a lado (se cortaba en celular) */
+  .product-imgdatalogic img:first-child {
+    display: none;
+  }
+
+  .product-imgdatalogic img:last-child {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .product-img {
+    height: 140px;
+    padding: 10px;
+  }
+
+  .product-img img {
+    max-height: 120px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -466,5 +538,24 @@ nav.main-nav { background: var(--blue-deep); }
   .nav-item > a {
     padding: 12px 14px;
     font-size: 13px;
+  }
+
+  .featured-brands-box .brand-item {
+    height: 96px;
+    padding: 12px;
+  }
+
+  .featured-brands-box .brand-item img {
+    max-height: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-brands-box .brand-item {
+    height: 88px;
   }
 }

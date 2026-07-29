@@ -140,18 +140,18 @@ ul { list-style: none; }
 
 .featured-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   padding: 15px;
 }
 
 .brand-item {
   border: 1px solid #f0f0f0;
-  padding: 8px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80px;
+  height: 70px;
 }
 
 .brand-item img {
@@ -358,9 +358,44 @@ ul { list-style: none; }
 }
 
 @media (max-width: 992px) {
-  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-container { flex-direction: column; }
   .sidebar { width: 100%; }
+
+  .featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .brand-item {
+    height: 110px;
+    padding: 14px;
+  }
+
+  .brand-item img {
+    max-height: 82px;
+    max-width: 95%;
+  }
+
+  .product-imgdatalogic {
+    height: auto;
+    padding: 0;
+    display: block;
+  }
+
+  .product-imgdatalogic img:first-child {
+    display: none;
+  }
+
+  .product-imgdatalogic img:last-child {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
 }
 
 /* NAVEGACIÓN PRINCIPAL */
