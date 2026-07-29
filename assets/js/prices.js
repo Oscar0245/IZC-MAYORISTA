@@ -1,18 +1,8 @@
 (function () {
   'use strict';
 
-  // precios.php regenera precios.json si el Excel cambió; JSON es respaldo
-  var PRICE_URLS = [
-    'assets/files/precios.php',
-    'assets/files/precios.json'
-  ];
-
   var priceMap = null;
   var loadPromise = null;
-
-  function skuFromElement(skuElem) {
-    return skuElem.textContent.replace(/\D/g, '').trim();
-  }
 
   function formatUSD(value) {
     return '$ ' + Number(value).toLocaleString('en-US', {
@@ -23,9 +13,7 @@
 
   function lookupPrice(sku) {
     if (!priceMap || !sku) return null;
-    if (Object.prototype.hasOwnProperty.call(priceMap, sku)) {
-      return priceMap[sku];
-    }
+    if (Object.prototype.hasOwnProperty.call(priceMap, sku)) return priceMap[sku];
     var skuNoZeros = sku.replace(/^0+/, '');
     if (skuNoZeros && Object.prototype.hasOwnProperty.call(priceMap, skuNoZeros)) {
       return priceMap[skuNoZeros];
@@ -35,38 +23,50 @@
 
   function applyPrices(root) {
     if (!priceMap) return;
-
     var scope = root || document;
     scope.querySelectorAll('.product-card, .product-carddatalogic').forEach(function (card) {
       var skuElem = card.querySelector('.sku');
       var priceElem = card.querySelector('.price');
       if (!skuElem || !priceElem) return;
-
-      var price = lookupPrice(skuFromElement(skuElem));
-      if (price != null) {
-        priceElem.textContent = formatUSD(price);
-      }
+      var price = lookupPrice(skuElem.textContent.replace(/\D/g, '').trim());
+      if (price != null) priceElem.textContent = formatUSD(price);
     });
   }
 
-  function fetchPrices(url) {
-    return fetch(url, { cache: 'no-store' }).then(function (response) {
-      if (!response.ok) throw new Error('No se pudo cargar ' + url);
-      return response.json();
-    }).then(function (mapa) {
-      if (!mapa || mapa.error) {
-        throw new Error((mapa && mapa.error) || 'Respuesta inválida');
-      }
-      return mapa;
-    });
+  function parsePricePayload(text) {
+    var trimmed = String(text || '').trim();
+    // GitHub Pages serves precios.php as raw PHP source
+    if (!trimmed || trimmed.charAt(0) !== '{') return null;
+    try {
+      var data = JSON.parse(trimmed);
+      if (!data || typeof data !== 'object' || data.error) return null;
+      return data;
+    } catch (e) {
+      return null;
+    }
   }
 
   function loadPrices() {
     if (priceMap) return Promise.resolve(priceMap);
     if (loadPromise) return loadPromise;
 
-    loadPromise = fetchPrices(PRICE_URLS[0])
-      .catch(function () { return fetchPrices(PRICE_URLS[1]); })
+    loadPromise = fetch('assets/files/precios.php', { cache: 'no-store' })
+      .then(function (response) {
+        if (!response.ok) return null;
+        return response.text().then(parsePricePayload);
+      })
+      .catch(function () { return null; })
+      .then(function (mapa) {
+        if (mapa) return mapa;
+        return fetch('assets/files/precios.json', { cache: 'no-store' }).then(function (response) {
+          if (!response.ok) throw new Error('No se pudo cargar precios.json');
+          return response.text().then(function (text) {
+            var data = parsePricePayload(text);
+            if (!data) throw new Error('precios.json inválido');
+            return data;
+          });
+        });
+      })
       .then(function (mapa) {
         priceMap = mapa || {};
         applyPrices();

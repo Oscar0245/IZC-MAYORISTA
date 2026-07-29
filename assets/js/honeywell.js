@@ -163,17 +163,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Precios USD: precios.php regenera desde Excel (A=SKU, BM=USD) si cambió
+  // Precios USD: intenta precios.php (XAMPP); si no es JSON valido usa precios.json (GitHub Pages)
   async function cargarPreciosUSD() {
     try {
-      let response = await fetch('assets/files/precios.php', { cache: 'no-store' });
-      if (!response.ok) {
-        response = await fetch('assets/files/precios.json', { cache: 'no-store' });
-      }
-      if (!response.ok) return;
+      let mapaPrecios = null;
 
-      const mapaPrecios = await response.json();
-      if (!mapaPrecios || mapaPrecios.error) return;
+      try {
+        const phpRes = await fetch('assets/files/precios.php', { cache: 'no-store' });
+        if (phpRes.ok) {
+          const text = await phpRes.text();
+          if (text.trim().startsWith('{')) {
+            const data = JSON.parse(text);
+            if (data && !data.error) mapaPrecios = data;
+          }
+        }
+      } catch (_) {}
+
+      if (!mapaPrecios) {
+        const jsonRes = await fetch('assets/files/precios.json', { cache: 'no-store' });
+        if (!jsonRes.ok) return;
+        mapaPrecios = await jsonRes.json();
+        if (!mapaPrecios || mapaPrecios.error) return;
+      }
 
       document.querySelectorAll('.product-card, .product-carddatalogic').forEach(tarjeta => {
         const skuElem = tarjeta.querySelector('.sku');
