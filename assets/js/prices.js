@@ -35,7 +35,6 @@
 
   function parsePricePayload(text) {
     var trimmed = String(text || '').trim();
-    // GitHub Pages serves precios.php as raw PHP source
     if (!trimmed || trimmed.charAt(0) !== '{') return null;
     try {
       var data = JSON.parse(trimmed);
@@ -50,7 +49,7 @@
     if (priceMap) return Promise.resolve(priceMap);
     if (loadPromise) return loadPromise;
 
-    loadPromise = fetch('assets/files/precios.php', { cache: 'no-store' })
+    loadPromise = fetch('assets/files/precios.json', { cache: 'no-store' })
       .then(function (response) {
         if (!response.ok) return null;
         return response.text().then(parsePricePayload);
@@ -58,11 +57,11 @@
       .catch(function () { return null; })
       .then(function (mapa) {
         if (mapa) return mapa;
-        return fetch('assets/files/precios.json', { cache: 'no-store' }).then(function (response) {
-          if (!response.ok) throw new Error('No se pudo cargar precios.json');
+        return fetch('assets/files/precios.php', { cache: 'no-store' }).then(function (response) {
+          if (!response.ok) throw new Error('No hay precios');
           return response.text().then(function (text) {
             var data = parsePricePayload(text);
-            if (!data) throw new Error('precios.json inválido');
+            if (!data) throw new Error('precios.php no devolvió JSON');
             return data;
           });
         });

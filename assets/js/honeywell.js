@@ -168,23 +168,30 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       let mapaPrecios = null;
 
+      // 1) precios.json (funciona en GitHub Pages y XAMPP)
       try {
-        const phpRes = await fetch('assets/files/precios.php', { cache: 'no-store' });
-        if (phpRes.ok) {
-          const text = await phpRes.text();
-          if (text.trim().startsWith('{')) {
-            const data = JSON.parse(text);
-            if (data && !data.error) mapaPrecios = data;
-          }
+        const jsonRes = await fetch('assets/files/precios.json', { cache: 'no-store' });
+        if (jsonRes.ok) {
+          const data = await jsonRes.json();
+          if (data && !data.error) mapaPrecios = data;
         }
       } catch (_) {}
 
+      // 2) precios.php solo si el JSON fallo (XAMPP puede regenerar)
       if (!mapaPrecios) {
-        const jsonRes = await fetch('assets/files/precios.json', { cache: 'no-store' });
-        if (!jsonRes.ok) return;
-        mapaPrecios = await jsonRes.json();
-        if (!mapaPrecios || mapaPrecios.error) return;
+        try {
+          const phpRes = await fetch('assets/files/precios.php', { cache: 'no-store' });
+          if (phpRes.ok) {
+            const text = await phpRes.text();
+            if (text.trim().startsWith('{')) {
+              const data = JSON.parse(text);
+              if (data && !data.error) mapaPrecios = data;
+            }
+          }
+        } catch (_) {}
       }
+
+      if (!mapaPrecios) return;
 
       document.querySelectorAll('.product-card, .product-carddatalogic').forEach(tarjeta => {
         const skuElem = tarjeta.querySelector('.sku');
