@@ -3,9 +3,19 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==========================================
   // 1. MENÚ FLYOUT
   // ==========================================
-  var flyouts = document.querySelectorAll('.flyout');
+  var flyoutItems = document.querySelectorAll('.nav-item.has-flyout');
 
-  flyouts.forEach(function (flyout) {
+  function closeAllFlyouts() {
+    flyoutItems.forEach(function (item) {
+      item.classList.remove('open', 'is-open');
+    });
+  }
+
+  flyoutItems.forEach(function (item) {
+    var trigger = item.querySelector(':scope > a');
+    var flyout = item.querySelector('.flyout');
+    if (!trigger || !flyout) return;
+
     var cats = flyout.querySelectorAll('.flyout-cat');
     var panels = flyout.querySelectorAll('.flyout-panel-content');
 
@@ -27,6 +37,19 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var willOpen = !item.classList.contains('open') && !item.classList.contains('is-open');
+      closeAllFlyouts();
+      if (willOpen) {
+        item.classList.add('open', 'is-open');
+        var active = flyout.querySelector('.flyout-cat.active');
+        var first = active || cats[0];
+        if (first) activatePanel(first.dataset.panel);
+      }
+    });
+
     cats.forEach(function (cat) {
       cat.addEventListener('mouseenter', function () {
         activatePanel(this.dataset.panel);
@@ -34,9 +57,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
       cat.addEventListener('click', function (e) {
         e.preventDefault();
+        e.stopPropagation();
         activatePanel(this.dataset.panel);
       });
     });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-item.has-flyout')) {
+      closeAllFlyouts();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAllFlyouts();
   });
 
   // ==========================================
