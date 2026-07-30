@@ -49,14 +49,28 @@
     if (priceMap) return Promise.resolve(priceMap);
     if (loadPromise) return loadPromise;
 
-    loadPromise = fetch('assets/files/precios.json', { cache: 'no-store' })
-      .then(function (response) {
-        if (!response.ok) return null;
-        return response.text().then(parsePricePayload);
-      })
-      .catch(function () { return null; })
+    function fromJson() {
+      if (window.IZCData && typeof window.IZCData.loadJson === 'function') {
+        return window.IZCData.loadJson('assets/files/precios.json', { cache: 'no-store' })
+          .then(function (data) {
+            if (!data || typeof data !== 'object' || data.error) return null;
+            return data;
+          })
+          .catch(function () { return null; });
+      }
+      return fetch('assets/files/precios.json', { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) return null;
+          return response.text().then(parsePricePayload);
+        })
+        .catch(function () { return null; });
+    }
+
+    loadPromise = fromJson()
       .then(function (mapa) {
         if (mapa) return mapa;
+        // precios.php solo funciona con servidor (XAMPP); en file:// se omite
+        if (location.protocol === 'file:') return null;
         return fetch('assets/files/precios.php', { cache: 'no-store' }).then(function (response) {
           if (!response.ok) throw new Error('No hay precios');
           return response.text().then(function (text) {

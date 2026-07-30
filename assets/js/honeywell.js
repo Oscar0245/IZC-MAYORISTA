@@ -53,20 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 4. Selección de Favoritos (Wishlist)
-  const wishlistBtns = document.querySelectorAll('.wishlist-btn');
-
-  wishlistBtns.forEach(btn => {
-    btn.addEventListener('click', function () {
-      if (this.textContent.trim() === '♡') {
-        this.textContent = '♥';
-        this.style.color = '#de2910';
-      } else {
-        this.textContent = '♡';
-        this.style.color = '#888';
-      }
-    });
-  });
+  // Wishlist: manejado por wishlist.js
+});
 
   // 5. Menú Flyout (Categorías y Paneles)
   const flyouts = document.querySelectorAll('.flyout');
@@ -168,17 +156,22 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       let mapaPrecios = null;
 
-      // 1) precios.json (funciona en GitHub Pages y XAMPP)
+      // 1) precios.json (http o file:// via IZCData)
       try {
-        const jsonRes = await fetch('assets/files/precios.json', { cache: 'no-store' });
-        if (jsonRes.ok) {
-          const data = await jsonRes.json();
+        if (window.IZCData && typeof window.IZCData.loadJson === 'function') {
+          const data = await window.IZCData.loadJson('assets/files/precios.json', { cache: 'no-store' });
           if (data && !data.error) mapaPrecios = data;
+        } else {
+          const jsonRes = await fetch('assets/files/precios.json', { cache: 'no-store' });
+          if (jsonRes.ok) {
+            const data = await jsonRes.json();
+            if (data && !data.error) mapaPrecios = data;
+          }
         }
       } catch (_) {}
 
-      // 2) precios.php solo si el JSON fallo (XAMPP puede regenerar)
-      if (!mapaPrecios) {
+      // 2) precios.php solo con servidor (XAMPP); no en file://
+      if (!mapaPrecios && location.protocol !== 'file:') {
         try {
           const phpRes = await fetch('assets/files/precios.php', { cache: 'no-store' });
           if (phpRes.ok) {

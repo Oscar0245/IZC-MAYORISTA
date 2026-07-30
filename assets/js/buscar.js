@@ -9,7 +9,7 @@
   var PRODUCT_TYPES = {
     lectores: {
       label: 'Lectores',
-      keywords: ['lector', 'lectores', 'escaner', 'scanner', 'scaner', 'codigo de barras', 'barcode', 'quickscan', 'magellan', 'voyager', 'xenon']
+      keywords: ['lectores de codigo de barras', 'lector de codigo de barras', 'codigo de barras', 'barcode', 'quickscan', 'magellan', 'voyager', 'xenon', 'escaner', 'scanner', 'scaner', 'lectores', 'lector']
     },
     balanzas: {
       label: 'Balanzas',
@@ -37,7 +37,7 @@
     },
     tarjetas: {
       label: 'Lectores de Tarjetas',
-      keywords: ['tarjeta', 'rfid', 'proximidad', 'omnikey']
+      keywords: ['lectores de tarjetas', 'lector de tarjetas', 'tarjeta', 'rfid', 'proximidad', 'omnikey', 'proid']
     },
     control: {
       label: 'Control de Acceso',
@@ -65,6 +65,40 @@
     }
   };
 
+  var PRODUCT_SUBTYPES = {
+    'lectores-de-mano': { label: 'Lectores de Mano', parent: 'lectores' },
+    'lectores-inalambricos': { label: 'Lectores Inalámbricos', parent: 'lectores' },
+    'lectores-de-mesa': { label: 'Lectores de Mesa', parent: 'lectores' },
+    'lectores-empotrables': { label: 'Lectores Empotrables', parent: 'lectores' },
+    'equipos-pos': { label: 'Equipos para Punto de Venta', parent: 'equipos' },
+    'monitores-touch': { label: 'Monitores Touch', parent: 'monitores' },
+    'mini-pc': { label: 'Mini PC', parent: 'equipos' },
+    'cajones': { label: 'Cajones monederos', parent: 'equipos' },
+    'impresoras-escritorio': { label: 'Impresoras de Escritorio', parent: 'impresoras' },
+    'impresoras-semi-industriales': { label: 'Impresoras Semi Industriales', parent: 'impresoras' },
+    'impresoras-industriales': { label: 'Impresoras Industriales', parent: 'impresoras' },
+    'impresoras-carnet': { label: 'Impresoras de Carnet', parent: 'impresoras' },
+    'impresoras-manillas': { label: 'Impresoras de Manillas', parent: 'impresoras' },
+    'consumibles-etiquetas': { label: 'Etiquetas adhesivas', parent: 'consumibles' },
+    'consumibles-ribbons': { label: 'Ribbons o Cintas', parent: 'consumibles' },
+    'consumibles-manillas': { label: 'Manillas', parent: 'consumibles' },
+    'consumibles-kits': { label: 'Kits de limpieza', parent: 'consumibles' },
+    'control-acceso': { label: 'Controles de Acceso', parent: 'control' },
+    'accesorios-acceso': { label: 'Accesorios de Control de Acceso', parent: 'control' },
+    'lectores-tarjetas': { label: 'Lectores de Tarjetas', parent: 'tarjetas' },
+    'camaras-ip': { label: 'Cámaras IP', parent: 'camaras' },
+    'camaras-wifi': { label: 'Cámaras WIFI', parent: 'camaras' },
+    'grabadores-analogo': { label: 'Grabadores Análogos', parent: 'grabadores' },
+    'grabadores-ip': { label: 'Grabadores IP', parent: 'grabadores' },
+    'accesorios-cctv': { label: 'Accesorios para CCTV', parent: 'camaras' },
+    'access-point': { label: 'Access Point', parent: 'red' },
+    'radio-enlaces': { label: 'Radio Enlaces', parent: 'red' },
+    'routers': { label: 'Routers', parent: 'red' },
+    'switch-poe': { label: 'Switch PoE', parent: 'red' },
+    'impresoras-portatiles': { label: 'Impresoras Portátiles', parent: 'impresoras' },
+    'terminales-moviles': { label: 'Terminales Móviles', parent: 'movilidad' }
+  };
+
   function normalize(text) {
     return String(text || '')
       .toLowerCase()
@@ -75,9 +109,34 @@
       .trim();
   }
 
+  function resolveSubtype(query) {
+    var norm = normalize(query).replace(/\s+/g, '-');
+    if (!norm) return null;
+    if (Object.prototype.hasOwnProperty.call(PRODUCT_SUBTYPES, norm)) return norm;
+    if (Object.prototype.hasOwnProperty.call(PRODUCT_SUBTYPES, query)) return query;
+    return null;
+  }
+
+  function productHasSubtype(product, subtypeId) {
+    if (!product || !subtypeId) return false;
+    if (product.subtype === subtypeId) return true;
+    if (Array.isArray(product.subtypes)) {
+      return product.subtypes.indexOf(subtypeId) !== -1;
+    }
+    return false;
+  }
+
   function resolveType(query) {
+    var subtypeId = resolveSubtype(query);
+    if (subtypeId) return PRODUCT_SUBTYPES[subtypeId].parent || null;
+
     var norm = normalize(query);
     if (!norm) return null;
+
+    // Match exact type id first (botones: lectores, tarjetas, etc.)
+    if (Object.prototype.hasOwnProperty.call(PRODUCT_TYPES, norm)) {
+      return norm;
+    }
 
     var bestId = null;
     var bestScore = 0;
@@ -86,20 +145,20 @@
       var type = PRODUCT_TYPES[id];
       type.keywords.forEach(function (keyword) {
         var keyNorm = normalize(keyword);
+        var score = 0;
         if (norm === keyNorm) {
-          bestScore = Math.max(bestScore, 100);
+          score = 100;
+        } else if (norm.length >= 4 && norm.indexOf(keyNorm) !== -1) {
+          score = 80;
+        } else if (norm.length >= 4 && keyNorm.indexOf(norm) !== -1) {
+          // Más débil: evita que "lectores" active "lectores de tarjetas"
+          score = 40;
+        }
+        if (score > bestScore) {
+          bestScore = score;
           bestId = id;
-        } else if (norm.indexOf(keyNorm) !== -1 || keyNorm.indexOf(norm) !== -1) {
-          if (norm.length >= 3) {
-            bestScore = Math.max(bestScore, 80);
-            bestId = id;
-          }
         }
       });
-      if (id === norm) {
-        bestScore = 100;
-        bestId = id;
-      }
     });
 
     return bestScore >= 70 ? bestId : null;
@@ -121,10 +180,31 @@
   function filterProducts(query) {
     if (!catalog) return [];
 
+    var subtypeId = resolveSubtype(query);
+    if (subtypeId) {
+      return catalog.products.filter(function (product) {
+        return productHasSubtype(product, subtypeId);
+      });
+    }
+
     var typeId = resolveType(query);
     if (typeId) {
+      var barcodeSubtypes = [
+        'lectores-de-mano',
+        'lectores-inalambricos',
+        'lectores-de-mesa',
+        'lectores-empotrables'
+      ];
       return catalog.products.filter(function (product) {
-        return product.type === typeId;
+        if (product.type === typeId || product.category === typeId) return true;
+        if (Array.isArray(product.types) && product.types.indexOf(typeId) !== -1) return true;
+        if (typeId === 'tarjetas' && productHasSubtype(product, 'lectores-tarjetas')) return true;
+        if (typeId === 'lectores') {
+          return barcodeSubtypes.some(function (sub) {
+            return productHasSubtype(product, sub);
+          });
+        }
+        return false;
       });
     }
 
@@ -146,15 +226,12 @@
 
   function renderProductCard(product) {
     var brandPage = product.brandPage || (product.brand + '.html');
-    var link = brandPage + '?sku=' + encodeURIComponent(product.sku);
+    var link = 'producto.html?sku=' + encodeURIComponent(product.sku);
     return (
       '<div class="product-card">' +
         '<button class="wishlist-btn" type="button">&#9825;</button>' +
         '<div class="product-img">' +
           '<img src="' + escapeHtml(product.img) + '" alt="' + escapeHtml(product.name) + '" onerror="this.src=\'assets/imgmarcas/' + escapeHtml(product.brandLogo) + '\'">' +
-        '</div>' +
-        '<div class="brand-banner">' +
-          '<img src="assets/imgmarcas/' + escapeHtml(product.brandLogo) + '" alt="' + escapeHtml(product.brandName) + '">' +
         '</div>' +
         '<div class="product-info">' +
           '<span class="sku">Sku: ' + escapeHtml(product.sku) + '</span>' +
@@ -200,12 +277,18 @@
     if (!grid) return;
 
     var products = filterProducts(query);
+    var subtypeId = resolveSubtype(query);
     var typeId = resolveType(query);
-    var typeLabel = typeId && PRODUCT_TYPES[typeId] ? PRODUCT_TYPES[typeId].label : null;
+    var label = null;
+    if (subtypeId && PRODUCT_SUBTYPES[subtypeId]) {
+      label = PRODUCT_SUBTYPES[subtypeId].label;
+    } else if (typeId && PRODUCT_TYPES[typeId]) {
+      label = PRODUCT_TYPES[typeId].label;
+    }
 
     if (titleEl) {
-      titleEl.textContent = typeLabel
-        ? typeLabel + ' — todas las marcas'
+      titleEl.textContent = label
+        ? label + ' — todas las marcas'
         : 'Resultados para "' + query + '"';
     }
 
@@ -231,17 +314,10 @@
   }
 
   function initWishlist() {
-    document.addEventListener('click', function (event) {
-      var btn = event.target.closest('.wishlist-btn');
-      if (!btn) return;
-      if (btn.textContent.trim() === '\u2661' || btn.textContent.trim() === '♡') {
-        btn.textContent = '\u2665';
-        btn.style.color = '#e60000';
-      } else {
-        btn.textContent = '\u2661';
-        btn.style.color = '#888';
-      }
-    });
+    if (window.IZCWishlist && typeof window.IZCWishlist.syncCardButtons === 'function') {
+      window.IZCWishlist.syncCardButtons(document);
+      return;
+    }
   }
 
   function init() {
@@ -275,11 +351,17 @@
       });
   }
 
-  fetch('assets/files/catalogo.json')
-    .then(function (response) {
+  function loadCatalogJson() {
+    if (window.IZCData && typeof window.IZCData.loadJson === 'function') {
+      return window.IZCData.loadJson('assets/files/catalogo.json');
+    }
+    return fetch('assets/files/catalogo.json').then(function (response) {
       if (!response.ok) throw new Error('Catalog not found');
       return response.json();
-    })
+    });
+  }
+
+  loadCatalogJson()
     .then(function (data) {
       catalog = data;
       startApp();
@@ -290,7 +372,9 @@
 
   window.IZCBuscar = {
     PRODUCT_TYPES: PRODUCT_TYPES,
+    PRODUCT_SUBTYPES: PRODUCT_SUBTYPES,
     resolveType: resolveType,
+    resolveSubtype: resolveSubtype,
     filterProducts: filterProducts
   };
 })();

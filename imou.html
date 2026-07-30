@@ -1,19 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">  
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IZC MAYORISTA - Imou</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
 
-  <link rel="stylesheet" href="assets/css/imou.css?v=4">
-  <link rel="stylesheet" href="assets/css/index.css?v=4">
+  <link rel="stylesheet" href="assets/css/imou.css?v=11">
+  <link rel="stylesheet" href="assets/css/index.css?v=16">
   <!-- Script principal de tu lógica -->
-  <script src="assets/js/search.js?v=2" defer></script>
+  <script src="assets/js/data-loader.js?v=1" defer></script>
+  <script src="assets/js/search.js?v=3" defer></script>
+  <script src="assets/js/wishlist.js?v=2" defer></script>
+  <script src="assets/js/brand_catalog.js?v=4" defer></script>
   <script src="assets/js/imou.js?v=2" defer></script>
   <script src="assets/js/index.js?v=2" defer></script>
 </head>
-<body>
+<body data-brand="imou">
 
   <!-- Top utility bar -->
   <div class="top-bar">
@@ -35,6 +38,7 @@
         <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
         <button type="submit">🔍︎</button>
       </form>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
     </div>
   </header>
 
@@ -60,36 +64,36 @@
               <div class="flyout-panel-content active" data-panel="pos">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras.html" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
+                    <a href="buscar.html?q=lectores" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mano.html">De Mano</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/inalambricos.html">Inalámbricos</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mesa.html">De Mesa</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html">Empotrables</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mano">De Mano</a></li>
+                      <li><a href="buscar.html?q=lectores-inalambricos">Inalámbricos</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mesa">De Mesa</a></li>
+                      <li><a href="buscar.html?q=lectores-empotrables">Empotrables</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos.html" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
+                    <a href="buscar.html?q=digitalizadores" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos/digitalizador-de-firmas.html">Digitalizadoras de Firmas</a></li>
+                      <li><a href="buscar.html?q=digitalizadores">Digitalizadoras de Firmas</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/equipos-pos.html" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
+                    <a href="buscar.html?q=equipos-pos" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/monitores-touch.html" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
+                    <a href="buscar.html?q=monitores-touch" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/mini-pc.html" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                    <a href="buscar.html?q=mini-pc" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/balanzas.html" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                    <a href="buscar.html?q=balanzas" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                    <a href="buscar.html?q=cajones" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
                   </div>
                 </div>
               </div>
@@ -98,32 +102,32 @@
               <div class="flyout-panel-content" data-panel="marcacion">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas.html" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
+                    <a href="buscar.html?q=impresoras" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/escritorio.html">De escritorio</a></li>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/semi-industriales.html">Semi industriales</a></li>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/industriales.html">Industriales</a></li>
+                      <li><a href="buscar.html?q=impresoras-escritorio">De escritorio</a></li>
+                      <li><a href="buscar.html?q=impresoras-semi-industriales">Semi industriales</a></li>
+                      <li><a href="buscar.html?q=impresoras-industriales">Industriales</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-carnet.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
+                    <a href="buscar.html?q=impresoras-carnet" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-para-manillas.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
+                    <a href="buscar.html?q=impresoras-manillas" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/consumibles.html" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
+                    <a href="buscar.html?q=consumibles" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/consumibles/etiquetas-adhesivas.html">Etiquetas adhesivas</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/ribbons-o-cintas.html">Ribbons o Cintas</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/manillas.html">Manillas para identificación</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/kits-de-limpieza.html">Kits de limpieza</a></li>
+                      <li><a href="buscar.html?q=consumibles-etiquetas">Etiquetas adhesivas</a></li>
+                      <li><a href="buscar.html?q=consumibles-ribbons">Ribbons o Cintas</a></li>
+                      <li><a href="buscar.html?q=consumibles">Manillas para identificación</a></li>
+                      <li><a href="buscar.html?q=consumibles-kits">Kits de limpieza</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/flexografia" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
+                    <a href="buscar.html?q=impresoras" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
                   </div>
                 </div>
               </div>
@@ -132,34 +136,34 @@
               <div class="flyout-panel-content" data-panel="seguridad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
+                    <a href="buscar.html?q=control-acceso" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso y Asistencia</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Accesorios de Control de Acceso</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores de Huella Biométricos</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/proveedores-de-alarmas-en-colombia.html">Alarmas</a></li>
+                      <li><a href="buscar.html?q=control-acceso">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="buscar.html?q=accesorios-acceso">Accesorios de Control de Acceso</a></li>
+                      <li><a href="buscar.html?q=huella">Lectores de Huella Biométricos</a></li>
+                      <li><a href="buscar.html?q=seguridad">Alarmas</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv.html" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
+                    <a href="buscar.html?q=camaras" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/ip.html">Cámaras IP</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/camaras-wifi.html">Cámaras WIFI</a></li>
+                      <li><a href="buscar.html?q=camaras-ip">Cámaras IP</a></li>
+                      <li><a href="buscar.html?q=camaras-wifi">Cámaras WIFI</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv.html" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
+                    <a href="buscar.html?q=grabadores" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/analogo-pentahibrido.html">Grabadores Análogos</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/ip-nvr.html">Grabadores IP</a></li>
+                      <li><a href="buscar.html?q=grabadores-analogo">Grabadores Análogos</a></li>
+                      <li><a href="buscar.html?q=grabadores-ip">Grabadores IP</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
+                    <a href="buscar.html?q=accesorios-cctv" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html">Accesorios para CCTV</a></li>
+                      <li><a href="buscar.html?q=accesorios-cctv">Accesorios para CCTV</a></li>
                     </ul>
                   </div>
                 </div>
@@ -169,17 +173,17 @@
               <div class="flyout-panel-content" data-panel="conectividad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica.html" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
+                    <a href="buscar.html?q=red" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/access-point.html">Access Point</a></li>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/radio-enlaces.html">Radio Enlaces</a></li>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/routers.html">Routers</a></li>
+                      <li><a href="buscar.html?q=access-point">Access Point</a></li>
+                      <li><a href="buscar.html?q=radio-enlaces">Radio Enlaces</a></li>
+                      <li><a href="buscar.html?q=routers">Routers</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/cableado-y-conectividad/switch.html" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
+                    <a href="buscar.html?q=switch-poe" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
                   </div>
                 </div>
               </div>
@@ -188,10 +192,10 @@
               <div class="flyout-panel-content" data-panel="movilidad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/movilidad.html" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
+                    <a href="buscar.html?q=terminales-moviles" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/movilidad/impresoras-portatiles.html">Impresoras Portátiles</a></li>
-                      <li><a href="https://izc.com.co/es/movilidad/computadoras-moviles.html">Terminales Móviles</a></li>
+                      <li><a href="buscar.html?q=impresoras-portatiles">Impresoras Portátiles</a></li>
+                      <li><a href="buscar.html?q=terminales-moviles">Terminales Móviles</a></li>
                     </ul>
                   </div>
                 </div>
@@ -202,7 +206,7 @@
         </li>
 
         <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
@@ -321,12 +325,14 @@
 
     <!-- Área de Contenido Principal -->
     <main class="content-area">
-      
+
         <!-- Tarjeta Imou Header Banner -->
         <div class="product-carddatalogic">
-          <div class="product-imgdatalogic">
-            <img src="assets/imgmarcas/IMOU.png" alt="Imou Logo">
-            <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Imou.webp" alt="Imou Banner" onerror="this.style.display='none'">
+          <div class="product-imgdatalogic brand-hero">
+            <img class="brand-hero-banner" src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Imou.webp" alt="Imou Banner" onerror="this.style.display='none'">
+            <div class="brand-hero-logo">
+              <img src="assets/imgmarcas/IMOU.png" alt="Imou Logo">
+            </div>
           </div>
           <div class="brand-banner"></div>
           <div class="product-info">
@@ -346,8 +352,6 @@
       <!-- Barra de Herramientas del Catálogo -->
       <div class="toolbar">
         <div class="view-mode">
-          <button class="grid-btn active">:::</button>
-          <button class="list-btn">☰</button>
           <span class="item-count" id="itemCountDisplay">32 artículos</span>
         </div>
         <div class="sort-mode">
@@ -363,488 +367,7 @@
 
       <!-- Grilla de Productos con data-category -->
       <section class="product-grid" id="productGrid">
-        
-        <!-- PÁGINA 1: 32 PRODUCTOS -->
-        
-        <!-- 1 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-b7ed_3.webp" alt="Sku 16602" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16602</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-B7ED-5M0TEA-AM/FSP14 AOV PT 360° CON PANEL SOLAR</a></h4>
-          </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-k2en_1.webp" alt="Sku 16587" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16587</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-K2EN-3R1W IP RANGER 2 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_mini_imou_ipc-k2mn_1.webp" alt="Sku 16589" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16589</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-K2MN-3R1W RANGER MINI R1 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_mini_imou_ipc-k2mn_2_1.webp" alt="Sku 16590" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16590</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-K2MN-5R1W RANGER MINI R1 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 5 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-k3dn_1.webp" alt="Sku 16592" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16592</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-K3DN-3V0W IP BULLET 2E 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 6 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-k3dn_2_1.webp" alt="Sku 16593" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16593</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-K3DN-5V0W IP BULLET 2E 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 7 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-k7fn_1.webp" alt="Sku 16594" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16594</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-K7FN-3V0W IP CRUISER SC 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 8 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-k7fn_2_1.webp" alt="Sku 16595" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16595</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-K7FN-5V0W IP CRUISER SC 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 9 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_mini_imou_ipc-k2mn_1_3.webp" alt="Sku 16606" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16606</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS2M-5R1 RANGER MINI POE 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 10 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_mini_imou_ipc-k2mn_1_2.webp" alt="Sku 16605" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16605</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS2MN-3R1 RANGER MINI POE 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 11 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps3dn_2.webp" alt="Sku 16611" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16611</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS3DN-3M0 BULLET POE NO AUDIO 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 12 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps3dn_1_1_1.webp" alt="Sku 16612" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16612</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS3DN-5M0 BULLET POE NO AUDIO 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 13 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps3dn_1_1.webp" alt="Sku 16613" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16613</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS3EN-3M0 BULLET POE 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 14 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps3dn_2_1_2.webp" alt="Sku 16614" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16614</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS3EN-5M0 BULLET POE 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 15 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps7fn_3.webp" alt="Sku 16618" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16618</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS70FN-10M0 CRUISER DOBLE LENTE POE 10MP (5MP+5MP)</a></h4>
-          </div>
-        </div>
-
-        <!-- 16 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps7fn_1_1.webp" alt="Sku 16617" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16617</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS70FN-8M0 CRUISER DOBLE LENTE POE 8MP (3MP+5MP)</a></h4>
-          </div>
-        </div>
-
-        <!-- 17 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/i/m/imou_ipc-ps7fn-7_1.webp" alt="Sku 16615" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16615</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS7FN-3M0 CRUISER SC POE 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 18 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/i/m/imou_ipc-ps7fn-2_1.webp" alt="Sku 16616" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16616</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS7FN-5M0 CRUISER SC POE 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 19 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps8dn_1_2.webp" alt="Sku 16608" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16608</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS8D-5V0 TURRET POE 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 20 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps8dn_1.webp" alt="Sku 16607" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16607</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS8DN-3V0 TURRET POE 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 21 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps8dn_2_3.webp" alt="Sku 16610" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16610</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS8E-5V0 TURRET POE CON AUDIO DOBLE VIA 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 22 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-ps8dn_2_1.webp" alt="Sku 16609" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16609</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-PS8EN-3V0 TURRET POE CON AUDIO DOBLE VIA 3MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 23 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-s20en_1.webp" alt="Sku 16591" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16591</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-S20EN-6M0S RANGER 2 DUAL 6MP FULL COLOR</a></h4>
-          </div>
-        </div>
-
-        <!-- 24 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/i/m/imou_ipc-ps7fn-1_1_2.webp" alt="Sku 16601" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16601</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-S7DN-5M0WEZ CRUISER SC POE 8MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 25 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/r/cruiser_z_-_3_1.webp" alt="Sku 16600" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16600</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-S7DN-5M0WEZ CRUISER Z 5MP</a></h4>
-          </div>
-        </div>
-
-        <!-- 26 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-s76dn_1_2.webp" alt="Sku 16598" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16598</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-S7UN-11M0WED CRUISER TRIPLE - LENS 11MP (3MP+3MP+5MP)</a></h4>
-          </div>
-        </div>
-
-        <!-- 27 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-s7xen_1.webp" alt="Sku 16597" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16597</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-S7XEN-10M0WED IP CRUISER DUAL-LENS 2 10MP (5MP+5MP)</a></h4>
-          </div>
-        </div>
-
-        <!-- 28 -->
-        <div class="product-card" data-category="camaras" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/c/_/c_mara_de_seguridad_imou_ipc-s7xen_1_1.webp" alt="Sku 16596" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16596</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Cámara de Seguridad IMOU IPC-S7XEN-8M0WED IP CRUISER DUAL-LENS 2 8MP (3MP+5MP)</a></h4>
-          </div>
-        </div>
-
-        <!-- 29 -->
-        <div class="product-card" data-category="grabadores" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/g/r/grabador_nvr_imou_nvr-n110-8a0e_cableado_-_1_1.webp" alt="Sku 16619" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16619</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Grabador NVR IMOU NVR-N110-8A0E 10 CANALES CON CABLE</a></h4>
-          </div>
-        </div>
-
-        <!-- 30 -->
-        <div class="product-card" data-category="grabadores" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/g/r/grabador_nvr_imou_nvr-n110w-8a0e_1.webp" alt="Sku 16603" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16603</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Grabador NVR IMOU NVR-N110W-8A0E WIFI 10 CANALES INALAMBRICO</a></h4>
-          </div>
-        </div>
-
-        <!-- 31 -->
-        <div class="product-card" data-category="grabadores" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/g/r/grabador_nvr_imou_nvr-n110-8a0e_cableado_-_2.webp" alt="Sku 16620" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16620</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Grabador NVR IMOU NVR-N118-8A0E 18 CANALES CON CABLE</a></h4>
-          </div>
-        </div>
-
-        <!-- 32 -->
-        <div class="product-card" data-category="grabadores" data-page="1">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/g/r/grabador_nvr_imou_nvr-n118w_1.webp" alt="Sku 16604" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16604</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Grabador NVR IMOU NVR-N118W-8A0E WIFI 18 CANALES INALAMBRICO ONVIF DOBLE BANDA</a></h4>
-          </div>
-        </div>
-
-
-        <!-- PÁGINA 2: LOS 2 ÚLTIMOS PRODUCTOS (MEMORIAS MICRO SD) -->
-        
-        <!-- 33 -->
-        <div class="product-card" data-category="memorias" data-page="2">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/m/e/memoria_micro_sd_imui_128gb.webp" alt="Sku 16622" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16622</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Memoria Micro SD IMOU 128GB</a></h4>
-          </div>
-        </div>
-
-        <!-- 34 -->
-        <div class="product-card" data-category="memorias" data-page="2">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/m/e/memoria_micro_sd_imui_64gb.webp" alt="Sku 16621" onerror="this.src='assets/imgmarcas/IMOU.png'">
-          </div>
-          <div class="brand-banner"><img src="assets/imgmarcas/IMOU.png" alt="Imou"></div>
-          <div class="product-info">
-            <span class="sku">Sku: 16621</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title"><a href="#">Memoria Micro SD IMOU 64GB</a></h4>
-          </div>
-        </div>
-
+        <!-- productos cargados desde catalogo.json -->
       </section>
 
       <!-- Paginación 1 y 2 -->
@@ -872,11 +395,5 @@
 
     </main>
   </div>
-
-  <!-- Botón flotante de ayuda / chat -->
-  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
-    🎧
-  </a>
-
 </body>
 </html>

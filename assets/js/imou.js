@@ -43,17 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  document.querySelectorAll('.wishlist-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-      if (this.textContent.trim() === '♡') {
-        this.textContent = '♥';
-        this.style.color = '#e60000';
-      } else {
-        this.textContent = '♡';
-        this.style.color = '#888';
-      }
-    });
-  });
+  // Wishlist: manejado por wishlist.js
+});
 
   document.querySelectorAll('.flyout').forEach(function (flyout) {
     const cats = flyout.querySelectorAll('.flyout-cat');
@@ -283,17 +274,22 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       let mapaPrecios = null;
 
-      // 1) precios.json (funciona en GitHub Pages y XAMPP)
+      // 1) precios.json (http o file:// via IZCData)
       try {
-        const jsonRes = await fetch('assets/files/precios.json', { cache: 'no-store' });
-        if (jsonRes.ok) {
-          const data = await jsonRes.json();
+        if (window.IZCData && typeof window.IZCData.loadJson === 'function') {
+          const data = await window.IZCData.loadJson('assets/files/precios.json', { cache: 'no-store' });
           if (data && !data.error) mapaPrecios = data;
+        } else {
+          const jsonRes = await fetch('assets/files/precios.json', { cache: 'no-store' });
+          if (jsonRes.ok) {
+            const data = await jsonRes.json();
+            if (data && !data.error) mapaPrecios = data;
+          }
         }
       } catch (_) {}
 
-      // 2) precios.php solo si el JSON fallo (XAMPP puede regenerar)
-      if (!mapaPrecios) {
+      // 2) precios.php solo con servidor (XAMPP); no en file://
+      if (!mapaPrecios && location.protocol !== 'file:') {
         try {
           const phpRes = await fetch('assets/files/precios.php', { cache: 'no-store' });
           if (phpRes.ok) {

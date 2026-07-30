@@ -1,19 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">  
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IZC MAYORISTA - HID Global</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
 
-  <link rel="stylesheet" href="assets/css/hid.css?v=4">
-  <link rel="stylesheet" href="assets/css/index.css?v=4">
+  <link rel="stylesheet" href="assets/css/hid.css?v=11">
+  <link rel="stylesheet" href="assets/css/index.css?v=16">
   <!-- Scripts principales -->
-  <script src="assets/js/search.js?v=2" defer></script>
+  <script src="assets/js/data-loader.js?v=1" defer></script>
+  <script src="assets/js/search.js?v=3" defer></script>
+  <script src="assets/js/wishlist.js?v=2" defer></script>
+  <script src="assets/js/brand_catalog.js?v=4" defer></script>
   <script src="assets/js/hid.js?v=2" defer></script>
   <script src="assets/js/index.js?v=2" defer></script>
 </head>
-<body>
+<body data-brand="hid">
 
   <!-- Top utility bar -->
   <div class="top-bar">
@@ -35,6 +38,7 @@
         <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
         <button type="submit">🔍︎</button>
       </form>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
     </div>
   </header>
 
@@ -60,11 +64,11 @@
               <div class="flyout-panel-content active" data-panel="seguridad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">🔒</span>CONTROL Y VIGILANCIA</a>
+                    <a href="buscar.html?q=control-acceso" class="flyout-group-title"><span class="icon">🔒</span>CONTROL Y VIGILANCIA</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores Biométricos</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Tarjetas y Lectores RFID</a></li>
+                      <li><a href="zkteco.html">Controles de Acceso</a></li>
+                      <li><a href="hid.html">Lectores Biométricos</a></li>
+                      <li><a href="zkteco.html">Tarjetas y Lectores RFID</a></li>
                     </ul>
                   </div>
                 </div>
@@ -74,7 +78,7 @@
         </li>
 
         <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
@@ -162,13 +166,15 @@
 
     <!-- Área de Contenido Principal -->
     <main class="content-area">
-      
+
       <!-- Tarjeta Header HID -->
       <div class="product-carddatalogic">
-        <div class="product-imgdatalogic">
-          <img src="assets/imgmarcas/HID.png" alt="HID Global Logo">
-          <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/HID.webp" alt="HID Banner">
-        </div>
+        <div class="product-imgdatalogic brand-hero">
+            <img class="brand-hero-banner" src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/HID.webp" alt="HID Banner">
+            <div class="brand-hero-logo">
+              <img src="assets/imgmarcas/HID.png" alt="HID Global Logo">
+            </div>
+          </div>
         <div class="brand-banner"></div>
         <div class="product-info">
           <h4 class="product-title"></h4>
@@ -186,8 +192,6 @@
       <!-- Barra de Herramientas del Catálogo -->
       <div class="toolbar">
         <div class="view-mode">
-          <button class="grid-btn active">:::</button>
-          <button class="list-btn">☰</button>
           <span class="item-count" id="itemCountDisplay">3 artículos</span>
         </div>
         <div class="sort-mode">
@@ -202,58 +206,7 @@
 
       <!-- Grilla de Productos HID Global -->
       <section class="product-grid" id="productGrid">
-        
-        <div class="product-card" data-category="biometricos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/i/hid_uareu_5300.webp" alt="Lector de Huella HID U ARE U 5300">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/HID.png" alt="HID">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 3090</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector de Huella HID U ARE U 5300</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="biometricos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/i/hid_uareu_4500.webp" alt="Lector de Huella HID Uareu 4500 4500U">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/HID.png" alt="HID">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 2942</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector de Huella HID Uareu 4500 4500U</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="rfid">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/i/hid_omnikey_5427ck.webp" alt="Lector de Tarjetas RFID HID OMNIKEY 5427 G2">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/HID.png" alt="HID">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 7082</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector de Tarjetas RFID HID OMNIKEY 5427 G2</a>
-            </h4>
-          </div>
-        </div>
-
+        <!-- productos cargados desde catalogo.json -->
       </section>
 
       <!-- Mensaje cuando no hay productos -->
@@ -263,11 +216,5 @@
 
     </main>
   </div>
-
-  <!-- Botón flotante de soporte -->
-  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
-    🎧
-  </a>
-
 </body>
 </html>

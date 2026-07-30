@@ -1,19 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">  
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IZC MAYORISTA - Topaz</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
 
-  <link rel="stylesheet" href="assets/css/topaz.css?v=4">
-  <link rel="stylesheet" href="assets/css/index.css?v=4">
+  <link rel="stylesheet" href="assets/css/topaz.css?v=11">
+  <link rel="stylesheet" href="assets/css/index.css?v=16">
   <!-- Script principal de tu lógica -->
-  <script src="assets/js/search.js?v=2" defer></script>
+  <script src="assets/js/data-loader.js?v=1" defer></script>
+  <script src="assets/js/search.js?v=3" defer></script>
+  <script src="assets/js/wishlist.js?v=2" defer></script>
+  <script src="assets/js/brand_catalog.js?v=4" defer></script>
   <script src="assets/js/topaz.js?v=2" defer></script>
   <script src="assets/js/index.js?v=2" defer></script>
 </head>
-<body>
+<body data-brand="topaz">
 
   <!-- Top utility bar -->
   <div class="top-bar">
@@ -35,6 +38,7 @@
         <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
         <button type="submit">🔍︎</button>
       </form>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
     </div>
   </header>
 
@@ -60,36 +64,36 @@
               <div class="flyout-panel-content active" data-panel="pos">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras.html" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
+                    <a href="buscar.html?q=lectores" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mano.html">De Mano</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/inalambricos.html">Inalámbricos</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mesa.html">De Mesa</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html">Empotrables</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mano">De Mano</a></li>
+                      <li><a href="buscar.html?q=lectores-inalambricos">Inalámbricos</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mesa">De Mesa</a></li>
+                      <li><a href="buscar.html?q=lectores-empotrables">Empotrables</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos.html" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
+                    <a href="buscar.html?q=digitalizadores" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos/digitalizador-de-firmas.html">Digitalizadoras de Firmas</a></li>
+                      <li><a href="buscar.html?q=digitalizadores">Digitalizadoras de Firmas</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/equipos-pos.html" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
+                    <a href="buscar.html?q=equipos-pos" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/monitores-touch.html" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
+                    <a href="buscar.html?q=monitores-touch" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/mini-pc.html" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                    <a href="buscar.html?q=mini-pc" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/balanzas.html" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                    <a href="buscar.html?q=balanzas" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                    <a href="buscar.html?q=cajones" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
                   </div>
                 </div>
               </div>
@@ -98,32 +102,32 @@
               <div class="flyout-panel-content" data-panel="marcacion">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas.html" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
+                    <a href="buscar.html?q=impresoras" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/escritorio.html">De escritorio</a></li>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/semi-industriales.html">Semi industriales</a></li>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/industriales.html">Industriales</a></li>
+                      <li><a href="buscar.html?q=impresoras-escritorio">De escritorio</a></li>
+                      <li><a href="buscar.html?q=impresoras-semi-industriales">Semi industriales</a></li>
+                      <li><a href="buscar.html?q=impresoras-industriales">Industriales</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-carnet.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
+                    <a href="buscar.html?q=impresoras-carnet" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-para-manillas.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
+                    <a href="buscar.html?q=impresoras-manillas" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/consumibles.html" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
+                    <a href="buscar.html?q=consumibles" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/consumibles/etiquetas-adhesivas.html">Etiquetas adhesivas</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/ribbons-o-cintas.html">Ribbons o Cintas</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/manillas.html">Manillas para identificación</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/kits-de-limpieza.html">Kits de limpieza</a></li>
+                      <li><a href="buscar.html?q=consumibles-etiquetas">Etiquetas adhesivas</a></li>
+                      <li><a href="buscar.html?q=consumibles-ribbons">Ribbons o Cintas</a></li>
+                      <li><a href="buscar.html?q=consumibles">Manillas para identificación</a></li>
+                      <li><a href="buscar.html?q=consumibles-kits">Kits de limpieza</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/flexografia" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
+                    <a href="buscar.html?q=impresoras" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
                   </div>
                 </div>
               </div>
@@ -132,34 +136,34 @@
               <div class="flyout-panel-content" data-panel="seguridad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
+                    <a href="buscar.html?q=control-acceso" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso y Asistencia</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Accesorios de Control de Acceso</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores de Huella Biométricos</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/proveedores-de-alarmas-en-colombia.html">Alarmas</a></li>
+                      <li><a href="buscar.html?q=control-acceso">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="buscar.html?q=accesorios-acceso">Accesorios de Control de Acceso</a></li>
+                      <li><a href="buscar.html?q=huella">Lectores de Huella Biométricos</a></li>
+                      <li><a href="buscar.html?q=seguridad">Alarmas</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv.html" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
+                    <a href="buscar.html?q=camaras" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/ip.html">Cámaras IP</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/camaras-wifi.html">Cámaras WIFI</a></li>
+                      <li><a href="buscar.html?q=camaras-ip">Cámaras IP</a></li>
+                      <li><a href="buscar.html?q=camaras-wifi">Cámaras WIFI</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv.html" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
+                    <a href="buscar.html?q=grabadores" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/analogo-pentahibrido.html">Grabadores Análogos</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/ip-nvr.html">Grabadores IP</a></li>
+                      <li><a href="buscar.html?q=grabadores-analogo">Grabadores Análogos</a></li>
+                      <li><a href="buscar.html?q=grabadores-ip">Grabadores IP</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
+                    <a href="buscar.html?q=accesorios-cctv" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html">Accesorios para CCTV</a></li>
+                      <li><a href="buscar.html?q=accesorios-cctv">Accesorios para CCTV</a></li>
                     </ul>
                   </div>
                 </div>
@@ -169,17 +173,17 @@
               <div class="flyout-panel-content" data-panel="conectividad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica.html" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
+                    <a href="buscar.html?q=red" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/access-point.html">Access Point</a></li>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/radio-enlaces.html">Radio Enlaces</a></li>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/routers.html">Routers</a></li>
+                      <li><a href="buscar.html?q=access-point">Access Point</a></li>
+                      <li><a href="buscar.html?q=radio-enlaces">Radio Enlaces</a></li>
+                      <li><a href="buscar.html?q=routers">Routers</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/cableado-y-conectividad/switch.html" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
+                    <a href="buscar.html?q=switch-poe" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
                   </div>
                 </div>
               </div>
@@ -188,10 +192,10 @@
               <div class="flyout-panel-content" data-panel="movilidad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/movilidad.html" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
+                    <a href="buscar.html?q=terminales-moviles" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/movilidad/impresoras-portatiles.html">Impresoras Portátiles</a></li>
-                      <li><a href="https://izc.com.co/es/movilidad/computadoras-moviles.html">Terminales Móviles</a></li>
+                      <li><a href="buscar.html?q=impresoras-portatiles">Impresoras Portátiles</a></li>
+                      <li><a href="buscar.html?q=terminales-moviles">Terminales Móviles</a></li>
                     </ul>
                   </div>
                 </div>
@@ -202,7 +206,7 @@
         </li>
 
         <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
@@ -269,12 +273,14 @@
 
     <!-- Área de Contenido Principal -->
     <main class="content-area">
-      
+
         <!-- Tarjeta datalogic -->
         <div class="product-carddatalogic">
-          <div class="product-imgdatalogic">
-            <img src="assets/imgmarcas/Topaz.png" alt="Topaz Logo">
-            <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Topaz.webp" alt="Topaz Banner">
+          <div class="product-imgdatalogic brand-hero">
+            <img class="brand-hero-banner" src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Topaz.webp" alt="Topaz Banner">
+            <div class="brand-hero-logo">
+              <img src="assets/imgmarcas/Topaz.png" alt="Topaz Logo">
+            </div>
           </div>
           <div class="brand-banner"></div>
           <div class="product-info">
@@ -293,8 +299,6 @@
       <!-- Barra de Herramientas del Catálogo -->
       <div class="toolbar">
         <div class="view-mode">
-          <button class="grid-btn active">:::</button>
-          <button class="list-btn">☰</button>
           <span class="item-count" id="itemCountDisplay">5 artículos</span>
         </div>
         <div class="sort-mode">
@@ -308,92 +312,7 @@
 
       <!-- Grilla de Productos -->
       <section class="product-grid" id="productGrid">
-
-        <div class="product-card" data-category="digitalizadores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_td-lbk070va_gemview.webp" alt="Digitalizador de Firmas Topaz T TD-LBK070VA Gemview" onerror="this.src='assets/imgmarcas/Topaz.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Topaz.png" alt="Topaz">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 4748</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Digitalizador de Firmas Topaz T TD-LBK070VA Gemview</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="digitalizadores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_s460_hsb_r_siglite.webp" alt="Digitalizador de Firmas Topaz T S460 HSB R Siglite" onerror="this.src='assets/imgmarcas/Topaz.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Topaz.png" alt="Topaz">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 4017</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Digitalizador de Firmas Topaz T S460 HSB R Siglite</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="digitalizadores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_s461_hsb_r_siglite_slim.webp" alt="Digitalizador de Firmas Topaz T S461 HSB R Siglite Slim" onerror="this.src='assets/imgmarcas/Topaz.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Topaz.png" alt="Topaz">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 1914</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Digitalizador de Firmas Topaz T S461 HSB R Siglite Slim</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="digitalizadores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_lbk460_hsb_r_siglite.webp" alt="Digitalizador de Firmas Topaz T LBK460 HSB R Siglite" onerror="this.src='assets/imgmarcas/Topaz.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Topaz.png" alt="Topaz">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 1913</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Digitalizador de Firmas Topaz T LBK460 HSB R Siglite</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="digitalizadores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_lbk750_bhsb_r_siglite.webp" alt="Digitalizador de Firmas Topaz T LBK750 BHSB R Siglite" onerror="this.src='assets/imgmarcas/Topaz.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Topaz.png" alt="Topaz">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 1905</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Digitalizador de Firmas Topaz T LBK750 BHSB R Siglite</a>
-            </h4>
-          </div>
-        </div>
-
+        <!-- productos cargados desde catalogo.json -->
       </section>
 
       <!-- Mensaje cuando no hay productos -->
@@ -403,11 +322,5 @@
 
     </main>
   </div>
-
-  <!-- Botón flotante de ayuda / chat -->
-  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
-    🎧
-  </a>
-
 </body>
 </html>

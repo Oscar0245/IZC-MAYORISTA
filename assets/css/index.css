@@ -53,8 +53,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   padding: 18px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  justify-content: flex-start;
+  gap: 16px;
 }
 
 .logo {
@@ -70,13 +70,50 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 .search-bar {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   max-width: 640px;
+  margin-left: auto;
   border: 1px solid #c2d1e5;
   border-radius: 4px;
   background: #fff;
   position: relative;
+}
+
+.header-wishlist {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  margin-left: 0;
+  border: 1px solid #c2d1e5;
+  border-radius: 4px;
+  background: #fff;
+  color: #e60000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+
+.header-wishlist:hover {
+  background: #fff5f5;
+  border-color: #f5b5b5;
+}
+
+.header-wishlist-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.header-wishlist-count {
+  display: none !important;
+}
+
+.wishlist-btn.is-liked,
+.wishlist-btn[aria-pressed="true"] {
+  color: #e60000;
 }
 
 /* ---------- Categories tree select ---------- */
@@ -397,6 +434,159 @@ nav.main-nav { background: var(--blue-deep); }
   object-fit: contain;
 }
 
+.product-carddatalogic {
+  overflow: visible !important;
+  background: #fff;
+  position: relative;
+}
+
+/* Hero de marca: banner a ancho completo + logo cuadrado superpuesto */
+.product-imgdatalogic,
+.product-imgelo,
+.brand-hero {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+}
+
+.brand-hero-banner,
+.product-imgdatalogic > img.brand-hero-banner,
+.product-imgelo > img.brand-hero-banner {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 140px !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: #f5f5f5 !important;
+}
+
+/* Logo cuadrado a la izquierda, montado sobre el borde inferior del banner */
+.brand-hero-logo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: absolute !important;
+  left: 16px !important;
+  bottom: 28px !important;
+  top: auto !important;
+  right: auto !important;
+  z-index: 6 !important;
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 120px !important;
+  max-height: 120px !important;
+  padding: 10px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  background-color: #fff !important;
+  background-image: none !important;
+  border: 1px solid #d0d0d0 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14) !important;
+  overflow: hidden !important;
+}
+
+.brand-hero-logo > img {
+  display: block !important;
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: auto !important;
+}
+
+/* Compat: logo como <img class="brand-hero-logo"> */
+img.brand-hero-logo,
+.product-imgdatalogic > img.brand-hero-logo,
+.product-imgelo > img.brand-hero-logo {
+  display: block !important;
+  position: absolute !important;
+  left: 16px !important;
+  bottom: 28px !important;
+  top: auto !important;
+  right: auto !important;
+  z-index: 6 !important;
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 120px !important;
+  max-height: 120px !important;
+  object-fit: contain !important;
+  padding: 12px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  background-color: #fff !important;
+  border: 1px solid #d0d0d0 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Compat HTML viejo: logo primero, banner segundo */
+.product-imgdatalogic > img:first-child:not(.brand-hero-banner):not(:only-child),
+.product-imgelo > img:first-child:not(.brand-hero-banner):not(:only-child) {
+  display: block !important;
+  position: absolute !important;
+  left: 16px !important;
+  bottom: 28px !important;
+  z-index: 6 !important;
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 120px !important;
+  max-height: 120px !important;
+  object-fit: contain !important;
+  padding: 12px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  background: #fff !important;
+  border: 1px solid #ddd !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12) !important;
+}
+
+.product-imgdatalogic > img:last-child:not(.brand-hero-logo),
+.product-imgelo > img:last-child:not(.brand-hero-logo) {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.brand-banner,
+.product-card .brand-banner {
+  display: none !important;
+}
+
 .filter-list {
   max-height: 150px;
   overflow-y: auto;
@@ -426,6 +616,64 @@ nav.main-nav { background: var(--blue-deep); }
   cursor: pointer;
 }
 
+.active-filters {
+  padding: 12px 14px 4px;
+  border-bottom: 1px solid #e5eaf0;
+  background: #f8fafc;
+}
+
+.active-filters-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+.active-filter-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.active-filter-clear {
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.clear-all-filters {
+  border: 0;
+  background: transparent;
+  color: #1653a0;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0 0 10px;
+  text-decoration: underline;
+}
+
+.filter-list a.is-active {
+  color: #1653a0;
+  font-weight: 600;
+}
+
+.filter-list a.is-active .count {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.color-filter-link.is-active .color-swatch {
+  outline: 2px solid #1653a0;
+  outline-offset: 2px;
+}
+
 /* Mobile: sidebar full width — larger brand logos + full-width banner */
 @media (max-width: 992px) {
   .featured-brands-box .brands-carousel-wrapper {
@@ -449,30 +697,69 @@ nav.main-nav { background: var(--blue-deep); }
   }
 
   .product-carddatalogic {
-    overflow: hidden;
+    overflow: visible !important;
   }
 
-  .product-imgdatalogic {
-    height: auto;
-    min-height: 0;
-    padding: 0;
-    display: block;
-    position: relative;
-    background: #fff;
+  .product-imgdatalogic,
+  .brand-hero {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    position: relative !important;
+    background: transparent !important;
+    overflow: visible !important;
   }
 
-  /* Evita logo + banner lado a lado (se cortaba en celular) */
-  .product-imgdatalogic img:first-child {
-    display: none;
+  .brand-hero-banner,
+  .product-imgdatalogic > img.brand-hero-banner {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
-  .product-imgdatalogic img:last-child {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    max-height: none;
-    object-fit: contain;
+  .brand-hero-logo,
+  img.brand-hero-logo,
+  .product-imgdatalogic > img.brand-hero-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    left: 12px !important;
+    bottom: 16px !important;
+    width: 88px !important;
+    height: 88px !important;
+    max-width: 88px !important;
+    max-height: 88px !important;
+    padding: 8px !important;
+    background-color: #fff !important;
+    border: 1px solid #d0d0d0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+    z-index: 6 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .brand-hero-logo > img {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
   }
 
   .product-grid {
@@ -510,10 +797,17 @@ nav.main-nav { background: var(--blue-deep); }
 
   .search-bar {
     display: flex;
-    flex: 1 1 100%;
+    flex: 1 1 auto;
     max-width: none;
-    width: 100%;
+    width: auto;
+    min-width: 0;
     min-height: 44px;
+  }
+
+  .header-wishlist {
+    margin-left: 8px;
+    width: 44px;
+    height: 44px;
   }
 
   .cat-select {
