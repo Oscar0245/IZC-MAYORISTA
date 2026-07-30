@@ -1,3 +1,13 @@
 ﻿.vscode/
-
 public/
+__pycache__/
+*.pyc
+assets/files/.precios-watch.lock
+assets/files/precios-watch.log
+assets/files/_sat_details_*.txt
+assets/files/_sat_details_*.log
+assets/files/_satpcs_*.html
+assets/files/_satpcs_url_cache.json
+src/__pycache__/
+src/probe_*.py
+src/test_sat_details.py

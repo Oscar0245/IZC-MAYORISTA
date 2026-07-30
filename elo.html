@@ -1,19 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">  
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IZC MAYORISTA - Elo Touch</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
 
-  <link rel="stylesheet" href="assets/css/datalogic.css?v=4">
-  <link rel="stylesheet" href="assets/css/index.css?v=4">
+  <link rel="stylesheet" href="assets/css/datalogic.css?v=11">
+  <link rel="stylesheet" href="assets/css/index.css?v=16">
 
-  <script src="assets/js/search.js?v=2" defer></script>
+  <script src="assets/js/data-loader.js?v=2" defer></script>
+  <script src="assets/js/prices.js?v=3" defer></script>
+  <script src="assets/js/search.js?v=3" defer></script>
+  <script src="assets/js/wishlist.js?v=2" defer></script>
+  <script src="assets/js/brand_catalog.js?v=7" defer></script>
   <script src="assets/js/elo.js?v=2" defer></script>
   <script src="assets/js/index.js?v=2" defer></script>
 </head>
-<body>
+<body data-brand="elo">
 
   <!-- Top utility bar -->
   <div class="top-bar">
@@ -35,6 +39,7 @@
         <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
         <button type="submit">🔍︎</button>
       </form>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
     </div>
   </header>
 
@@ -60,24 +65,24 @@
               <div class="flyout-panel-content active" data-panel="pos">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras.html" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
+                    <a href="buscar.html?q=lectores" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mano.html">De Mano</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/inalambricos.html">Inalámbricos</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mesa.html">De Mesa</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html">Empotrables</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mano">De Mano</a></li>
+                      <li><a href="buscar.html?q=lectores-inalambricos">Inalámbricos</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mesa">De Mesa</a></li>
+                      <li><a href="buscar.html?q=lectores-empotrables">Empotrables</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos.html" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
+                    <a href="buscar.html?q=digitalizadores" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/equipos-pos.html" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
+                    <a href="buscar.html?q=equipos-pos" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/monitores-touch.html" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
+                    <a href="buscar.html?q=monitores-touch" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
                   </div>
                 </div>
               </div>
@@ -86,7 +91,7 @@
         </li>
 
         <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
@@ -224,13 +229,15 @@
 
     <!-- Área de Contenido Principal -->
     <main class="content-area">
-      
+
       <!-- Tarjeta Elo Header -->
       <div class="product-carddatalogic">
-        <div class="product-imgdatalogic">
-          <img src="assets/imgmarcas/Elo.png" alt="Elo Touch Solutions Logo">
-          <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Elo-touch.webp" alt="Elo Banner">
-        </div>
+        <div class="product-imgdatalogic brand-hero">
+            <img class="brand-hero-banner" src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/Elo-touch.webp" alt="Elo Banner">
+            <div class="brand-hero-logo">
+              <img src="assets/imgmarcas/Elo.png" alt="Elo Touch Solutions Logo">
+            </div>
+          </div>
         <div class="brand-banner"></div>
         <div class="product-info">
           <h4 class="product-title"></h4>
@@ -246,8 +253,6 @@
       <!-- Barra de Herramientas del Catálogo -->
       <div class="toolbar">
         <div class="view-mode">
-          <button class="grid-btn active">:::</button>
-          <button class="list-btn">☰</button>
           <span class="item-count" id="itemCountDisplay">12 artículos</span>
         </div>
         <div class="sort-mode">
@@ -263,226 +268,7 @@
 
       <!-- Grilla de Productos Elo Touch -->
       <section class="product-grid" id="productGrid">
-        
-        <!-- Fila 1 -->
-        <!-- Tarjeta 1 -->
-        <div class="product-card" data-category="equipos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_15e2.webp" alt="Equipos todo en uno POS Elo 15E2 J1900">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 2156</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Equipos todo en uno POS Elo 15E2 J1900 RAM 4GB Disco 120GB SSD No SO E732416</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 2 -->
-        <div class="product-card" data-category="equipos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_15e3.webp" alt="Equipos todo en uno POS Elo CI3">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 6484</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Equipos todo en uno POS Elo CI3 4GB Disco 128GB No SO</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 3 -->
-        <div class="product-card" data-category="equipos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_e-series-2.webp" alt="Equipos todo en uno POS ELO E-SERIES 2 Celeron">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 8582</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Equipos todo en uno POS ELO E-SERIES 2 Celeron 4GB, 128GB SSD No SO E135925</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 4 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_10.1__1002l.webp" alt="Monitor Touch Elo 10.1'' 1002L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 5064</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 10.1" 1002L E155834</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Fila 2 -->
-        <!-- Tarjeta 5 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_15__1515l_lcd.webp" alt="Monitor Touch Elo 15'' 1515L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 3149</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 15" 1515L LCD E700813</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 6 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_15__1517l_lcd.webp" alt="Monitor Touch Elo 15'' 1517L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 3158</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 15" 1517L LCD E829550</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 7 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_15.6__1509l.webp" alt="Monitor Touch Elo 15.6'' 1509L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 14154</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 15.6" 1509L Tft LCD (Led) Wide E551755</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 8 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_17__1715l_lcd.webp" alt="Monitor Touch Elo 17'' 1715L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 3151</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 17" 1715L LCD E719160</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Fila 3 -->
-        <!-- Tarjeta 9 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_17__1717l_lcd.webp" alt="Monitor Touch Elo 17'' 1717L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 3168</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 17" 1717L LCD E179069</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 10 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_1790l.webp" alt="Monitor Touch Elo 1790L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 9380</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">MONITOR TOUCH ELO 1790L LCD DE 17" MARCO ABIERTO CAPACITIVO SIN BISEL E330225</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 11 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_19__1915l_lcd.webp" alt="Monitor Touch Elo 19'' 1915L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 3150</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 19" 1915L LCD E266835</a>
-            </h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta 12 -->
-        <div class="product-card" data-category="monitores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_22__2202l_lcd.webp" alt="Monitor Touch Elo 22'' 2202L">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/Elo.png" alt="Elo">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 3184</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Monitor Touch Elo 22" 2202L LCD E351600</a>
-            </h4>
-          </div>
-        </div>
-
+        <!-- productos cargados desde catalogo.json -->
       </section>
 
       <!-- Mensaje cuando no hay productos -->
@@ -492,11 +278,5 @@
 
     </main>
   </div>
-
-  <!-- Botón flotante de ayuda -->
-  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
-    🎧
-  </a>
-
 </body>
 </html>

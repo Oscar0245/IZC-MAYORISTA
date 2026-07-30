@@ -1,12 +1,13 @@
 """Extrae precios USD (columna BM) por SKU (columna Stone / A) desde
-lista-precios-izc.xlsb y guarda assets/files/precios.json.
+lista-precios-izc.xlsb y guarda assets/files/precios.json (+ precios.data.js).
 
-Actualización automática (recomendado):
-  Al abrir una página vía XAMPP, precios.php detecta si el Excel es más nuevo
-  y ejecuta este script solo cuando hace falta.
+Sin XAMPP (abrir HTML con doble clic / file://):
+  1) Reemplaza assets/files/lista-precios-izc.xlsb
+  2) Ejecuta: python src/extraer_precios.py
+  3) Recarga la página en el navegador
 
-Manual:
-  python src/extraer_precios.py
+Con XAMPP (localhost):
+  precios.php puede regenerar el JSON solo si el Excel es más nuevo.
 """
 from __future__ import annotations
 
@@ -18,6 +19,8 @@ import pandas as pd
 BASE_DIR = Path(__file__).resolve().parent.parent
 RUTA_EXCEL = BASE_DIR / "assets" / "files" / "lista-precios-izc.xlsb"
 RUTA_JSON = BASE_DIR / "assets" / "files" / "precios.json"
+RUTA_DATA_JS = BASE_DIR / "assets" / "files" / "precios.data.js"
+JSON_KEY = "assets/files/precios.json"
 
 STONE_COL = 0
 USD_COL = 64  # Columna BM
@@ -72,10 +75,24 @@ def extraer_precios_stone_usd() -> dict[str, float]:
     return mapa_precios
 
 
+def excel_stamp() -> str:
+    if not RUTA_EXCEL.exists():
+        return "missing"
+    st = RUTA_EXCEL.stat()
+    return f"{st.st_mtime_ns}:{st.st_size}"
+
+
 def guardar_precios(mapa: dict[str, float]) -> None:
     RUTA_JSON.parent.mkdir(parents=True, exist_ok=True)
-    RUTA_JSON.write_text(
-        json.dumps(mapa, ensure_ascii=False, indent=2) + "\n",
+    payload = json.dumps(mapa, ensure_ascii=False, indent=2) + "\n"
+    RUTA_JSON.write_text(payload, encoding="utf-8")
+    # Necesario para ver precios al abrir el HTML sin servidor (file://)
+    compact = json.dumps(mapa, ensure_ascii=False)
+    stamp = excel_stamp()
+    RUTA_DATA_JS.write_text(
+        "window.__IZC_DATA__=window.__IZC_DATA__||{};\n"
+        f"window.__IZC_PRICES_STAMP__={json.dumps(stamp)};\n"
+        f"window.__IZC_DATA__[{json.dumps(JSON_KEY)}]={compact};\n",
         encoding="utf-8",
     )
 
@@ -85,6 +102,7 @@ if __name__ == "__main__":
     precios = extraer_precios_stone_usd()
     guardar_precios(precios)
     print(f"Listo: {len(precios)} SKUs -> {RUTA_JSON}")
+    print(f"También: {RUTA_DATA_JS.name}")
     for sku in ("4031", "6513", "13"):
         if sku in precios:
             print(f"  {sku}: ${precios[sku]:.2f}")

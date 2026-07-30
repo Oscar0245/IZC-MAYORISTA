@@ -1,19 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">  
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IZC MAYORISTA - ZKTeco</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
 
-  <link rel="stylesheet" href="assets/css/zkteco.css?v=4">
-  <link rel="stylesheet" href="assets/css/index.css?v=4">
+  <link rel="stylesheet" href="assets/css/zkteco.css?v=11">
+  <link rel="stylesheet" href="assets/css/index.css?v=16">
   <!-- Script principal de tu lógica -->
-  <script src="assets/js/search.js?v=2" defer></script>
+  <script src="assets/js/data-loader.js?v=2" defer></script>
+  <script src="assets/js/prices.js?v=3" defer></script>
+  <script src="assets/js/search.js?v=3" defer></script>
+  <script src="assets/js/wishlist.js?v=2" defer></script>
+  <script src="assets/js/brand_catalog.js?v=7" defer></script>
   <script src="assets/js/zkteco.js?v=2" defer></script>
   <script src="assets/js/index.js?v=2" defer></script>
 </head>
-<body>
+<body data-brand="zkteco">
 
   <!-- Top utility bar -->
   <div class="top-bar">
@@ -35,6 +39,7 @@
         <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
         <button type="submit">🔍︎</button>
       </form>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
     </div>
   </header>
 
@@ -60,36 +65,36 @@
               <div class="flyout-panel-content active" data-panel="pos">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras.html" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
+                    <a href="buscar.html?q=lectores" class="flyout-group-title"><span class="icon">▤</span>Lectores de Códigos de Barras</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mano.html">De Mano</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/inalambricos.html">Inalámbricos</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/de-mesa.html">De Mesa</a></li>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html">Empotrables</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mano">De Mano</a></li>
+                      <li><a href="buscar.html?q=lectores-inalambricos">Inalámbricos</a></li>
+                      <li><a href="buscar.html?q=lectores-de-mesa">De Mesa</a></li>
+                      <li><a href="buscar.html?q=lectores-empotrables">Empotrables</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos.html" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
+                    <a href="buscar.html?q=digitalizadores" class="flyout-group-title"><span class="icon">▭</span>Periféricos POS</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/punto-de-venta-pos/perifericos-pos/digitalizador-de-firmas.html">Digitalizadoras de Firmas</a></li>
+                      <li><a href="buscar.html?q=digitalizadores">Digitalizadoras de Firmas</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/equipos-pos.html" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
+                    <a href="buscar.html?q=equipos-pos" class="flyout-group-title"><span class="icon">🖳</span>Equipos para Punto de Venta</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/monitores-touch.html" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
+                    <a href="buscar.html?q=monitores-touch" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/mini-pc.html" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                    <a href="buscar.html?q=mini-pc" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/balanzas.html" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                    <a href="buscar.html?q=balanzas" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                    <a href="buscar.html?q=cajones" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
                   </div>
                 </div>
               </div>
@@ -98,32 +103,32 @@
               <div class="flyout-panel-content" data-panel="marcacion">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas.html" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
+                    <a href="buscar.html?q=impresoras" class="flyout-group-title"><span class="icon">🏷</span>Impresoras de Etiquetas</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/escritorio.html">De escritorio</a></li>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/semi-industriales.html">Semi industriales</a></li>
-                      <li><a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/industriales.html">Industriales</a></li>
+                      <li><a href="buscar.html?q=impresoras-escritorio">De escritorio</a></li>
+                      <li><a href="buscar.html?q=impresoras-semi-industriales">Semi industriales</a></li>
+                      <li><a href="buscar.html?q=impresoras-industriales">Industriales</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-carnet.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
+                    <a href="buscar.html?q=impresoras-carnet" class="flyout-group-title"><span class="icon">▭</span>Impresoras de carnet</a>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/identificacion-y-marcacion/impresoras-para-manillas.html" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
+                    <a href="buscar.html?q=impresoras-manillas" class="flyout-group-title"><span class="icon">▭</span>Impresoras de manillas</a>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/consumibles.html" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
+                    <a href="buscar.html?q=consumibles" class="flyout-group-title"><span class="icon">▭</span>Consumibles</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/consumibles/etiquetas-adhesivas.html">Etiquetas adhesivas</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/ribbons-o-cintas.html">Ribbons o Cintas</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/manillas.html">Manillas para identificación</a></li>
-                      <li><a href="https://izc.com.co/es/consumibles/kits-de-limpieza.html">Kits de limpieza</a></li>
+                      <li><a href="buscar.html?q=consumibles-etiquetas">Etiquetas adhesivas</a></li>
+                      <li><a href="buscar.html?q=consumibles-ribbons">Ribbons o Cintas</a></li>
+                      <li><a href="buscar.html?q=consumibles">Manillas para identificación</a></li>
+                      <li><a href="buscar.html?q=consumibles-kits">Kits de limpieza</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/flexografia" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
+                    <a href="buscar.html?q=impresoras" class="flyout-group-title"><span class="icon">▭</span>Flexografía</a>
                   </div>
                 </div>
               </div>
@@ -132,34 +137,34 @@
               <div class="flyout-panel-content" data-panel="seguridad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
+                    <a href="buscar.html?q=control-acceso" class="flyout-group-title"><span class="icon">📷</span>CONTROL Y VIGILANCIA</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/controles-de-acceso-y-asistencia.html">Controles de Acceso y Asistencia</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/accesorios-control-de-acceso.html">Accesorios de Control de Acceso</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/lectores-huella-biometricos.html">Lectores de Huella Biométricos</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/proveedores-de-alarmas-en-colombia.html">Alarmas</a></li>
+                      <li><a href="buscar.html?q=control-acceso">Controles de Acceso y Asistencia</a></li>
+                      <li><a href="buscar.html?q=accesorios-acceso">Accesorios de Control de Acceso</a></li>
+                      <li><a href="buscar.html?q=huella">Lectores de Huella Biométricos</a></li>
+                      <li><a href="buscar.html?q=seguridad">Alarmas</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv.html" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
+                    <a href="buscar.html?q=camaras" class="flyout-group-title"><span class="icon">📷</span>CÁMARAS CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/ip.html">Cámaras IP</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/camaras-cctv/camaras-wifi.html">Cámaras WIFI</a></li>
+                      <li><a href="buscar.html?q=camaras-ip">Cámaras IP</a></li>
+                      <li><a href="buscar.html?q=camaras-wifi">Cámaras WIFI</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv.html" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
+                    <a href="buscar.html?q=grabadores" class="flyout-group-title"><span class="icon">🔒</span>GRABADORES CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/analogo-pentahibrido.html">Grabadores Análogos</a></li>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/grabadores-cctv/ip-nvr.html">Grabadores IP</a></li>
+                      <li><a href="buscar.html?q=grabadores-analogo">Grabadores Análogos</a></li>
+                      <li><a href="buscar.html?q=grabadores-ip">Grabadores IP</a></li>
                     </ul>
                   </div>
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
+                    <a href="buscar.html?q=accesorios-cctv" class="flyout-group-title"><span class="icon">🔌</span>Accesorios para CCTV</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/seguridad-electronica/cctv-circuito-cerrado-de-television/accesorios-para-cctv.html">Accesorios para CCTV</a></li>
+                      <li><a href="buscar.html?q=accesorios-cctv">Accesorios para CCTV</a></li>
                     </ul>
                   </div>
                 </div>
@@ -169,17 +174,17 @@
               <div class="flyout-panel-content" data-panel="conectividad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica.html" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
+                    <a href="buscar.html?q=red" class="flyout-group-title"><span class="icon">📡</span>CONECTIVIDAD INALÁMBRICA</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/access-point.html">Access Point</a></li>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/radio-enlaces.html">Radio Enlaces</a></li>
-                      <li><a href="https://izc.com.co/es/cableado-y-conectividad/conectividad-inalambrica/routers.html">Routers</a></li>
+                      <li><a href="buscar.html?q=access-point">Access Point</a></li>
+                      <li><a href="buscar.html?q=radio-enlaces">Radio Enlaces</a></li>
+                      <li><a href="buscar.html?q=routers">Routers</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/cableado-y-conectividad/switch.html" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
+                    <a href="buscar.html?q=switch-poe" class="flyout-group-title"><span class="icon">🔌</span>SWITCH POE</a>
                   </div>
                 </div>
               </div>
@@ -188,10 +193,10 @@
               <div class="flyout-panel-content" data-panel="movilidad">
                 <div class="flyout-col">
                   <div class="flyout-group">
-                    <a href="https://izc.com.co/es/movilidad.html" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
+                    <a href="buscar.html?q=terminales-moviles" class="flyout-group-title"><span class="icon">📱</span>MOVILIDAD</a>
                     <ul>
-                      <li><a href="https://izc.com.co/es/movilidad/impresoras-portatiles.html">Impresoras Portátiles</a></li>
-                      <li><a href="https://izc.com.co/es/movilidad/computadoras-moviles.html">Terminales Móviles</a></li>
+                      <li><a href="buscar.html?q=impresoras-portatiles">Impresoras Portátiles</a></li>
+                      <li><a href="buscar.html?q=terminales-moviles">Terminales Móviles</a></li>
                     </ul>
                   </div>
                 </div>
@@ -202,7 +207,7 @@
         </li>
 
         <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="https://izc.com.co/es/promociones">Promociones</a></li>
+        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
@@ -392,12 +397,14 @@
 
     <!-- Área de Contenido Principal -->
     <main class="content-area">
-      
+
         <!-- Tarjeta datalogic -->
         <div class="product-carddatalogic">
-          <div class="product-imgdatalogic">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco Logo">
-            <img src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/zkteco.webp" alt="ZKTeco Banner">
+          <div class="product-imgdatalogic brand-hero">
+            <img class="brand-hero-banner" src="https://izc.com.co/pub/media/webp_image/codazon_cache/brand/1200x/codazon/brand/banner_marca/zkteco.webp" alt="ZKTeco Banner">
+            <div class="brand-hero-logo">
+              <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco Logo">
+            </div>
           </div>
           <div class="brand-banner"></div>
           <div class="product-info">
@@ -416,8 +423,6 @@
       <!-- Barra de Herramientas del Catálogo -->
       <div class="toolbar">
         <div class="view-mode">
-          <button class="grid-btn active">:::</button>
-          <button class="list-btn">☰</button>
           <span class="item-count" id="itemCountDisplay">32 artículos</span>
         </div>
         <div class="sort-mode">
@@ -433,551 +438,7 @@
 
       <!-- Grilla de Productos -->
       <section class="product-grid" id="productGrid">
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15982_-_torniquete_doble_brazo_zkteco_ts2200_pro_-_1.webp" alt="Torniquete Doble Brazo ZKTeco TS2200 Pro" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15982</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Torniquete Doble Brazo ZKTeco TS2200 Pro</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15981_-_torniquete_bidireccional_zkteco_ts2000_pro_-_1.webp" alt="Torniquete Bidireccional ZKTeco TS2000 Pro" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15981</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Torniquete Bidireccional ZKTeco TS2000 Pro</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15980_-_torniquete_tr_pode_zkteco_ts1000_pro_-_1.webp" alt="Torniquete Tr&#237;pode ZKTeco TS1000 Pro" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15980</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Torniquete Tr&#237;pode ZKTeco TS1000 Pro</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15979_-_torniquete_zkteco_sbt2000s_1_carri.webp" alt="Torniquete ZKTeco SBT2000S 1 Carril" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15979</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Torniquete ZKTeco SBT2000S 1 Carril</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15977_-_lector_uhf_zkteco_uhf5_pro_series_-_1.webp" alt="Lector UHF ZKTeco UHF5 Pro Series" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15977</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector UHF ZKTeco UHF5 Pro Series</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15976_-_lector_uhf_zkteco_uhf10_pro_series_-_1.webp" alt="Lector UHF ZKTeco UHF10 Pro Series" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15976</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector UHF ZKTeco UHF10 Pro Series</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15975_-_dispensador_de_tickets_zkteco_tbm01_-_1.webp" alt="Dispensador de Tickets ZKTeco TBM01" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15975</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Dispensador de Tickets ZKTeco TBM01</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15974_-_dispensador_de_tickets_zkteco_tbm02_-_2.webp" alt="Dispensador de Tickets ZKTeco TBM02" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15974</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Dispensador de Tickets ZKTeco TBM02</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15973_-_barrera_vehicular_zkteco_probg3060r_led_-_1_1.webp" alt="Barrera Vehicular ZKTeco ProBG3060R LED" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15973</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Barrera Vehicular ZKTeco ProBG3060R LED</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/5/15250_-_control_de_acceso_zkteco_mb10-vl_id_adms.webp" alt="Control de Acceso ZKTeco MB10-VL ID ADMS" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 15250</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Control de Acceso ZKTeco MB10-VL ID ADMS</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/4/14901_-_control_de_acceso_zkteco_mb10-vl_facial.webp" alt="Control de Acceso ZKTeco MB10-VL Facial" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 14901</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Control de Acceso ZKTeco MB10-VL Facial</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/3/13685_-_terminal_multi-biom_trica_zkteco_mb360_id_-_1.webp" alt="Terminal Multi-Biom&#233;trica ZKTeco MB360 ID" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 13685</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Terminal Multi-Biom&#233;trica ZKTeco MB360 ID</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/3/13574_-_terminal_biom_trica_zkteco_multibio800v2.webp" alt="Terminal Biom&#233;trica ZKTeco MultiBio800V2" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 13574</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Terminal Biom&#233;trica ZKTeco MultiBio800V2</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/3/13272_-_terminal_facial_zkteco_speedface_v5l_rfid_wifi.webp" alt="Terminal Facial ZKTeco SpeedFace V5L RFID WiFi" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 13272</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Terminal Facial ZKTeco SpeedFace V5L RFID WiFi</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/1/11831_-_terminal_facial_zkteco_speedface_v3l_exterior.webp" alt="Terminal Facial ZKTeco SpeedFace V3L Exterior" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 11831</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Terminal Facial ZKTeco SpeedFace V3L Exterior</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/1/11610_-_terminal_biom_trica_zkteco_k50_id_tcp_ip.webp" alt="Terminal Biom&#233;trica ZKTeco K50 ID TCP/IP" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 11610</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Terminal Biom&#233;trica ZKTeco K50 ID TCP/IP</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="control">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/1/11186_-_terminal_biom_trica_zkteco_in05-aid_wifi_rfid_-_1.webp" alt="Terminal Biom&#233;trica ZKTeco IN05-AID WiFi RFID" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 11186</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Terminal Biom&#233;trica ZKTeco IN05-AID WiFi RFID</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16071_-_barrera_vehicular_izquierda_zkteco_probg3060l-led_brazo_6mts_led_-_1.webp" alt="Barrera Vehicular Izquierda ZKTECO PROBG3060L-LED, Brazo 6MTS, LED" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16071</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Barrera Vehicular Izquierda ZKTECO PROBG3060L-LED, Brazo 6MTS, LED</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16070_-_barrera_vehicular_derecha_zkteco_probg3030r-led_brazo_3mts_led_-_1.webp" alt="Barrera Vehicular Derecha ZKTECO PROBG3030R-LED, Brazo 3MTS, LED" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16070</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Barrera Vehicular Derecha ZKTECO PROBG3030R-LED, Brazo 3MTS, LED</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16069_-_barrera_vehicular_izquierda_zkteco_probg3030l-led_brazo_3mts_led_-_1.webp" alt="Barrera Vehicular Izquierda ZKTECO PROBG3030L-LED, Brazo 3MTS, LED" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16069</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Barrera Vehicular Izquierda ZKTECO PROBG3030L-LED, Brazo 3MTS, LED</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16067_-_brazo_de_repuesto_para_barrera_vehicular_zkteco_6mts_led.webp" alt="Brazo De Repuesto Para Barrera Vehicular ZKTECO 6MTS, LED" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16067</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Brazo De Repuesto Para Barrera Vehicular ZKTECO 6MTS, LED</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16066_-_brazo_de_repuesto_para_barrera_vehicular_zkteco_3mts_led.webp" alt="Brazo De Repuesto Para Barrera Vehicular ZKTECO 3MTS, LED" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16066</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Brazo De Repuesto Para Barrera Vehicular ZKTECO 3MTS, LED</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16065_-_brazo_de_repuesto_para_barrera_vehicular_zkteco_3mts_led.webp" alt="Brazo De Repuesto Para Barrera Vehicular ZKTECO 3MTS, LED" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16065</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Brazo De Repuesto Para Barrera Vehicular ZKTECO 3MTS, LED</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16064_-_camara_reconocimiento_de_placas_zkteco_bl-852q38a-lp.webp" alt="Camara Reconocimiento De Placas ZKTECO BL-852Q38A-LP" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16064</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Camara Reconocimiento De Placas ZKTECO BL-852Q38A-LP</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="perifericos">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16063_-_enrolador_de_tarjetas_uhf_zkteco_ur20rw-f.webp" alt="Enrolador De Tarjetas UHF ZKTECO UR20RW-F" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16063</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Enrolador De Tarjetas UHF ZKTECO UR20RW-F</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="lectores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16062_-_lector_de_huella_zkteco_slk20r_-_1.webp" alt="Lector De Huella ZKTECO SLK20R" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16062</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector De Huella ZKTECO SLK20R</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="lectores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16061_-_lector_de_tarjetas_de_proximidad_zkteco_proid30be_mifare_teclado.webp" alt="lector de tarjetas de proximidad ZKTECO PROID30BE, MIFARE, Teclado" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16061</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">lector de tarjetas de proximidad ZKTECO PROID30BE, MIFARE, Teclado</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="lectores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16060_-_lector_de_tarjetas_de_proximidad_zkteco_proid30be_teclado.webp" alt="Lector De Tarjetas De Proximidad ZKTECO PROID30BE, Teclado" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16060</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector De Tarjetas De Proximidad ZKTECO PROID30BE, Teclado</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="lectores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16059_-_lector_de_tarjetas_de_proximidad_zkteco_mifare_proid20bm_rs485_mifare.webp" alt="Lector De Tarjetas De Proximidad ZKTECO MIFARE PROID20 BM RS485, MIFARE" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16059</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector De Tarjetas De Proximidad ZKTECO MIFARE PROID20 BM RS485, MIFARE</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="lectores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16058_-_lector_de_tarjetas_de_proximidad_zkteco_proid20-be_rs485.webp" alt="Lector De Tarjetas De Proximidad ZKTECO PROID20 BE, RS485" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16058</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector De Tarjetas De Proximidad ZKTECO PROID20 BE, RS485</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="lectores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16057_-_lector_de_tarjetas_de_proximidad_zkteco_proid20-be.webp" alt="Lector De Tarjetas De Proximidad ZKTECO PROID20 BE" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16057</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector De Tarjetas De Proximidad ZKTECO PROID20 BE</a>
-            </h4>
-          </div>
-        </div>
-
-        <div class="product-card" data-category="lectores">
-          <button class="wishlist-btn">♡</button>
-          <div class="product-img">
-            <img src="https://izc.com.co/pub/media/webp_image/catalog/product/cache/bb7696f33c0507e199458c931a841b31/1/6/16056_-_lector_de_tarjetas_de_proximidad_zkteco_proid10-be_1.webp" alt="Lector De Tarjetas De Proximidad ZKTECO PROID10 BE" onerror="this.src='assets/imgmarcas/ZKTeco.png'">
-          </div>
-          <div class="brand-banner">
-            <img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco">
-          </div>
-          <div class="product-info">
-            <span class="sku">Sku: 16056</span>
-            <span class="price">$ 0.00</span>
-            <h4 class="product-title">
-              <a href="#">Lector De Tarjetas De Proximidad ZKTECO PROID10 BE</a>
-            </h4>
-          </div>
-        </div>
-
+        <!-- productos cargados desde catalogo.json -->
       </section>
 
       <!-- Mensaje cuando no hay productos -->
@@ -987,11 +448,5 @@
 
     </main>
   </div>
-
-  <!-- Botón flotante de ayuda / chat -->
-  <a href="https://api.whatsapp.com/send?phone=573144355391" class="floating-support" target="_blank">
-    🎧
-  </a>
-
 </body>
 </html>

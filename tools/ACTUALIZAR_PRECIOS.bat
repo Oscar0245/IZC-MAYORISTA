@@ -1,0 +1,14 @@
+@echo off
+cd /d "%~dp0.."
+title IZC - Actualizar precios ahora
+python src\extraer_precios.py
+if errorlevel 1 (
+  echo.
+  echo ERROR: no se pudo actualizar.
+  echo pip install pandas pyxlsb
+  pause
+  exit /b 1
+)
+echo.
+echo Listo. Recarga la pagina en el navegador.
+pause

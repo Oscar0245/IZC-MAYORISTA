@@ -330,6 +330,27 @@
       }
     }
 
+    // Subcategorías del menú (ej. lectores-de-mano) antes que tipos generales
+    if (window.IZCBuscar && window.IZCBuscar.resolveSubtype) {
+      var subtypeId = window.IZCBuscar.resolveSubtype(query);
+      if (subtypeId) {
+        return {
+          type: 'category',
+          query: subtypeId,
+          page: 'buscar.html'
+        };
+      }
+    } else {
+      var maybeSubtype = String(query || '').trim().toLowerCase();
+      if (/^(lectores|impresoras|camaras|grabadores|consumibles|control|accesorios|access|radio|routers|switch|mini|equipos|monitores|terminales|impresoras)-[a-z0-9-]+$/.test(maybeSubtype)) {
+        return {
+          type: 'category',
+          query: maybeSubtype,
+          page: 'buscar.html'
+        };
+      }
+    }
+
     var productType = findProductType(query);
     if (productType) {
       var typeProducts = findProductsByType(productType);
@@ -526,11 +547,17 @@
     applyUrlSearchFilter();
   }
 
-  fetch('assets/files/catalogo.json')
-    .then(function (response) {
+  function loadCatalogJson() {
+    if (window.IZCData && typeof window.IZCData.loadJson === 'function') {
+      return window.IZCData.loadJson('assets/files/catalogo.json');
+    }
+    return fetch('assets/files/catalogo.json').then(function (response) {
       if (!response.ok) throw new Error('Catalog not found');
       return response.json();
-    })
+    });
+  }
+
+  loadCatalogJson()
     .then(function (data) {
       catalog = data;
       init();
