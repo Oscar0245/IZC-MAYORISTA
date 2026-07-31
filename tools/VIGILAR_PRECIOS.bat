@@ -1,4 +1,5 @@
 @echo off
+REM Inicia el vigilante automático de precios (consola visible).
 cd /d "%~dp0.."
 title IZC - Vigilancia de precios
 echo Actualizacion automatica de precios (sin XAMPP)

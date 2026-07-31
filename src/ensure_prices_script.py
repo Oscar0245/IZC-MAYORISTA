@@ -1,3 +1,4 @@
+"""Asegura que el script de precios esté en las páginas."""
 #!/usr/bin/env python3
 from __future__ import annotations
 

@@ -1,3 +1,4 @@
+/* Interacciones UI de la página Honeywell. */
 document.addEventListener('DOMContentLoaded', function () {
 
   // 1. Colapsables del Filtro Lateral

@@ -1,3 +1,4 @@
+"""Convierte los JSON del catálogo a archivos .data.js offline."""
 #!/usr/bin/env python3
 """Genera .data.js junto a cada JSON de assets/files para apertura file://."""
 from __future__ import annotations

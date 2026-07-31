@@ -1,3 +1,4 @@
+/* Carga JSON también en file:// usando archivos .data.js. */
 (function () {
   'use strict';
 

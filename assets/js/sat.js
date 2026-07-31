@@ -1,3 +1,4 @@
+/* Interacciones UI de la página SAT (filtros laterales, carrusel). */
 document.addEventListener('DOMContentLoaded', function () {
 
   // 1. Colapsables del Filtro Lateral

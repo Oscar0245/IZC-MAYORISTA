@@ -1,3 +1,4 @@
+"""Sincroniza productos SAT desde izc.com.co al catálogo."""
 #!/usr/bin/env python3
 """Scrape productos SAT desde izc.com.co e intégralos al catálogo local."""
 from __future__ import annotations

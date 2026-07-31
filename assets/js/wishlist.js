@@ -1,3 +1,4 @@
+/* Guarda/quita favoritos y actualiza el corazón del header. */
 (function () {
   'use strict';
 

@@ -1,3 +1,4 @@
+/* Filtra y muestra productos en la página de búsqueda. */
 (function () {
   'use strict';
 

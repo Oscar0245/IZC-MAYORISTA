@@ -1,3 +1,4 @@
+/* Aplica precios USD a las tarjetas de productos. */
 (function () {
   'use strict';
 

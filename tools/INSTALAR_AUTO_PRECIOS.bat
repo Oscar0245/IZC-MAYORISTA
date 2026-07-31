@@ -1,4 +1,5 @@
 @echo off
+REM Instala el autoarranque del vigilante de precios al iniciar Windows.
 cd /d "%~dp0.."
 echo Instalando vigilancia automatica de precios al iniciar Windows...
 wscript //nologo "%~dp0INICIAR_VIGILANCIA.vbs"

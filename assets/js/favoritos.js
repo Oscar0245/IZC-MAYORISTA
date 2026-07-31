@@ -1,3 +1,4 @@
+/* Lista los productos guardados en favoritos. */
 (function () {
   'use strict';
 

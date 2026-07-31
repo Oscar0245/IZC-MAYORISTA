@@ -1,3 +1,4 @@
+"""Genera o actualiza la página HTML/CSS/JS de SAT."""
 #!/usr/bin/env python3
 """Crea sat.html/css/js desde plantilla topaz y actualiza marcas."""
 from __future__ import annotations

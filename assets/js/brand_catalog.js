@@ -1,3 +1,4 @@
+/* Carga el catálogo de cada marca y aplica filtros/categorías. */
 (function () {
   'use strict';
 

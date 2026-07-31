@@ -1,3 +1,4 @@
+"""Segunda pasada para completar detalles SAT faltantes."""
 #!/usr/bin/env python3
 """Segunda pasada: productos SAT sin detalle, buscando por nombre en satpcs.com."""
 from __future__ import annotations

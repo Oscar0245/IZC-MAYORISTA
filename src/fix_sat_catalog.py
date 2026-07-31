@@ -1,3 +1,4 @@
+"""Corrige/normaliza datos del catálogo SAT."""
 #!/usr/bin/env python3
 """Corrige nombres SAT y genera filtros por categoría."""
 from __future__ import annotations

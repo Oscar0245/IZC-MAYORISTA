@@ -1,3 +1,4 @@
+"""Inserta data-loader.js en las páginas HTML del sitio."""
 #!/usr/bin/env python3
 """Inyecta data-loader.js en las páginas HTML antes de los scripts de datos."""
 from __future__ import annotations

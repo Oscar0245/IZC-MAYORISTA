@@ -1,3 +1,4 @@
+/* Muestra la ficha detallada de un producto por SKU. */
 (function () {
   'use strict';
 

@@ -1,3 +1,4 @@
+/* Lógica del home: flyer de categorías y menú del buscador. */
 document.addEventListener('DOMContentLoaded', function () {
 
   // Menu desplegable del filtro de categorías en el buscador

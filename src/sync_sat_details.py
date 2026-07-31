@@ -1,3 +1,4 @@
+"""Descarga fichas/detalles de productos SAT."""
 #!/usr/bin/env python3
 """Scrapea descripciones y fichas de productos SAT desde https://satpcs.com/sp/"""
 from __future__ import annotations
