@@ -1218,11 +1218,11 @@
       "brandLogo": "IMOU.png",
       "brandPage": "imou.html",
       "img": "https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/m/e/memoria_micro_sd_imui_128gb.jpg",
-      "category": "otros",
-      "type": "otros",
-      "subtype": "otros",
+      "category": "memorias",
+      "type": "memorias",
+      "subtype": "memorias",
       "subtypes": [
-        "otros"
+        "memorias"
       ]
     },
     {
@@ -1233,11 +1233,11 @@
       "brandLogo": "IMOU.png",
       "brandPage": "imou.html",
       "img": "https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/m/e/memoria_micro_sd_imui_64gb.jpg",
-      "category": "otros",
-      "type": "otros",
-      "subtype": "otros",
+      "category": "memorias",
+      "type": "memorias",
+      "subtype": "memorias",
       "subtypes": [
-        "otros"
+        "memorias"
       ]
     }
   ],

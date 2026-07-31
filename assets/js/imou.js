@@ -63,17 +63,19 @@ document.addEventListener('DOMContentLoaded', function () {
     prevBtn.addEventListener('click', goPrev);
     window.addEventListener('resize', updateCarousel);
 
+    var DRAG_THRESHOLD = 40;
+
     track.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function (e) {
         if (hasDragged) {
           e.preventDefault();
           e.stopPropagation();
         }
-        hasDragged = false;
       });
     });
 
     function onPointerDown(e) {
+      if (e.target.closest && e.target.closest('.arrow-btn')) return;
       if (e.pointerType === 'mouse' && e.button !== 0) return;
       isDragging = true;
       hasDragged = false;
@@ -81,14 +83,19 @@ document.addEventListener('DOMContentLoaded', function () {
       baseX = -(currentSlide * stepWidth());
       currentX = baseX;
       pointerId = e.pointerId;
-      track.style.transition = 'none';
-      try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
     }
 
     function onPointerMove(e) {
       if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
       var diff = e.clientX - startX;
-      if (Math.abs(diff) > 12) hasDragged = true;
+
+      if (!hasDragged && Math.abs(diff) > DRAG_THRESHOLD) {
+        hasDragged = true;
+        track.style.transition = 'none';
+        try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+
+      if (!hasDragged) return;
       currentX = baseX + diff;
       track.style.transform = 'translateX(' + currentX + 'px)';
     }
@@ -98,12 +105,24 @@ document.addEventListener('DOMContentLoaded', function () {
       isDragging = false;
       pointerId = null;
       var movedBy = currentX - baseX;
-      if (movedBy < -40) {
-        goNext();
-      } else if (movedBy > 40) {
-        goPrev();
-      } else {
-        updateCarousel();
+
+      if (hasDragged) {
+        if (movedBy < -DRAG_THRESHOLD) {
+          goNext();
+        } else if (movedBy > DRAG_THRESHOLD) {
+          goPrev();
+        } else {
+          updateCarousel();
+        }
+        setTimeout(function () { hasDragged = false; }, 0);
+        return;
+      }
+
+      updateCarousel();
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var link = el && el.closest ? el.closest('a') : null;
+      if (link && track.contains(link) && link.href) {
+        window.location.href = link.href;
       }
     }
 
@@ -113,9 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
     wrapper.addEventListener('pointermove', onPointerMove);
     wrapper.addEventListener('pointerup', onPointerUp);
     wrapper.addEventListener('pointercancel', onPointerUp);
-    wrapper.addEventListener('pointerleave', function (e) {
-      if (isDragging) onPointerUp(e);
-    });
   }
 
   // Wishlist: manejado por wishlist.js
@@ -150,20 +166,42 @@ document.addEventListener('DOMContentLoaded', function () {
   const prevPageBtn = document.querySelector('.prev-page');
   const nextPageBtn = document.querySelector('.next-page');
   const perPageSelect = document.getElementById('perPageSelect');
-  const productCards = document.querySelectorAll('#productGrid .product-card');
   const itemCountDisplay = document.getElementById('itemCountDisplay');
   const catFilterBtns = document.querySelectorAll('.cat-filter-btn');
   const sortSelect = document.getElementById('sortSelect');
   const noProductsMsg = document.getElementById('noProductsMessage');
 
   const TOTAL_PAGES = 2;
+  const PAGE2_SKUS = { '16621': true, '16622': true };
 
   let currentActivePage = 1;
   let currentCategory = 'all';
   let itemsPerPage = 32;
 
+  function getProductCards() {
+    return document.querySelectorAll('#productGrid .product-card');
+  }
+
+  function ensureCardPages() {
+    getProductCards().forEach(function (card) {
+      var sku = card.getAttribute('data-sku') || '';
+      var cat = card.getAttribute('data-category') || '';
+      var title = '';
+      var titleEl = card.querySelector('.product-title');
+      if (titleEl) title = titleEl.textContent || '';
+
+      var isMemoria = PAGE2_SKUS[sku] || cat === 'memorias' || /memoria|micro\s*sd/i.test(title);
+      if (isMemoria) {
+        card.setAttribute('data-category', 'memorias');
+        card.setAttribute('data-page', '2');
+      } else if (!card.getAttribute('data-page')) {
+        card.setAttribute('data-page', '1');
+      }
+    });
+  }
+
   function getCardsForCategory(categoria) {
-    return Array.from(productCards).filter(card => {
+    return Array.from(getProductCards()).filter(card => {
       const cardCat = card.getAttribute('data-category');
       return categoria === 'all' || cardCat === categoria;
     });
@@ -185,7 +223,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function cambiarPagina(pagina) {
+    ensureCardPages();
     currentActivePage = pagina;
+    const productCards = getProductCards();
     const cards = getCardsForCategory(currentCategory);
     let visibles = 0;
 
@@ -340,6 +380,11 @@ document.addEventListener('DOMContentLoaded', function () {
       cambiarPagina(itemsPerPage >= 34 ? 1 : currentActivePage);
     });
   }
+
+  document.addEventListener('izc:brand-products-rendered', function () {
+    ensureCardPages();
+    cambiarPagina(currentActivePage || 1);
+  });
 
   cambiarPagina(1);
 

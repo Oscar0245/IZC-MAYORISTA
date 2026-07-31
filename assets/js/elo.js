@@ -65,17 +65,19 @@ document.addEventListener('DOMContentLoaded', function () {
     prevBtn.addEventListener('click', goPrev);
     window.addEventListener('resize', updateCarousel);
 
+    var DRAG_THRESHOLD = 40;
+
     track.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function (e) {
         if (hasDragged) {
           e.preventDefault();
           e.stopPropagation();
         }
-        hasDragged = false;
       });
     });
 
     function onPointerDown(e) {
+      if (e.target.closest && e.target.closest('.arrow-btn')) return;
       if (e.pointerType === 'mouse' && e.button !== 0) return;
       isDragging = true;
       hasDragged = false;
@@ -83,14 +85,19 @@ document.addEventListener('DOMContentLoaded', function () {
       baseX = -(currentSlide * stepWidth());
       currentX = baseX;
       pointerId = e.pointerId;
-      track.style.transition = 'none';
-      try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
     }
 
     function onPointerMove(e) {
       if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
       var diff = e.clientX - startX;
-      if (Math.abs(diff) > 12) hasDragged = true;
+
+      if (!hasDragged && Math.abs(diff) > DRAG_THRESHOLD) {
+        hasDragged = true;
+        track.style.transition = 'none';
+        try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+
+      if (!hasDragged) return;
       currentX = baseX + diff;
       track.style.transform = 'translateX(' + currentX + 'px)';
     }
@@ -100,12 +107,24 @@ document.addEventListener('DOMContentLoaded', function () {
       isDragging = false;
       pointerId = null;
       var movedBy = currentX - baseX;
-      if (movedBy < -40) {
-        goNext();
-      } else if (movedBy > 40) {
-        goPrev();
-      } else {
-        updateCarousel();
+
+      if (hasDragged) {
+        if (movedBy < -DRAG_THRESHOLD) {
+          goNext();
+        } else if (movedBy > DRAG_THRESHOLD) {
+          goPrev();
+        } else {
+          updateCarousel();
+        }
+        setTimeout(function () { hasDragged = false; }, 0);
+        return;
+      }
+
+      updateCarousel();
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var link = el && el.closest ? el.closest('a') : null;
+      if (link && track.contains(link) && link.href) {
+        window.location.href = link.href;
       }
     }
 
@@ -115,9 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
     wrapper.addEventListener('pointermove', onPointerMove);
     wrapper.addEventListener('pointerup', onPointerUp);
     wrapper.addEventListener('pointercancel', onPointerUp);
-    wrapper.addEventListener('pointerleave', function (e) {
-      if (isDragging) onPointerUp(e);
-    });
   }
 
   // Wishlist: manejado por wishlist.js
