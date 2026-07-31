@@ -28,6 +28,7 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 14px;
+  justify-content: center;
 }
 
 .search-type-tags a {
