@@ -28,29 +28,95 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (track && prevBtn && nextBtn) {
     let currentSlide = 0;
-    const slides = document.querySelectorAll('.brand-slide');
-    const totalSlides = slides.length;
+    const columns = track.querySelectorAll('.brand-column');
+    const maxSlide = Math.max(0, columns.length - 2);
+    const wrapper = track.parentElement || track;
+    let isDragging = false;
+    let hasDragged = false;
+    let startX = 0;
+    let baseX = 0;
+    let currentX = 0;
+    let pointerId = null;
 
-    function updateCarousel() {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    function stepWidth() {
+      var col = columns[0];
+      return col ? col.getBoundingClientRect().width : 0;
     }
 
-    nextBtn.addEventListener('click', function () {
-      if (currentSlide < totalSlides - 1) {
-        currentSlide++;
-      } else {
-        currentSlide = 0;
-      }
+    function updateCarousel() {
+      var step = stepWidth();
+      baseX = -(currentSlide * step);
+      currentX = baseX;
+      track.style.transition = 'transform 0.4s ease-in-out';
+      track.style.transform = 'translateX(' + baseX + 'px)';
+    }
+
+    function goNext() {
+      currentSlide = currentSlide < maxSlide ? currentSlide + 1 : 0;
       updateCarousel();
+    }
+
+    function goPrev() {
+      currentSlide = currentSlide > 0 ? currentSlide - 1 : maxSlide;
+      updateCarousel();
+    }
+
+    nextBtn.addEventListener('click', goNext);
+    prevBtn.addEventListener('click', goPrev);
+    window.addEventListener('resize', updateCarousel);
+
+    track.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        hasDragged = false;
+      });
     });
 
-    prevBtn.addEventListener('click', function () {
-      if (currentSlide > 0) {
-        currentSlide--;
+    function onPointerDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isDragging = true;
+      hasDragged = false;
+      startX = e.clientX;
+      baseX = -(currentSlide * stepWidth());
+      currentX = baseX;
+      pointerId = e.pointerId;
+      track.style.transition = 'none';
+      try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
+      var diff = e.clientX - startX;
+      if (Math.abs(diff) > 12) hasDragged = true;
+      currentX = baseX + diff;
+      track.style.transform = 'translateX(' + currentX + 'px)';
+    }
+
+    function onPointerUp(e) {
+      if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
+      isDragging = false;
+      pointerId = null;
+      var movedBy = currentX - baseX;
+      if (movedBy < -40) {
+        goNext();
+      } else if (movedBy > 40) {
+        goPrev();
       } else {
-        currentSlide = totalSlides - 1;
+        updateCarousel();
       }
-      updateCarousel();
+    }
+
+    wrapper.style.touchAction = 'pan-y';
+    wrapper.style.cursor = 'grab';
+    wrapper.addEventListener('pointerdown', onPointerDown);
+    wrapper.addEventListener('pointermove', onPointerMove);
+    wrapper.addEventListener('pointerup', onPointerUp);
+    wrapper.addEventListener('pointercancel', onPointerUp);
+    wrapper.addEventListener('pointerleave', function (e) {
+      if (isDragging) onPointerUp(e);
     });
   }
 
@@ -147,6 +213,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!mapaPrecios) return;
 
+      if (window.IZCPrices && typeof window.IZCPrices.apply === 'function') {
+        window.IZCPrices.apply();
+        return;
+      }
+
+      function formatEntry(entry) {
+        if (entry == null) return null;
+        if (typeof entry === 'object' && entry.currency === 'COP') {
+          return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+        }
+        var amount = typeof entry === 'object' ? entry.amount : entry;
+        if (amount == null) return null;
+        return '$ ' + Number(amount).toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+
       document.querySelectorAll('.product-card, .product-carddatalogic').forEach(tarjeta => {
         const skuElem = tarjeta.querySelector('.sku');
         const priceElem = tarjeta.querySelector('.price');
@@ -155,18 +239,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const skuTexto = skuElem.textContent.replace(/\D/g, '').trim();
         if (!skuTexto) return;
 
-        let precioUSD = mapaPrecios[skuTexto];
-        if (precioUSD == null) {
+        let entry = mapaPrecios[skuTexto];
+        if (entry == null) {
           const skuSinCeros = skuTexto.replace(/^0+/, '');
-          precioUSD = mapaPrecios[skuSinCeros];
+          entry = mapaPrecios[skuSinCeros];
         }
 
-        if (precioUSD != null) {
-          priceElem.textContent = `$ ${Number(precioUSD).toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })}`;
-        }
+        const text = formatEntry(entry);
+        if (text) priceElem.textContent = text;
       });
     } catch (error) {
       console.error('Error al actualizar precios:', error);

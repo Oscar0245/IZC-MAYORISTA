@@ -19,8 +19,17 @@
     return new URLSearchParams(window.location.search).get(name);
   }
 
-  function formatUsd(value) {
-    return '$ ' + Number(value).toLocaleString('en-US', {
+  function formatPriceEntry(entry) {
+    if (window.IZCPrices && typeof window.IZCPrices.format === 'function') {
+      return window.IZCPrices.format(entry);
+    }
+    if (entry == null) return null;
+    if (typeof entry === 'object' && entry.currency === 'COP') {
+      return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+    }
+    var amount = typeof entry === 'object' ? entry.amount : entry;
+    if (amount == null) return null;
+    return '$ ' + Number(amount).toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
@@ -150,8 +159,9 @@
     priceEl.setAttribute('data-sku', String(sku));
     if (window.IZCPrices && typeof window.IZCPrices.get === 'function') {
       var cached = window.IZCPrices.get(sku);
-      if (cached != null) {
-        priceEl.textContent = formatUsd(cached);
+      var cachedText = formatPriceEntry(cached);
+      if (cachedText) {
+        priceEl.textContent = cachedText;
         return;
       }
     }
@@ -159,7 +169,8 @@
       .then(function (map) {
         if (!map) return;
         var value = map[sku] != null ? map[sku] : map[String(sku).replace(/^0+/, '')];
-        if (value != null) priceEl.textContent = formatUsd(value);
+        var text = formatPriceEntry(value);
+        if (text) priceEl.textContent = text;
       })
       .catch(function () {});
   }

@@ -75,142 +75,112 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ==========================================
-  // 3. CARRUSEL DE MARCAS (Táctil + Arrastre + Flechas)
+  // 3. CARRUSEL DE MARCAS (Pointer/Touch + Flechas)
   // ==========================================
-  const track = document.getElementById('brandsTrack');
-  const prevBtn = document.getElementById('prevBrandBtn');
-  const nextBtn = document.getElementById('nextBrandBtn');
-  const cards = document.querySelectorAll('.brand-card');
+  var track = document.getElementById('brandsTrack');
+  var prevBtn = document.getElementById('prevBrandBtn');
+  var nextBtn = document.getElementById('nextBrandBtn');
+  var cards = track ? track.querySelectorAll('.brand-card') : [];
 
-  if (!track || cards.length === 0) return;
+  if (track && cards.length) {
+    var currentIndex = 0;
+    var isDragging = false;
+    var hasDragged = false;
+    var startX = 0;
+    var baseTranslate = 0;
+    var currentTranslate = 0;
+    var activePointerId = null;
+    var dragTarget = track.parentElement || track;
 
-  let currentIndex = 0;
-  let isDragging = false;
-  let startPos = 0;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
-  let animationID = 0;
-  let hasDragged = false;
+    function getCardStepWidth() {
+      return cards[0].offsetWidth + 15;
+    }
 
-  function getCardStepWidth() {
-    return cards[0].offsetWidth + 15; // Ancho + gap (15px)
-  }
+    function getVisibleCards() {
+      var containerWidth = (track.parentElement || track).offsetWidth;
+      return Math.max(1, Math.round(containerWidth / getCardStepWidth()));
+    }
 
-  function getVisibleCards() {
-    const containerWidth = track.parentElement.offsetWidth;
-    return Math.round(containerWidth / getCardStepWidth()) || 1;
-  }
+    function getMaxIndex() {
+      return Math.max(0, cards.length - getVisibleCards());
+    }
 
-  function getMaxIndex() {
-    return Math.max(0, cards.length - getVisibleCards());
-  }
+    function updateCarousel() {
+      var maxIndex = getMaxIndex();
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      if (currentIndex < 0) currentIndex = 0;
 
-  function updateCarousel() {
-    const maxIndex = getMaxIndex();
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
-    if (currentIndex < 0) currentIndex = 0;
+      baseTranslate = -(currentIndex * getCardStepWidth());
+      currentTranslate = baseTranslate;
+      track.style.transition = 'transform 0.35s ease-out';
+      track.style.transform = 'translateX(' + currentTranslate + 'px)';
+    }
 
-    currentTranslate = -(currentIndex * getCardStepWidth());
-    prevTranslate = currentTranslate;
-
-    track.style.transition = 'transform 0.4s ease-out';
-    track.style.transform = `translateX(${currentTranslate}px)`;
-  }
-
-  // Controles por botones
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function () {
-      if (currentIndex < getMaxIndex()) {
-        currentIndex++;
-      } else {
-        currentIndex = 0;
-      }
+    function goNext() {
+      currentIndex = currentIndex < getMaxIndex() ? currentIndex + 1 : 0;
       updateCarousel();
-    });
-  }
+    }
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', function () {
-      if (currentIndex > 0) {
-        currentIndex--;
-      } else {
-        currentIndex = getMaxIndex();
-      }
+    function goPrev() {
+      currentIndex = currentIndex > 0 ? currentIndex - 1 : getMaxIndex();
       updateCarousel();
-    });
-  }
+    }
 
-  // Solo cancela la navegación si hubo un arrastre real (no un clic)
-  const brandLinks = track.querySelectorAll('a');
-  brandLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (hasDragged) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+    if (nextBtn) nextBtn.addEventListener('click', goNext);
+    if (prevBtn) prevBtn.addEventListener('click', goPrev);
+
+    track.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        hasDragged = false;
+      });
+    });
+
+    function onPointerDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isDragging = true;
       hasDragged = false;
-    });
-  });
-
-  // Arrastre solo en el contenedor del carrusel (no bloquea los enlaces)
-  const trackContainer = track.parentElement;
-  const dragTarget = trackContainer || track;
-
-  dragTarget.addEventListener('touchstart', touchStart, { passive: true });
-  dragTarget.addEventListener('touchend', touchEnd);
-  dragTarget.addEventListener('touchmove', touchMove, { passive: true });
-  dragTarget.addEventListener('mousedown', touchStart);
-  window.addEventListener('mouseup', touchEnd);
-  window.addEventListener('mousemove', touchMove);
-
-  function touchStart(event) {
-    isDragging = true;
-    hasDragged = false;
-    startPos = getPositionX(event);
-    track.style.transition = 'none';
-    animationID = requestAnimationFrame(animation);
-  }
-
-  function touchMove(event) {
-    if (!isDragging) return;
-    const currentPosition = getPositionX(event);
-    const diff = currentPosition - startPos;
-
-    if (Math.abs(diff) > 40) {
-      hasDragged = true;
+      activePointerId = e.pointerId;
+      startX = e.clientX;
+      baseTranslate = -(currentIndex * getCardStepWidth());
+      currentTranslate = baseTranslate;
+      track.style.transition = 'none';
+      try {
+        dragTarget.setPointerCapture(e.pointerId);
+      } catch (_) {}
     }
 
-    currentTranslate = prevTranslate + diff;
-  }
-
-  function touchEnd() {
-    if (!isDragging) return;
-    isDragging = false;
-    cancelAnimationFrame(animationID);
-
-    const movedBy = currentTranslate - prevTranslate;
-
-    if (movedBy < -50 && currentIndex < getMaxIndex()) {
-      currentIndex += 1;
-    } else if (movedBy > 50 && currentIndex > 0) {
-      currentIndex -= 1;
+    function onPointerMove(e) {
+      if (!isDragging || e.pointerId !== activePointerId) return;
+      var diff = e.clientX - startX;
+      if (Math.abs(diff) > 10) hasDragged = true;
+      currentTranslate = baseTranslate + diff;
+      track.style.transform = 'translateX(' + currentTranslate + 'px)';
     }
 
+    function onPointerUp(e) {
+      if (!isDragging || (activePointerId != null && e.pointerId !== activePointerId)) return;
+      isDragging = false;
+      activePointerId = null;
+      var movedBy = currentTranslate - baseTranslate;
+      if (movedBy < -40) {
+        goNext();
+      } else if (movedBy > 40) {
+        goPrev();
+      } else {
+        updateCarousel();
+      }
+    }
+
+    dragTarget.style.touchAction = 'pan-y';
+    dragTarget.addEventListener('pointerdown', onPointerDown);
+    dragTarget.addEventListener('pointermove', onPointerMove);
+    dragTarget.addEventListener('pointerup', onPointerUp);
+    dragTarget.addEventListener('pointercancel', onPointerUp);
+    window.addEventListener('resize', updateCarousel);
     updateCarousel();
   }
-
-  function getPositionX(event) {
-    return event.type.includes('touch') ? event.touches[0].clientX : event.clientX;
-  }
-
-  function animation() {
-    setSliderPosition();
-    if (isDragging) requestAnimationFrame(animation);
-  }
-
-  function setSliderPosition() {
-    track.style.transform = `translateX(${currentTranslate}px)`;
-  }
-
-  window.addEventListener('resize', updateCarousel);
 });

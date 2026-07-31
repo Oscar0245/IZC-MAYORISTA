@@ -306,7 +306,13 @@ nav.main-nav { background: var(--blue-deep); }
   overflow: hidden;
   width: 100%;
   padding: 10px 0;
+  cursor: grab;
   touch-action: pan-y;
+  -ms-touch-action: pan-y;
+}
+
+.carousel-track-container:active {
+  cursor: grabbing;
 }
 
 .carousel-track {

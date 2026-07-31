@@ -130,13 +130,6 @@ ul { list-style: none; }
   outline-offset: 2px;
 }
 
-/* MARCAS DESTACADAS SIDEBAR Y CARRUSEL */
-.featured-brands-box {
-  background: #fff;
-  border: 1px solid var(--line);
-  overflow: hidden;
-}
-
 .featured-header {
   background: var(--blue-deep);
   color: #fff;
@@ -146,59 +139,6 @@ ul { list-style: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.arrow-btn {
-  background: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 0 4px;
-  transition: opacity 0.2s;
-}
-
-.arrow-btn:hover {
-  opacity: 0.8;
-}
-
-.brands-carousel-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.brands-carousel-track {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
-  width: 100%;
-}
-
-.brand-slide {
-  min-width: 100%;
-  box-sizing: border-box;
-}
-
-.featured-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  padding: 15px;
-}
-
-.brand-item {
-  border: 1px solid #f0f0f0;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
-}
-
-.brand-item img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
 }
 
 /* CONTENT AREA */
@@ -253,7 +193,6 @@ ul { list-style: none; }
 .list-btn {
   display: none !important;
 }
-
 
 .sort-mode {
   display: flex;
@@ -477,22 +416,6 @@ img.brand-hero-logo,
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-container { flex-direction: column; }
   .sidebar { width: 100%; }
-
-  .featured-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    padding: 14px;
-  }
-
-  .brand-item {
-    height: 110px;
-    padding: 14px;
-  }
-
-  .brand-item img {
-    max-height: 82px;
-    max-width: 95%;
-  }
 
   .product-imgdatalogic,
   .product-imgelo,

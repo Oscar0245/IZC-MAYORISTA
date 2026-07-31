@@ -1,12 +1,11 @@
-/* Filtra y muestra productos en la página de búsqueda. */
 (function () {
   'use strict';
-
+  
   var catalog = null;
   var grid = null;
   var titleEl = null;
   var subtitleEl = null;
-
+  
   var PRODUCT_TYPES = {
     lectores: {
       label: 'Lectores',
@@ -73,7 +72,7 @@
       keywords: ['cajones monederos', 'cajon monedero', 'cajón monedero', 'cajones', 'cajon', 'cajón', 'cash drawer', 'monedero']
     }
   };
-
+  
   var PRODUCT_SUBTYPES = {
     'lectores-de-mano': { label: 'Lectores de Mano', parent: 'lectores' },
     'lectores-inalambricos': { label: 'Lectores Inalámbricos', parent: 'lectores' },
@@ -107,7 +106,7 @@
     'impresoras-portatiles': { label: 'Impresoras Portátiles', parent: 'impresoras' },
     'terminales-moviles': { label: 'Terminales Móviles', parent: 'movilidad' }
   };
-
+  
   function normalize(text) {
     return String(text || '')
       .toLowerCase()
@@ -117,7 +116,7 @@
       .replace(/\s+/g, ' ')
       .trim();
   }
-
+  
   function resolveSubtype(query) {
     var norm = normalize(query).replace(/\s+/g, '-');
     if (!norm) return null;
@@ -125,7 +124,7 @@
     if (Object.prototype.hasOwnProperty.call(PRODUCT_SUBTYPES, query)) return query;
     return null;
   }
-
+  
   function productHasSubtype(product, subtypeId) {
     if (!product || !subtypeId) return false;
     if (product.subtype === subtypeId) return true;
@@ -134,22 +133,22 @@
     }
     return false;
   }
-
+  
   function resolveType(query) {
     var subtypeId = resolveSubtype(query);
     if (subtypeId) return PRODUCT_SUBTYPES[subtypeId].parent || null;
-
+    
     var norm = normalize(query);
     if (!norm) return null;
-
+    
     // Match exact type id first (botones: lectores, tarjetas, etc.)
     if (Object.prototype.hasOwnProperty.call(PRODUCT_TYPES, norm)) {
       return norm;
     }
-
+    
     var bestId = null;
     var bestScore = 0;
-
+    
     Object.keys(PRODUCT_TYPES).forEach(function (id) {
       var type = PRODUCT_TYPES[id];
       type.keywords.forEach(function (keyword) {
@@ -169,10 +168,10 @@
         }
       });
     });
-
+    
     return bestScore >= 70 ? bestId : null;
   }
-
+  
   function textScore(query, text) {
     if (window.IZCSearch && window.IZCSearch.scoreTextMatch) {
       return window.IZCSearch.scoreTextMatch(query, text);
@@ -185,10 +184,10 @@
       return norm.indexOf(word) !== -1;
     }) ? 30 : 0;
   }
-
+  
   function filterProducts(query) {
     if (!catalog) return [];
-
+    
     var subtypeId = resolveSubtype(query);
     if (subtypeId) {
       return catalog.products.filter(function (product) {
@@ -259,7 +258,7 @@
         return false;
       });
     }
-
+    
     return catalog.products.filter(function (product) {
       var combined = product.name + ' ' + product.brandName + ' ' + product.sku;
       return textScore(query, combined) >= 16;
@@ -267,7 +266,7 @@
       return textScore(query, b.name) - textScore(query, a.name);
     });
   }
-
+  
   function escapeHtml(text) {
     return String(text)
       .replace(/&/g, '&amp;')
@@ -275,7 +274,7 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
   }
-
+  
   function renderProductCard(product) {
     var brandPage = product.brandPage || (product.brand + '.html');
     var link = 'producto.html?sku=' + encodeURIComponent(product.sku);
@@ -295,7 +294,7 @@
       '</div>'
     );
   }
-
+  
   function updateCount(count) {
     var itemCountDisplay = document.getElementById('itemCountDisplay');
     if (itemCountDisplay) {
@@ -306,11 +305,11 @@
       noProductsMessage.style.display = count === 0 ? 'block' : 'none';
     }
   }
-
+  
   function renderTypeTags(activeQuery) {
     var container = document.getElementById('searchTypeTags');
     if (!container) return;
-
+    
     var activeType = resolveType(activeQuery);
     var activeSubtype = resolveSubtype(activeQuery);
     if (activeSubtype === 'mini-pc') activeType = 'minipc';

@@ -21,41 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 3. Carrusel de Marcas Destacadas
-  const track = document.getElementById('brandsTrack');
-  const prevBtn = document.getElementById('prevBrand');
-  const nextBtn = document.getElementById('nextBrand');
-
-  if (track && prevBtn && nextBtn) {
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.brand-slide');
-    const totalSlides = slides.length;
-
-    function updateCarousel() {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    nextBtn.addEventListener('click', function () {
-      if (currentSlide < totalSlides - 1) {
-        currentSlide++;
-      } else {
-        currentSlide = 0; // Regresa al inicio
-      }
-      updateCarousel();
-    });
-
-    prevBtn.addEventListener('click', function () {
-      if (currentSlide > 0) {
-        currentSlide--;
-      } else {
-        currentSlide = totalSlides - 1; // Va al final
-      }
-      updateCarousel();
-    });
-  }
-
   // Wishlist: manejado por wishlist.js
-});
 
   // 5. Menú Flyout (Categorías y Paneles)
   const flyouts = document.querySelectorAll('.flyout');
@@ -193,6 +159,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!mapaPrecios) return;
 
+      if (window.IZCPrices && typeof window.IZCPrices.apply === 'function') {
+        window.IZCPrices.apply();
+        return;
+      }
+
+      function formatEntry(entry) {
+        if (entry == null) return null;
+        if (typeof entry === 'object' && entry.currency === 'COP') {
+          return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+        }
+        var amount = typeof entry === 'object' ? entry.amount : entry;
+        if (amount == null) return null;
+        return '$ ' + Number(amount).toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+
       document.querySelectorAll('.product-card, .product-carddatalogic').forEach(tarjeta => {
         const skuElem = tarjeta.querySelector('.sku');
         const priceElem = tarjeta.querySelector('.price');
@@ -201,18 +185,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const skuTexto = skuElem.textContent.replace(/\D/g, '').trim();
         if (!skuTexto) return;
 
-        let precioUSD = mapaPrecios[skuTexto];
-        if (precioUSD == null) {
+        let entry = mapaPrecios[skuTexto];
+        if (entry == null) {
           const skuSinCeros = skuTexto.replace(/^0+/, '');
-          precioUSD = mapaPrecios[skuSinCeros];
+          entry = mapaPrecios[skuSinCeros];
         }
 
-        if (precioUSD != null) {
-          priceElem.textContent = `$ ${Number(precioUSD).toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })}`;
-        }
+        const text = formatEntry(entry);
+        if (text) priceElem.textContent = text;
       });
     } catch (error) {
       console.error('Error al actualizar precios:', error);

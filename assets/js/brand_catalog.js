@@ -91,8 +91,17 @@
     }
   }
 
-  function formatUsd(value) {
-    return '$ ' + Number(value).toLocaleString('en-US', {
+  function formatPriceEntry(entry) {
+    if (window.IZCPrices && typeof window.IZCPrices.format === 'function') {
+      return window.IZCPrices.format(entry);
+    }
+    if (entry == null) return null;
+    if (typeof entry === 'object' && entry.currency === 'COP') {
+      return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+    }
+    var amount = typeof entry === 'object' ? entry.amount : entry;
+    if (amount == null) return null;
+    return '$ ' + Number(amount).toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
@@ -106,13 +115,12 @@
       if (!skuElem || !priceElem) return;
       var skuTexto = skuElem.textContent.replace(/\D/g, '').trim();
       if (!skuTexto) return;
-      var precioUSD = mapaPrecios[skuTexto];
-      if (precioUSD == null) {
-        precioUSD = mapaPrecios[skuTexto.replace(/^0+/, '')];
+      var entry = mapaPrecios[skuTexto];
+      if (entry == null) {
+        entry = mapaPrecios[skuTexto.replace(/^0+/, '')];
       }
-      if (precioUSD != null) {
-        priceElem.textContent = formatUsd(precioUSD);
-      }
+      var text = formatPriceEntry(entry);
+      if (text) priceElem.textContent = text;
     });
   }
 

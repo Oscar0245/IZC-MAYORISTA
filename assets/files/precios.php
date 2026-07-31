@@ -1,7 +1,8 @@
 <?php
 /**
  * Si lista-precios-izc.xlsb es más nuevo que precios.json, regenera el JSON
- * con python src/extraer_precios.py (Stone/col A = SKU, BM = USD) y lo sirve.
+ * con python src/extraer_precios.py
+ * (Stone/A = SKU; BM = USD; BL PESOS = COP solo etiquetas/ribbons) y lo sirve.
  */
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate');

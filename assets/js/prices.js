@@ -1,4 +1,4 @@
-/* Aplica precios USD a las tarjetas de productos. */
+/* Aplica precios a las tarjetas: USD por defecto; COP para etiquetas/ribbons. */
 (function () {
   'use strict';
 
@@ -15,9 +15,37 @@
     });
   }
 
+  function formatCOP(value) {
+    return '$ ' + Math.round(Number(value)).toLocaleString('es-CO') + ' COP';
+  }
+
+  function resolveEntry(entry) {
+    if (entry == null) return null;
+    if (typeof entry === 'number' && isFinite(entry) && entry > 0) {
+      return { amount: entry, currency: 'USD' };
+    }
+    if (typeof entry === 'object') {
+      var amount = entry.amount != null ? entry.amount : entry.v;
+      var currency = entry.currency || entry.c || 'USD';
+      if (amount != null && isFinite(Number(amount)) && Number(amount) > 0) {
+        return { amount: Number(amount), currency: String(currency).toUpperCase() };
+      }
+    }
+    return null;
+  }
+
+  function formatPrice(entry) {
+    var resolved = resolveEntry(entry);
+    if (!resolved) return null;
+    if (resolved.currency === 'COP') return formatCOP(resolved.amount);
+    return formatUSD(resolved.amount);
+  }
+
   function lookupPrice(sku) {
     if (!priceMap || !sku) return null;
-    if (Object.prototype.hasOwnProperty.call(priceMap, sku)) return priceMap[sku];
+    if (Object.prototype.hasOwnProperty.call(priceMap, sku)) {
+      return priceMap[sku];
+    }
     var skuNoZeros = String(sku).replace(/^0+/, '');
     if (skuNoZeros && Object.prototype.hasOwnProperty.call(priceMap, skuNoZeros)) {
       return priceMap[skuNoZeros];
@@ -32,15 +60,14 @@
       var skuElem = card.querySelector('.sku');
       var priceElem = card.querySelector('.price');
       if (!skuElem || !priceElem) return;
-      var price = lookupPrice(skuElem.textContent.replace(/\D/g, '').trim());
-      if (price != null) priceElem.textContent = formatUSD(price);
+      var text = formatPrice(lookupPrice(skuElem.textContent.replace(/\D/g, '').trim()));
+      if (text) priceElem.textContent = text;
     });
 
     var detailPrice = document.getElementById('productPrice');
     if (detailPrice && detailPrice.getAttribute('data-sku')) {
-      var detailSku = detailPrice.getAttribute('data-sku');
-      var detailValue = lookupPrice(detailSku);
-      if (detailValue != null) detailPrice.textContent = formatUSD(detailValue);
+      var detailText = formatPrice(lookupPrice(detailPrice.getAttribute('data-sku')));
+      if (detailText) detailPrice.textContent = detailText;
     }
   }
 
@@ -61,8 +88,17 @@
       return String(window.__IZC_PRICES_STAMP__);
     }
     if (!priceMap) return '';
-    var keys = Object.keys(priceMap);
-    return String(keys.length);
+    return String(Object.keys(priceMap).length);
+  }
+
+  function entryEqual(a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (typeof a === 'number' || typeof b === 'number') return a === b;
+    if (typeof a === 'object' && typeof b === 'object') {
+      return a.amount === b.amount && (a.currency || 'USD') === (b.currency || 'USD');
+    }
+    return false;
   }
 
   function mapsEqual(a, b) {
@@ -73,7 +109,7 @@
     if (keysA.length !== keysB.length) return false;
     for (var i = 0; i < keysA.length; i++) {
       var key = keysA[i];
-      if (a[key] !== b[key]) return false;
+      if (!entryEqual(a[key], b[key])) return false;
     }
     return true;
   }
@@ -166,6 +202,7 @@
     load: loadPrices,
     reload: function () { return loadPrices({ forceReload: true }); },
     apply: applyPrices,
-    get: lookupPrice
+    get: lookupPrice,
+    format: formatPrice
   };
 })();
