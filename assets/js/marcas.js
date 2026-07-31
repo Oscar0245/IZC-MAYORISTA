@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentTranslate = 0;
     var activePointerId = null;
     var dragTarget = track.parentElement || track;
+    var DRAG_THRESHOLD = 40;
 
     function getCardStepWidth() {
       return cards[0].offsetWidth + 15;
@@ -135,11 +136,11 @@ document.addEventListener('DOMContentLoaded', function () {
           e.preventDefault();
           e.stopPropagation();
         }
-        hasDragged = false;
       });
     });
 
     function onPointerDown(e) {
+      if (e.target.closest && e.target.closest('.carousel-btn')) return;
       if (e.pointerType === 'mouse' && e.button !== 0) return;
       isDragging = true;
       hasDragged = false;
@@ -147,16 +148,22 @@ document.addEventListener('DOMContentLoaded', function () {
       startX = e.clientX;
       baseTranslate = -(currentIndex * getCardStepWidth());
       currentTranslate = baseTranslate;
-      track.style.transition = 'none';
-      try {
-        dragTarget.setPointerCapture(e.pointerId);
-      } catch (_) {}
     }
 
     function onPointerMove(e) {
       if (!isDragging || e.pointerId !== activePointerId) return;
       var diff = e.clientX - startX;
-      if (Math.abs(diff) > 10) hasDragged = true;
+
+      // Solo empieza arrastre real al pasar el umbral (el tap debe abrir la marca)
+      if (!hasDragged && Math.abs(diff) > DRAG_THRESHOLD) {
+        hasDragged = true;
+        track.style.transition = 'none';
+        try {
+          dragTarget.setPointerCapture(e.pointerId);
+        } catch (_) {}
+      }
+
+      if (!hasDragged) return;
       currentTranslate = baseTranslate + diff;
       track.style.transform = 'translateX(' + currentTranslate + 'px)';
     }
@@ -166,12 +173,25 @@ document.addEventListener('DOMContentLoaded', function () {
       isDragging = false;
       activePointerId = null;
       var movedBy = currentTranslate - baseTranslate;
-      if (movedBy < -40) {
-        goNext();
-      } else if (movedBy > 40) {
-        goPrev();
-      } else {
-        updateCarousel();
+
+      if (hasDragged) {
+        if (movedBy < -DRAG_THRESHOLD) {
+          goNext();
+        } else if (movedBy > DRAG_THRESHOLD) {
+          goPrev();
+        } else {
+          updateCarousel();
+        }
+        setTimeout(function () { hasDragged = false; }, 0);
+        return;
+      }
+
+      // Tap / clic: ir a la página de la marca
+      updateCarousel();
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var link = el && el.closest ? el.closest('a') : null;
+      if (link && track.contains(link) && link.href) {
+        window.location.href = link.href;
       }
     }
 
