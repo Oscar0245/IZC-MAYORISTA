@@ -165,6 +165,44 @@
     return null;
   }
 
+  // En GitHub Pages: cuenta compartida desde data/usuarios.json (publicado)
+  function fetchRemoteUsers() {
+    if (isDevHost()) return Promise.resolve([]);
+    return fetch('data/usuarios.json?v=' + Date.now(), { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) return [];
+        return res.json().then(function (list) {
+          return Array.isArray(list) ? list : [];
+        });
+      })
+      .catch(function () { return []; });
+  }
+
+  function mergeUsers(local, remote) {
+    var map = {};
+    (remote || []).forEach(function (u) {
+      if (u && u.nit) map[normalizeNit(u.nit)] = u;
+    });
+    (local || []).forEach(function (u) {
+      if (u && u.nit) map[normalizeNit(u.nit)] = u;
+    });
+    return Object.keys(map).map(function (k) { return map[k]; });
+  }
+
+  function cacheUserLocally(user) {
+    if (!user || !user.nit) return;
+    var users = readUsersLocal().filter(function (u) {
+      return normalizeNit(u.nit) !== normalizeNit(user.nit);
+    });
+    users.push({
+      nit: user.nit,
+      nombre: user.nombre || '',
+      password_hash: user.password_hash || '',
+      created_at: user.created_at || new Date().toISOString()
+    });
+    writeUsersLocal(users);
+  }
+
   function bufferToBase64(buf) {
     var bytes = new Uint8Array(buf);
     var binary = '';
@@ -284,32 +322,38 @@
   }
 
   function registerLocal(nit, password, nombre) {
-    var users = readUsersLocal();
-    if (findUser(users, nit)) {
-      return Promise.resolve({ ok: false, error: 'Este NIT ya está registrado.' });
-    }
-    return hashPassword(password).then(function (passwordHash) {
-      users.push({
-        nit: nit,
-        nombre: nombre,
-        password_hash: passwordHash,
-        created_at: new Date().toISOString()
+    return fetchRemoteUsers().then(function (remote) {
+      var users = mergeUsers(readUsersLocal(), remote);
+      if (findUser(users, nit)) {
+        return { ok: false, error: 'Este NIT ya está registrado.' };
+      }
+      return hashPassword(password).then(function (passwordHash) {
+        var local = readUsersLocal();
+        local.push({
+          nit: nit,
+          nombre: nombre,
+          password_hash: passwordHash,
+          created_at: new Date().toISOString()
+        });
+        writeUsersLocal(local);
+        setSessionNit('', '');
+        return { ok: true, nit: nit, nombre: nombre, message: 'Registro exitoso. Ahora inicia sesión.' };
       });
-      writeUsersLocal(users);
-      setSessionNit('', '');
-      return { ok: true, nit: nit, nombre: nombre, message: 'Registro exitoso. Ahora inicia sesión.' };
     });
   }
 
   function loginLocal(nit, password) {
-    var user = findUser(readUsersLocal(), nit);
-    if (!user) {
-      return Promise.resolve({ ok: false, error: 'NIT o contraseña incorrectos.' });
-    }
-    return verifyPassword(password, user).then(function (ok) {
-      if (!ok) return { ok: false, error: 'NIT o contraseña incorrectos.' };
-      setSessionNit(user.nit, user.nombre || '');
-      return { ok: true, nit: user.nit, nombre: user.nombre || '', message: 'Sesión iniciada.' };
+    return fetchRemoteUsers().then(function (remote) {
+      var user = findUser(mergeUsers(readUsersLocal(), remote), nit);
+      if (!user) {
+        return { ok: false, error: 'NIT no registrado. Primero crea tu cuenta en Registrarse.' };
+      }
+      return verifyPassword(password, user).then(function (ok) {
+        if (!ok) return { ok: false, error: 'NIT o contraseña incorrectos.' };
+        cacheUserLocally(user);
+        setSessionNit(user.nit, user.nombre || '');
+        return { ok: true, nit: user.nit, nombre: user.nombre || '', message: 'Sesión iniciada.' };
+      });
     });
   }
 
