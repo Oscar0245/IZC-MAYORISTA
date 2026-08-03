@@ -53,19 +53,51 @@
     return null;
   }
 
+  function isLoggedIn() {
+    if (window.IZCAuth && typeof window.IZCAuth.isLoggedIn === 'function') {
+      return !!window.IZCAuth.isLoggedIn();
+    }
+    try {
+      return !!localStorage.getItem('izc_session_nit');
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function lockPrices(root) {
+    var scope = root || document;
+    scope.querySelectorAll('.product-card .price, .product-carddatalogic .price').forEach(function (priceElem) {
+      priceElem.textContent = 'Inicia sesión';
+      priceElem.classList.add('price-locked');
+      priceElem.title = 'Inicia sesión para ver el precio';
+    });
+    var detailPrice = document.getElementById('productPrice');
+    if (detailPrice) {
+      detailPrice.textContent = 'Inicia sesión para ver el precio';
+      detailPrice.classList.add('price-locked');
+    }
+  }
+
   function applyPrices(root) {
+    if (!isLoggedIn()) {
+      lockPrices(root);
+      return;
+    }
     if (!priceMap) return;
     var scope = root || document;
     scope.querySelectorAll('.product-card, .product-carddatalogic').forEach(function (card) {
       var skuElem = card.querySelector('.sku');
       var priceElem = card.querySelector('.price');
       if (!skuElem || !priceElem) return;
+      priceElem.classList.remove('price-locked');
+      priceElem.removeAttribute('title');
       var text = formatPrice(lookupPrice(skuElem.textContent.replace(/\D/g, '').trim()));
       if (text) priceElem.textContent = text;
     });
 
     var detailPrice = document.getElementById('productPrice');
     if (detailPrice && detailPrice.getAttribute('data-sku')) {
+      detailPrice.classList.remove('price-locked');
       var detailText = formatPrice(lookupPrice(detailPrice.getAttribute('data-sku')));
       if (detailText) detailPrice.textContent = detailText;
     }
@@ -189,6 +221,9 @@
   function boot() {
     loadPrices().then(function () {
       startAutoRefresh();
+    });
+    document.addEventListener('izc:auth-changed', function () {
+      applyPrices();
     });
   }
 

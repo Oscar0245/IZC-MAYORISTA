@@ -420,11 +420,13 @@ nav.main-nav { background: var(--blue-deep); }
 }
 
 .featured-brands-box .brands-carousel-wrapper {
-  min-height: 370px;
+  min-height: 0;
+  height: auto;
   overflow: hidden;
   touch-action: pan-y;
   cursor: grab;
   user-select: none;
+  transition: height 0.35s ease;
 }
 
 .featured-brands-box .brands-carousel-wrapper:active {

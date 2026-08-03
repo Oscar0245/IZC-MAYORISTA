@@ -43,12 +43,26 @@ document.addEventListener('DOMContentLoaded', function () {
       return col ? col.getBoundingClientRect().width : 0;
     }
 
+    function syncWrapperHeight() {
+      var left = columns[currentSlide];
+      var right = columns[currentSlide + 1];
+      var maxH = 0;
+      [left, right].forEach(function (col) {
+        if (!col) return;
+        maxH = Math.max(maxH, col.offsetHeight || 0);
+      });
+      if (maxH > 0) {
+        wrapper.style.height = maxH + 'px';
+      }
+    }
+
     function updateCarousel() {
       var step = stepWidth();
       baseX = -(currentSlide * step);
       currentX = baseX;
       track.style.transition = 'transform 0.4s ease-in-out';
       track.style.transform = 'translateX(' + baseX + 'px)';
+      syncWrapperHeight();
     }
 
     function goNext() {
@@ -134,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
     wrapper.addEventListener('pointermove', onPointerMove);
     wrapper.addEventListener('pointerup', onPointerUp);
     wrapper.addEventListener('pointercancel', onPointerUp);
+    updateCarousel();
   }
 
   // Wishlist: manejado por wishlist.js

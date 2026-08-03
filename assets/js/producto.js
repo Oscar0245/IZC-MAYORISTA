@@ -157,6 +157,15 @@
     var priceEl = document.getElementById('productPrice');
     if (!priceEl) return;
     priceEl.setAttribute('data-sku', String(sku));
+
+    var loggedIn = window.IZCAuth && window.IZCAuth.isLoggedIn && window.IZCAuth.isLoggedIn();
+    if (!loggedIn) {
+      priceEl.textContent = 'Inicia sesión para ver el precio';
+      priceEl.classList.add('price-locked');
+      return;
+    }
+    priceEl.classList.remove('price-locked');
+
     if (window.IZCPrices && typeof window.IZCPrices.get === 'function') {
       var cached = window.IZCPrices.get(sku);
       var cachedText = formatPriceEntry(cached);
@@ -168,6 +177,7 @@
     loadJson('assets/files/precios.json')
       .then(function (map) {
         if (!map) return;
+        if (!(window.IZCAuth && window.IZCAuth.isLoggedIn && window.IZCAuth.isLoggedIn())) return;
         var value = map[sku] != null ? map[sku] : map[String(sku).replace(/^0+/, '')];
         var text = formatPriceEntry(value);
         if (text) priceEl.textContent = text;
