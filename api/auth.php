@@ -70,9 +70,10 @@ function verify_password($password, $user) {
     return $legacy !== '' && hash_equals($legacy, $password);
 }
 
-function public_user($nit, $passwordHash, $createdAt) {
+function public_user($nit, $passwordHash, $createdAt, $nombre = '') {
     return [
         'nit' => $nit,
+        'nombre' => trim((string) $nombre),
         'password_hash' => $passwordHash,
         'created_at' => $createdAt ?: date('c'),
     ];
@@ -99,7 +100,11 @@ $action = $body['action'] ?? ($_GET['action'] ?? '');
 if ($action === 'register') {
     $nit = normalize_nit($body['nit'] ?? '');
     $password = (string) ($body['password'] ?? '');
+    $nombre = trim((string) ($body['nombre'] ?? ($body['name'] ?? '')));
 
+    if ($nombre === '' || mb_strlen($nombre) < 2) {
+        json_out(['ok' => false, 'error' => 'Ingresa un nombre válido (mínimo 2 caracteres).'], 400);
+    }
     if ($nit === '' || !preg_match('/^\d{6,15}(-\d)?$/', $nit)) {
         json_out(['ok' => false, 'error' => 'NIT inválido. Usa solo números (opcional dígito de verificación).'], 400);
     }
@@ -113,13 +118,13 @@ if ($action === 'register') {
         json_out(['ok' => false, 'error' => 'Este NIT ya está registrado.'], 409);
     }
 
-    $users[] = public_user($nit, hash_password($password), date('c'));
+    $users[] = public_user($nit, hash_password($password), date('c'), $nombre);
 
     if (!write_users($usersFile, $users)) {
         json_out(['ok' => false, 'error' => 'No se pudo guardar el usuario en el archivo.'], 500);
     }
 
-    json_out(['ok' => true, 'nit' => $nit, 'message' => 'Registro exitoso.']);
+    json_out(['ok' => true, 'nit' => $nit, 'nombre' => $nombre, 'message' => 'Registro exitoso.']);
 }
 
 if ($action === 'login') {
@@ -137,11 +142,17 @@ if ($action === 'login') {
     }
 
     if (empty($user['password_hash'])) {
-        $users[$idx] = public_user($user['nit'], hash_password($password), $user['created_at'] ?? date('c'));
+        $users[$idx] = public_user($user['nit'], hash_password($password), $user['created_at'] ?? date('c'), $user['nombre'] ?? '');
         write_users($usersFile, $users);
+        $user = $users[$idx];
     }
 
-    json_out(['ok' => true, 'nit' => $user['nit'], 'message' => 'Sesión iniciada.']);
+    json_out([
+        'ok' => true,
+        'nit' => $user['nit'],
+        'nombre' => (string) ($user['nombre'] ?? ''),
+        'message' => 'Sesión iniciada.',
+    ]);
 }
 
 if ($action === 'sync') {
@@ -158,16 +169,17 @@ if ($action === 'sync') {
         if ($nit === '' || !preg_match('/^\d{6,15}(-\d)?$/', $nit)) {
             continue;
         }
+        $nombre = trim((string) ($u['nombre'] ?? ($u['name'] ?? '')));
         $existingHash = (string) ($u['password_hash'] ?? '');
         if ($existingHash !== '' && str_starts_with($existingHash, 'pbkdf2$')) {
-            $clean[] = public_user($nit, $existingHash, (string) ($u['created_at'] ?? date('c')));
+            $clean[] = public_user($nit, $existingHash, (string) ($u['created_at'] ?? date('c')), $nombre);
             continue;
         }
         $password = (string) ($u['password'] ?? '');
         if (strlen($password) < 4) {
             continue;
         }
-        $clean[] = public_user($nit, hash_password($password), (string) ($u['created_at'] ?? date('c')));
+        $clean[] = public_user($nit, hash_password($password), (string) ($u['created_at'] ?? date('c')), $nombre);
     }
     if (!write_users($usersFile, $clean)) {
         json_out(['ok' => false, 'error' => 'No se pudo guardar usuarios.json.'], 500);

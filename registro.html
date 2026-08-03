@@ -6,13 +6,13 @@
   <title>Registrarse - IZC MAYORISTA</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
   <link rel="stylesheet" href="assets/css/index.css?v=29">
-  <link rel="stylesheet" href="assets/css/auth.css?v=2">
+  <link rel="stylesheet" href="assets/css/auth.css?v=4">
   <script>
     if (location.protocol === 'file:') {
       location.replace('http://127.0.0.1:8080/registro.html');
     }
   </script>
-  <script src="assets/js/auth.js?v=8" defer></script>
+  <script src="assets/js/auth.js?v=11" defer></script>
   <script src="assets/js/index.js?v=3" defer></script>
 </head>
 <body>
@@ -35,8 +35,12 @@
   <main class="auth-page">
     <div class="auth-card">
       <h1>Registrarse</h1>
-      <p class="auth-lead">Crea tu cuenta con NIT y contraseña de cliente.</p>
+      <p class="auth-lead">Crea tu cuenta con nombre, NIT y contraseña de cliente.</p>
       <form id="registroForm" autocomplete="on">
+        <div class="auth-field">
+          <label for="regNombre">Nombre</label>
+          <input id="regNombre" name="nombre" type="text" placeholder="Nombre o razón social" required minlength="2" autocomplete="name">
+        </div>
         <div class="auth-field">
           <label for="regNit">NIT</label>
           <input id="regNit" name="nit" type="text" inputmode="numeric" placeholder="Ej: 900123456-1" required>

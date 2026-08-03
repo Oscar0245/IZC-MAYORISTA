@@ -111,7 +111,7 @@
     if (titleEl) titleEl.textContent = 'Mis favoritos';
     if (subtitleEl) {
       subtitleEl.textContent = products.length
-        ? 'NIT ' + nit + ': tienes ' + products.length + ' producto(s) guardados.'
+        ?  products.length + ' producto(s) guardados.'
         : 'NIT ' + nit + ': aún no has marcado productos con el corazón.';
     }
 

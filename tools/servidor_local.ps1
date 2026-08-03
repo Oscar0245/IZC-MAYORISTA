@@ -61,6 +61,8 @@ function Test-PasswordHash([string]$password, $user) {
 
 function Protect-UserRecord($user) {
   $nit = Normalize-Nit ([string]$user.nit)
+  $nombre = ([string]$user.nombre).Trim()
+  if (-not $nombre) { $nombre = ([string]$user.name).Trim() }
   $created = [string]$user.created_at
   if (-not $created) { $created = (Get-Date).ToString('o') }
 
@@ -72,6 +74,7 @@ function Protect-UserRecord($user) {
 
   return [pscustomobject]@{
     nit = $nit
+    nombre = $nombre
     password_hash = $hash
     created_at = $created
   }
@@ -112,10 +115,13 @@ function Write-Users($users) {
     $hash = [string]$item.password_hash
     if (-not $nit -or $nit -match '\s') { continue }
     if (-not $hash) { continue }
+    $nombre = ([string]$item.nombre).Trim()
+    if (-not $nombre) { $nombre = ([string]$item.name).Trim() }
     $created = [string]$item.created_at
     if (-not $created) { $created = (Get-Date).ToString('o') }
     $list.Add([ordered]@{
       nit = $nit
+      nombre = $nombre
       password_hash = $hash
       created_at = $created
     })
@@ -129,10 +135,12 @@ function Write-Users($users) {
     for ($i = 0; $i -lt $list.Count; $i++) {
       $u = $list[$i]
       $nitJson = ($u.nit | ConvertTo-Json -Compress)
+      $nombreJson = ($u.nombre | ConvertTo-Json -Compress)
       $hashJson = ($u.password_hash | ConvertTo-Json -Compress)
       $createdJson = ($u.created_at | ConvertTo-Json -Compress)
       [void]$sb.Append('  {')
       [void]$sb.Append("`n    `"nit`": $nitJson,")
+      [void]$sb.Append("`n    `"nombre`": $nombreJson,")
       [void]$sb.Append("`n    `"password_hash`": $hashJson,")
       [void]$sb.Append("`n    `"created_at`": $createdJson")
       [void]$sb.Append("`n  }")
@@ -204,8 +212,14 @@ function Handle-Auth($request, $response) {
   $action = [string]$body.action
   $nit = Normalize-Nit ([string]$body.nit)
   $password = [string]$body.password
+  $nombre = ([string]$body.nombre).Trim()
+  if (-not $nombre) { $nombre = ([string]$body.name).Trim() }
 
   if ($action -eq 'register') {
+    if (-not $nombre -or $nombre.Length -lt 2) {
+      Send-Json $response @{ ok = $false; error = 'Ingresa un nombre valido (minimo 2 caracteres).' } 400
+      return
+    }
     if (-not $nit -or $nit -notmatch '^\d{6,15}(-\d)?$') {
       Send-Json $response @{ ok = $false; error = 'NIT invalido. Usa solo numeros (opcional digito de verificacion).' } 400
       return
@@ -224,11 +238,12 @@ function Handle-Auth($request, $response) {
     }
     $users.Add((Protect-UserRecord ([pscustomobject]@{
       nit = $nit
+      nombre = $nombre
       password = $password
       created_at = (Get-Date).ToString('o')
     })))
     Write-Users $users.ToArray()
-    Send-Json $response @{ ok = $true; nit = $nit; message = 'Registro exitoso.' }
+    Send-Json $response @{ ok = $true; nit = $nit; nombre = $nombre; message = 'Registro exitoso.' }
     return
   }
 
@@ -257,13 +272,16 @@ function Handle-Auth($request, $response) {
     if (-not [string]$found.password_hash) {
       $users[$foundIndex] = Protect-UserRecord ([pscustomobject]@{
         nit = [string]$found.nit
+        nombre = [string]$found.nombre
         password = $password
         created_at = [string]$found.created_at
       })
       Write-Users $users.ToArray()
+      $found = $users[$foundIndex]
     }
 
-    Send-Json $response @{ ok = $true; nit = [string]$found.nit; message = 'Sesion iniciada.' }
+    $foundNombre = ([string]$found.nombre).Trim()
+    Send-Json $response @{ ok = $true; nit = [string]$found.nit; nombre = $foundNombre; message = 'Sesion iniciada.' }
     return
   }
 

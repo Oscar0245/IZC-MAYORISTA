@@ -3,6 +3,7 @@
   'use strict';
 
   var SESSION_KEY = 'izc_session_nit';
+  var SESSION_NAME_KEY = 'izc_session_nombre';
   var USERS_KEY = 'izc_users';
   var NIT_RE = /^\d{6,15}(-\d)?$/;
   var API = 'http://127.0.0.1:8080/api/auth';
@@ -21,22 +22,35 @@
     try { return localStorage.getItem(SESSION_KEY) || ''; } catch (e) { return ''; }
   }
 
-  function setSessionNit(nit) {
+  function getSessionNombre() {
+    try { return localStorage.getItem(SESSION_NAME_KEY) || ''; } catch (e) { return ''; }
+  }
+
+  function setSessionNombre(nombre) {
+    try {
+      if (nombre) localStorage.setItem(SESSION_NAME_KEY, String(nombre));
+      else localStorage.removeItem(SESSION_NAME_KEY);
+    } catch (e) { /* ignore */ }
+  }
+
+  function setSessionNit(nit, nombre) {
     try {
       if (nit) localStorage.setItem(SESSION_KEY, String(nit));
       else localStorage.removeItem(SESSION_KEY);
     } catch (e) { /* ignore */ }
+    if (arguments.length > 1) setSessionNombre(nombre || '');
+    else if (!nit) setSessionNombre('');
     renderHeaderAuth();
     applyGuestMode();
     try {
       document.dispatchEvent(new CustomEvent('izc:auth-changed', {
-        detail: { nit: nit || '', loggedIn: !!nit }
+        detail: { nit: nit || '', nombre: getSessionNombre(), loggedIn: !!nit }
       }));
     } catch (e) { /* ignore */ }
   }
 
   function logout() {
-    setSessionNit('');
+    setSessionNit('', '');
     window.location.href = 'index.html';
   }
 
@@ -52,11 +66,35 @@
     return false;
   }
 
+  function ensureProfileButton() {
+    if (document.getElementById('headerProfile')) return;
+    var heart = document.getElementById('headerWishlist');
+    var host = heart && heart.parentNode
+      ? heart.parentNode
+      : document.querySelector('.main-header-inner');
+    if (!host) return;
+
+    var link = document.createElement('a');
+    link.href = 'perfil.html';
+    link.id = 'headerProfile';
+    link.className = 'header-profile';
+    link.title = 'Mi perfil';
+    link.setAttribute('aria-label', 'Mi perfil');
+    link.innerHTML = '<img src="assets/logo/perfil.png" alt="" class="header-profile-img" width="28" height="28">';
+
+    if (heart && heart.parentNode === host) {
+      heart.insertAdjacentElement('afterend', link);
+    } else {
+      host.appendChild(link);
+    }
+  }
+
   function applyGuestMode() {
     var logged = isLoggedIn();
     if (!document.body) return;
     document.body.classList.toggle('is-logged-in', logged);
     document.body.classList.toggle('is-guest', !logged);
+    ensureProfileButton();
   }
 
   function isCommerceAction(el) {
@@ -154,10 +192,14 @@
     return 'No hay servidor local. Cierra esta ventana, ejecuta tools\\ABRIR.bat y vuelve a intentar.';
   }
 
-  function register(nit, password) {
+  function register(nit, password, nombre) {
     nit = normalizeNit(nit);
     password = String(password || '');
+    nombre = String(nombre || '').trim();
 
+    if (!nombre || nombre.length < 2) {
+      return Promise.resolve({ ok: false, error: 'Ingresa un nombre válido (mínimo 2 caracteres).' });
+    }
     if (!nit || !NIT_RE.test(nit)) {
       return Promise.resolve({ ok: false, error: 'NIT inválido. Usa solo números (opcional dígito de verificación).' });
     }
@@ -165,7 +207,7 @@
       return Promise.resolve({ ok: false, error: 'La contraseña debe tener al menos 4 caracteres.' });
     }
 
-    return postAuth({ action: 'register', nit: nit, password: password })
+    return postAuth({ action: 'register', nit: nit, password: password, nombre: nombre })
       .then(function (data) {
         if (!data.ok) return data;
         // Verificar que quedó en el archivo
@@ -174,8 +216,8 @@
             return { ok: false, error: 'No se confirmó el guardado en data\\usuarios.json.' };
           }
           writeUsersLocal(users);
-          setSessionNit('');
-          return { ok: true, nit: nit, message: 'Registro exitoso. Ahora inicia sesión.' };
+          setSessionNit('', '');
+          return { ok: true, nit: nit, nombre: nombre, message: 'Registro exitoso. Ahora inicia sesión.' };
         });
       })
       .catch(function () {
@@ -194,7 +236,7 @@
     // El login siempre va por API: compara contra password_hash del JSON
     return postAuth({ action: 'login', nit: nit, password: password })
       .then(function (data) {
-        if (data.ok) setSessionNit(data.nit);
+        if (data.ok) setSessionNit(data.nit, data.nombre || '');
         return data;
       })
       .catch(function () {
@@ -215,10 +257,7 @@
     var nit = getSessionNit();
     if (nit) {
       slot.innerHTML =
-        '<span class="header-auth-nit">NIT ' + escapeHtml(nit) + '</span>' +
-        '<button type="button" class="header-auth-link" id="headerLogout">Cerrar sesión</button>';
-      var btn = document.getElementById('headerLogout');
-      if (btn) btn.addEventListener('click', logout);
+        '<span class="header-auth-nit">NIT ' + escapeHtml(nit) + '</span>';
     } else {
       slot.innerHTML =
         '<a class="header-auth-link" href="login.html">Iniciar sesión</a>' +
@@ -255,14 +294,16 @@
     var msg = document.getElementById('authMessage');
     var nitInput = form.querySelector('[name="nit"]');
     var passInput = form.querySelector('[name="password"]');
+    var nombreInput = form.querySelector('[name="nombre"]');
     var btn = form.querySelector('button[type="submit"]');
     var nit = nitInput ? nitInput.value.trim() : '';
     var password = passInput ? passInput.value : '';
+    var nombre = nombreInput ? nombreInput.value.trim() : '';
 
     setMessage(msg, '', '');
     if (btn) btn.disabled = true;
 
-    var action = mode === 'register' ? register(nit, password) : login(nit, password);
+    var action = mode === 'register' ? register(nit, password, nombre) : login(nit, password);
     action.then(function (data) {
       if (data.ok) {
         setMessage(msg, data.message || 'Listo.', 'ok');
@@ -303,6 +344,7 @@
 
   window.IZCAuth = {
     getSessionNit: getSessionNit,
+    getSessionNombre: getSessionNombre,
     isLoggedIn: isLoggedIn,
     requireLogin: requireLogin,
     login: login,
