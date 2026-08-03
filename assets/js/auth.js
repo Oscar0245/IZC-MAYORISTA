@@ -1,4 +1,7 @@
-/* Sesión NIT/contraseña. Guarda siempre en data/usuarios.json vía servidor local. */
+/* Sesión NIT/contraseña.
+ * - En PC local (127.0.0.1): usa el servidor y data/usuarios.json
+ * - En GitHub Pages / celular: usa almacenamiento del navegador (localStorage)
+ */
 (function () {
   'use strict';
 
@@ -6,11 +9,13 @@
   var SESSION_NAME_KEY = 'izc_session_nombre';
   var USERS_KEY = 'izc_users';
   var NIT_RE = /^\d{6,15}(-\d)?$/;
-  var API = 'http://127.0.0.1:8080/api/auth';
-  var USERS_URL = 'http://127.0.0.1:8080/data/usuarios.json';
   var LOCAL_ORIGIN = 'http://127.0.0.1:8080';
 
-  /** Si abrieron el HTML como archivo, saltar al servidor local (único que puede escribir el JSON). */
+  function isDevHost() {
+    var h = location.hostname;
+    return h === '127.0.0.1' || h === 'localhost';
+  }
+
   function forceLocalServer() {
     if (location.protocol !== 'file:') return false;
     var name = (location.pathname.split('/').pop() || 'index.html');
@@ -116,7 +121,6 @@
       var target = isCommerceAction(event.target);
       if (!target) return;
 
-      // Permitir ir a favoritos.html solo para ver el aviso de login (no bloquear navegación a la página)
       if (target.id === 'headerWishlist' || (target.getAttribute && target.getAttribute('href') === 'favoritos.html')) {
         return;
       }
@@ -161,35 +165,165 @@
     return null;
   }
 
-  function postAuth(payload) {
-    return fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (res) {
-      return res.json().then(function (data) {
-        if (!data || typeof data !== 'object') throw new Error('Respuesta inválida');
-        data._http = res.status;
-        return data;
-      });
+  function bufferToBase64(buf) {
+    var bytes = new Uint8Array(buf);
+    var binary = '';
+    for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+  }
+
+  function base64ToBuffer(b64) {
+    var binary = atob(b64);
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return bytes.buffer;
+  }
+
+  function hashPassword(password) {
+    if (!window.crypto || !crypto.subtle) {
+      return Promise.reject(new Error('Este navegador no soporta cifrado de contraseñas.'));
+    }
+    var iterations = 100000;
+    var salt = crypto.getRandomValues(new Uint8Array(16));
+    return crypto.subtle.importKey(
+      'raw',
+      new TextEncoder().encode(password),
+      'PBKDF2',
+      false,
+      ['deriveBits']
+    ).then(function (keyMaterial) {
+      return crypto.subtle.deriveBits(
+        { name: 'PBKDF2', salt: salt, iterations: iterations, hash: 'SHA-256' },
+        keyMaterial,
+        256
+      );
+    }).then(function (bits) {
+      return 'pbkdf2$' + iterations + '$' + bufferToBase64(salt) + '$' + bufferToBase64(bits);
     });
   }
 
-  function loadUsersFromFile() {
-    return fetch(USERS_URL + '?t=' + Date.now(), { cache: 'no-store' })
-      .then(function (res) {
-        if (!res.ok) throw new Error('No se pudo leer usuarios.json');
-        return res.json();
-      })
-      .then(function (list) {
-        if (!Array.isArray(list)) throw new Error('usuarios.json inválido');
-        writeUsersLocal(list);
-        return list;
-      });
+  function verifyPassword(password, user) {
+    var stored = String((user && (user.password_hash || user.password)) || '');
+    if (!stored) return Promise.resolve(false);
+
+    if (stored.indexOf('pbkdf2$') !== 0) {
+      return Promise.resolve(stored === password);
+    }
+
+    if (!window.crypto || !crypto.subtle) {
+      return Promise.resolve(false);
+    }
+
+    var parts = stored.split('$');
+    if (parts.length !== 4) return Promise.resolve(false);
+    var iterations = parseInt(parts[1], 10);
+    var salt = base64ToBuffer(parts[2]);
+    var expected = new Uint8Array(base64ToBuffer(parts[3]));
+
+    return crypto.subtle.importKey(
+      'raw',
+      new TextEncoder().encode(password),
+      'PBKDF2',
+      false,
+      ['deriveBits']
+    ).then(function (keyMaterial) {
+      return crypto.subtle.deriveBits(
+        { name: 'PBKDF2', salt: salt, iterations: iterations, hash: 'SHA-256' },
+        keyMaterial,
+        expected.length * 8
+      );
+    }).then(function (bits) {
+      var actual = new Uint8Array(bits);
+      if (actual.length !== expected.length) return false;
+      var ok = true;
+      for (var i = 0; i < actual.length; i++) {
+        if (actual[i] !== expected[i]) ok = false;
+      }
+      return ok;
+    }).catch(function () {
+      return false;
+    });
   }
 
-  function serverDownMessage() {
-    return 'No hay servidor local. Cierra esta ventana, ejecuta tools\\ABRIR.bat y vuelve a intentar.';
+  function apiEndpoints() {
+    var list = [];
+    if (isDevHost()) {
+      list.push(LOCAL_ORIGIN + '/api/auth');
+      list.push('api/auth');
+    }
+    list.push('api/auth.php');
+    return list;
+  }
+
+  function postAuth(payload) {
+    var body = JSON.stringify(payload);
+    var endpoints = apiEndpoints();
+    var lastErr = null;
+
+    function tryOne(i) {
+      if (i >= endpoints.length) {
+        return Promise.reject(lastErr || new Error('sin api'));
+      }
+      return fetch(endpoints[i], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+      }).then(function (res) {
+        return res.json().then(function (data) {
+          if (!data || typeof data !== 'object') throw new Error('Respuesta inválida');
+          data._http = res.status;
+          return data;
+        });
+      }).catch(function (err) {
+        lastErr = err;
+        return tryOne(i + 1);
+      });
+    }
+
+    return tryOne(0);
+  }
+
+  function registerLocal(nit, password, nombre) {
+    var users = readUsersLocal();
+    if (findUser(users, nit)) {
+      return Promise.resolve({ ok: false, error: 'Este NIT ya está registrado.' });
+    }
+    return hashPassword(password).then(function (passwordHash) {
+      users.push({
+        nit: nit,
+        nombre: nombre,
+        password_hash: passwordHash,
+        created_at: new Date().toISOString()
+      });
+      writeUsersLocal(users);
+      setSessionNit('', '');
+      return { ok: true, nit: nit, nombre: nombre, message: 'Registro exitoso. Ahora inicia sesión.' };
+    });
+  }
+
+  function loginLocal(nit, password) {
+    var user = findUser(readUsersLocal(), nit);
+    if (!user) {
+      return Promise.resolve({ ok: false, error: 'NIT o contraseña incorrectos.' });
+    }
+    return verifyPassword(password, user).then(function (ok) {
+      if (!ok) return { ok: false, error: 'NIT o contraseña incorrectos.' };
+      setSessionNit(user.nit, user.nombre || '');
+      return { ok: true, nit: user.nit, nombre: user.nombre || '', message: 'Sesión iniciada.' };
+    });
+  }
+
+  function validateRegister(nit, password, nombre) {
+    if (!nombre || nombre.length < 2) {
+      return { ok: false, error: 'Ingresa un nombre válido (mínimo 2 caracteres).' };
+    }
+    if (!nit || !NIT_RE.test(nit)) {
+      return { ok: false, error: 'NIT inválido. Usa solo números (opcional dígito de verificación).' };
+    }
+    if (password.length < 4) {
+      return { ok: false, error: 'La contraseña debe tener al menos 4 caracteres.' };
+    }
+    return null;
   }
 
   function register(nit, password, nombre) {
@@ -197,31 +331,41 @@
     password = String(password || '');
     nombre = String(nombre || '').trim();
 
-    if (!nombre || nombre.length < 2) {
-      return Promise.resolve({ ok: false, error: 'Ingresa un nombre válido (mínimo 2 caracteres).' });
-    }
-    if (!nit || !NIT_RE.test(nit)) {
-      return Promise.resolve({ ok: false, error: 'NIT inválido. Usa solo números (opcional dígito de verificación).' });
-    }
-    if (password.length < 4) {
-      return Promise.resolve({ ok: false, error: 'La contraseña debe tener al menos 4 caracteres.' });
+    var invalid = validateRegister(nit, password, nombre);
+    if (invalid) return Promise.resolve(invalid);
+
+    // En web pública (GitHub Pages / celular): solo navegador
+    if (!isDevHost()) {
+      return registerLocal(nit, password, nombre);
     }
 
+    // En local: intenta servidor; si no responde, usa navegador
     return postAuth({ action: 'register', nit: nit, password: password, nombre: nombre })
       .then(function (data) {
         if (!data.ok) return data;
-        // Verificar que quedó en el archivo
-        return loadUsersFromFile().then(function (users) {
-          if (!findUser(users, nit)) {
-            return { ok: false, error: 'No se confirmó el guardado en data\\usuarios.json.' };
-          }
+        // Espejo local para poder entrar también sin servidor
+        return hashPassword(password).then(function (passwordHash) {
+          var users = readUsersLocal().filter(function (u) {
+            return normalizeNit(u.nit) !== nit;
+          });
+          users.push({
+            nit: nit,
+            nombre: nombre,
+            password_hash: passwordHash,
+            created_at: new Date().toISOString()
+          });
           writeUsersLocal(users);
           setSessionNit('', '');
-          return { ok: true, nit: nit, nombre: nombre, message: 'Registro exitoso. Ahora inicia sesión.' };
+          return {
+            ok: true,
+            nit: nit,
+            nombre: nombre,
+            message: data.message || 'Registro exitoso. Ahora inicia sesión.'
+          };
         });
       })
       .catch(function () {
-        return { ok: false, error: serverDownMessage() };
+        return registerLocal(nit, password, nombre);
       });
   }
 
@@ -233,14 +377,17 @@
       return Promise.resolve({ ok: false, error: 'Ingresa NIT y contraseña.' });
     }
 
-    // El login siempre va por API: compara contra password_hash del JSON
+    if (!isDevHost()) {
+      return loginLocal(nit, password);
+    }
+
     return postAuth({ action: 'login', nit: nit, password: password })
       .then(function (data) {
         if (data.ok) setSessionNit(data.nit, data.nombre || '');
         return data;
       })
       .catch(function () {
-        return { ok: false, error: serverDownMessage() };
+        return loginLocal(nit, password);
       });
   }
 
@@ -327,21 +474,6 @@
     el.className = 'auth-message' + (type ? ' is-' + type : '');
   }
 
-  function showServerBannerIfNeeded() {
-    if (location.protocol === 'file:') return;
-    if (location.hostname !== '127.0.0.1' && location.hostname !== 'localhost') return;
-
-    fetch(USERS_URL + '?t=' + Date.now(), { cache: 'no-store' }).catch(function () {
-      var host = document.querySelector('.auth-card') || document.body;
-      if (!host || document.getElementById('izcServerBanner')) return;
-      var box = document.createElement('p');
-      box.id = 'izcServerBanner';
-      box.className = 'auth-message is-error';
-      box.textContent = serverDownMessage();
-      host.insertBefore(box, host.firstChild);
-    });
-  }
-
   window.IZCAuth = {
     getSessionNit: getSessionNit,
     getSessionNombre: getSessionNombre,
@@ -360,7 +492,6 @@
     renderHeaderAuth();
     bindAuthForms();
     bindGuestGuards();
-    showServerBannerIfNeeded();
     document.addEventListener('izc:auth-changed', applyGuestMode);
   }
 
