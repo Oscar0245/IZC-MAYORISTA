@@ -436,20 +436,56 @@
   }
 
   function renderHeaderAuth() {
-    var bar = document.querySelector('.top-bar-inner');
-    if (!bar) return;
+    var topBar = document.querySelector('.top-bar-inner');
+    var header = document.querySelector('.main-header-inner');
+    var nit = getSessionNit();
+
+    // Slot NIT en la barra azul (izquierda)
+    var topSlot = document.getElementById('headerAuthNit');
+    if (topBar) {
+      if (!topSlot) {
+        topSlot = document.createElement('div');
+        topSlot.id = 'headerAuthNit';
+        topSlot.className = 'header-auth-top';
+        topBar.insertBefore(topSlot, topBar.firstChild);
+      }
+      if (nit) {
+        topSlot.innerHTML =
+          '<span class="header-auth-nit">NIT ' + escapeHtml(nit) + '</span>';
+        topSlot.hidden = false;
+      } else {
+        topSlot.innerHTML = '';
+        topSlot.hidden = true;
+      }
+    }
+
+    // Botones Iniciar sesión / Registrarse junto al buscador (solo sin sesión)
+    if (!header) return;
     var slot = document.getElementById('headerAuth');
+    if (slot && slot.parentNode !== header) {
+      slot.parentNode.removeChild(slot);
+      slot = null;
+    }
     if (!slot) {
       slot = document.createElement('div');
       slot.id = 'headerAuth';
       slot.className = 'header-auth';
-      bar.insertBefore(slot, bar.firstChild);
+      var search = header.querySelector('.search-bar');
+      var wishlist = document.getElementById('headerWishlist');
+      if (search) {
+        search.insertAdjacentElement('afterend', slot);
+      } else if (wishlist) {
+        wishlist.insertAdjacentElement('beforebegin', slot);
+      } else {
+        header.appendChild(slot);
+      }
     }
-    var nit = getSessionNit();
+
     if (nit) {
-      slot.innerHTML =
-        '<span class="header-auth-nit">NIT ' + escapeHtml(nit) + '</span>';
+      slot.innerHTML = '';
+      slot.hidden = true;
     } else {
+      slot.hidden = false;
       slot.innerHTML =
         '<a class="header-auth-link" href="login.html">Iniciar sesión</a>' +
         '<a class="header-auth-link" href="registro.html">Registrarse</a>';
@@ -464,9 +500,23 @@
       .replace(/"/g, '&quot;');
   }
 
+  function clearAuthForm(form) {
+    if (!form) return;
+    var fields = form.querySelectorAll('input[name="nit"], input[name="password"], input[name="nombre"]');
+    for (var i = 0; i < fields.length; i++) {
+      fields[i].value = '';
+    }
+    var msg = document.getElementById('authMessage');
+    setMessage(msg, '', '');
+  }
+
   function bindAuthForms() {
     var loginForm = document.getElementById('loginForm');
     if (loginForm) {
+      clearAuthForm(loginForm);
+      // El navegador a veces rellena después del load; limpiar otra vez
+      setTimeout(function () { clearAuthForm(loginForm); }, 50);
+      setTimeout(function () { clearAuthForm(loginForm); }, 300);
       loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
         submitAuthForm(loginForm, 'login');
@@ -474,6 +524,8 @@
     }
     var regForm = document.getElementById('registroForm');
     if (regForm) {
+      clearAuthForm(regForm);
+      setTimeout(function () { clearAuthForm(regForm); }, 50);
       regForm.addEventListener('submit', function (e) {
         e.preventDefault();
         submitAuthForm(regForm, 'register');

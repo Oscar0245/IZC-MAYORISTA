@@ -112,7 +112,7 @@
     if (subtitleEl) {
       subtitleEl.textContent = products.length
         ?  products.length + ' producto(s) guardados.'
-        : 'NIT ' + nit + ': aún no has marcado productos con el corazón.';
+        : ' aún no has marcado productos con el corazón.';
     }
 
     grid.innerHTML = products.map(renderCard).join('');

@@ -6,13 +6,13 @@
   <title>Iniciar sesión - IZC MAYORISTA</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
   <link rel="stylesheet" href="assets/css/index.css?v=29">
-  <link rel="stylesheet" href="assets/css/auth.css?v=4">
+  <link rel="stylesheet" href="assets/css/auth.css?v=7">
   <script>
     if (location.protocol === 'file:') {
       location.replace('http://127.0.0.1:8080/login.html');
     }
   </script>
-  <script src="assets/js/auth.js?v=13" defer></script>
+  <script src="assets/js/auth.js?v=16" defer></script>
   <script src="assets/js/index.js?v=3" defer></script>
 </head>
 <body>
@@ -36,14 +36,14 @@
     <div class="auth-card">
       <h1>Iniciar sesión</h1>
       <p class="auth-lead">Ingresa con tu NIT y contraseña. Si es la primera vez en este celular, regístrate primero.</p>
-      <form id="loginForm" autocomplete="on">
+      <form id="loginForm" autocomplete="off">
         <div class="auth-field">
           <label for="loginNit">NIT</label>
-          <input id="loginNit" name="nit" type="text" inputmode="numeric" placeholder="Ej: 900123456-1" required>
+          <input id="loginNit" name="nit" type="text" inputmode="numeric" placeholder="Ej: 900123456-1" required autocomplete="off" value="">
         </div>
         <div class="auth-field">
           <label for="loginPassword">Contraseña</label>
-          <input id="loginPassword" name="password" type="password" placeholder="Tu contraseña" required minlength="4">
+          <input id="loginPassword" name="password" type="password" placeholder="Tu contraseña" required minlength="4" autocomplete="new-password" value="">
         </div>
         <button class="auth-submit" type="submit">Entrar</button>
         <p id="authMessage" class="auth-message" role="status"></p>
