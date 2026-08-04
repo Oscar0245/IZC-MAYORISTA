@@ -1,0 +1,20 @@
+[
+  {
+    "nit": "03166122778",
+    "nombre": "Oscar",
+    "password_hash": "pbkdf2$100000$o+ILSNyWt/14lmG27Gd9Hg==$CVC+vfGkCOkebdKzk5Yi67mm4Kb09iWD8oP+BBUQdoM=",
+    "created_at": "2026-08-03T14:50:26.7286061-05:00"
+  },
+  {
+    "nit": "1109843363",
+    "nombre": "Carlos",
+    "password_hash": "pbkdf2$100000$+ArocoyflWncn5olAOiJxg==$ikDlSWm23UCRxM+88ZJfJ28H0f0H8oKOJ5Cf4Ed14LI=",
+    "created_at": "2026-08-04T13:45:23.5196646-05:00"
+  },
+  {
+    "nit": "3187195533",
+    "nombre": "Josue",
+    "password_hash": "pbkdf2$100000$kOkpM+fx4hPhmWOZl5OzCw==$GcOriZ/m7u9uIWjWDIV1zbKeiIWbylWYGwChMDHto+w=",
+    "created_at": "2026-08-04T14:45:18.4330860-05:00"
+  }
+]

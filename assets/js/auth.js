@@ -95,15 +95,53 @@
       };
     }
 
-    if (!isDevHost()) {
-      return Promise.resolve(fromLocal());
+    function mergePublic(serverUsers, localUsers) {
+      return mergeUsers(localUsers.map(publicUserView), serverUsers.map(publicUserView));
     }
 
-    return postAuth({ action: 'list', admin_nit: getSessionNit() })
+    // Empuja al archivo las cuentas que solo están en el navegador
+    function syncLocalToFile(serverUsers) {
+      var local = readUsersLocal();
+      var missing = local.filter(function (u) {
+        if (!u || !u.nit || !u.password_hash) return false;
+        if (String(u.password_hash).indexOf('pbkdf2$') !== 0) return false;
+        return !findUser(serverUsers, u.nit);
+      });
+      if (!missing.length) {
+        return Promise.resolve(serverUsers);
+      }
+
+      var chain = Promise.resolve();
+      missing.forEach(function (u) {
+        chain = chain.then(function () {
+          return postAuthFile({
+            action: 'upsert',
+            admin_nit: getSessionNit(),
+            nit: normalizeNit(u.nit),
+            nombre: u.nombre || '',
+            password_hash: u.password_hash,
+            created_at: u.created_at || ''
+          }).catch(function () { return null; });
+        });
+      });
+
+      return chain.then(function () {
+        return postAuthFile({ action: 'list', admin_nit: getSessionNit() })
+          .then(function (data) {
+            return (data && data.ok && Array.isArray(data.users)) ? data.users : serverUsers;
+          })
+          .catch(function () { return serverUsers; });
+      });
+    }
+
+    return postAuthFile({ action: 'list', admin_nit: getSessionNit() })
       .then(function (data) {
         if (!data.ok) return fromLocal();
-        var users = Array.isArray(data.users) ? data.users.map(publicUserView) : [];
-        return { ok: true, users: users, source: 'servidor' };
+        var serverUsers = Array.isArray(data.users) ? data.users : [];
+        return syncLocalToFile(serverUsers).then(function (finalServer) {
+          var users = mergePublic(finalServer, readUsersLocal());
+          return { ok: true, users: users, source: 'servidor' };
+        });
       })
       .catch(function () {
         return fromLocal();
@@ -122,35 +160,42 @@
       return Promise.resolve({ ok: false, error: 'No puedes eliminar tu propia cuenta de administrador.' });
     }
 
-    function deleteLocal() {
+    function deleteLocalOnly() {
       var before = readUsersLocal();
       var after = before.filter(function (u) {
         return normalizeNit(u.nit) !== nit;
       });
-      if (after.length === before.length) {
-        return { ok: false, error: 'Usuario no encontrado.' };
-      }
       writeUsersLocal(after);
-      return { ok: true, message: 'Usuario eliminado.', source: 'navegador' };
+      return after.length !== before.length;
     }
 
-    if (!isDevHost()) {
-      return Promise.resolve(deleteLocal());
-    }
-
-    return postAuth({ action: 'delete', nit: nit, admin_nit: getSessionNit() })
+    return postAuthFile({ action: 'delete', nit: nit, admin_nit: getSessionNit() })
       .then(function (data) {
+        var removedLocal = deleteLocalOnly();
         if (data.ok) {
-          // Espejo local
-          writeUsersLocal(readUsersLocal().filter(function (u) {
-            return normalizeNit(u.nit) !== nit;
-          }));
-          return data;
+          return {
+            ok: true,
+            message: 'Usuario eliminado de usuarios.json.',
+            source: 'servidor',
+            nit: nit
+          };
         }
-        return deleteLocal();
+        if (removedLocal) {
+          return { ok: true, message: 'Usuario eliminado.', source: 'navegador', nit: nit };
+        }
+        return data;
       })
       .catch(function () {
-        return deleteLocal();
+        if (deleteLocalOnly()) {
+          return {
+            ok: false,
+            error: 'Se quitó del navegador, pero no de usuarios.json. Usa tools\\ABRIR.bat (http://127.0.0.1:8080).'
+          };
+        }
+        return {
+          ok: false,
+          error: 'No se pudo actualizar usuarios.json. Abre el sitio con tools\\ABRIR.bat (http://127.0.0.1:8080/admin.html).'
+        };
       });
   }
 
@@ -380,8 +425,9 @@
 
   function apiEndpoints() {
     var list = [];
+    // Siempre prioriza el servidor local que escribe data/usuarios.json
+    list.push(LOCAL_ORIGIN + '/api/auth');
     if (isDevHost()) {
-      list.push(LOCAL_ORIGIN + '/api/auth');
       list.push('api/auth');
     }
     list.push('api/auth.php');
@@ -405,6 +451,37 @@
         return res.json().then(function (data) {
           if (!data || typeof data !== 'object') throw new Error('Respuesta inválida');
           data._http = res.status;
+          return data;
+        });
+      }).catch(function (err) {
+        lastErr = err;
+        return tryOne(i + 1);
+      });
+    }
+
+    return tryOne(0);
+  }
+
+  // Igual que postAuth, pero solo endpoints que pueden escribir el archivo
+  function postAuthFile(payload) {
+    var body = JSON.stringify(payload);
+    var endpoints = [LOCAL_ORIGIN + '/api/auth', 'api/auth', 'api/auth.php'];
+    var lastErr = null;
+
+    function tryOne(i) {
+      if (i >= endpoints.length) {
+        return Promise.reject(lastErr || new Error('sin api archivo'));
+      }
+      return fetch(endpoints[i], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+      }).then(function (res) {
+        return res.json().then(function (data) {
+          if (!data || typeof data !== 'object') throw new Error('Respuesta inválida');
+          data._http = res.status;
+          // Si el endpoint respondió HTML/404 de GitHub Pages, no cuenta
+          if (data._http >= 400 && !data.error && !data.ok) throw new Error('http ' + data._http);
           return data;
         });
       }).catch(function (err) {
@@ -441,7 +518,10 @@
     return fetchRemoteUsers().then(function (remote) {
       var user = findUser(mergeUsers(readUsersLocal(), remote), nit);
       if (!user) {
-        return { ok: false, error: 'NIT no registrado. Primero crea tu cuenta en Registrarse.' };
+        return {
+          ok: false,
+          error: 'NIT no registrado en este sitio. Regístrate aquí, o si te registraste en el PC entra en http://127.0.0.1:8080'
+        };
       }
       return verifyPassword(password, user).then(function (ok) {
         if (!ok) return { ok: false, error: 'NIT o contraseña incorrectos.' };
@@ -473,38 +553,58 @@
     var invalid = validateRegister(nit, password, nombre);
     if (invalid) return Promise.resolve(invalid);
 
-    // En web pública (GitHub Pages / celular): solo navegador
-    if (!isDevHost()) {
-      return registerLocal(nit, password, nombre);
+    function mirrorLocal(passwordHash) {
+      var users = readUsersLocal().filter(function (u) {
+        return normalizeNit(u.nit) !== nit;
+      });
+      users.push({
+        nit: nit,
+        nombre: nombre,
+        password_hash: passwordHash,
+        created_at: new Date().toISOString()
+      });
+      writeUsersLocal(users);
+      setSessionNit('', '');
     }
 
-    // En local: intenta servidor; si no responde, usa navegador
-    return postAuth({ action: 'register', nit: nit, password: password, nombre: nombre })
+    function okResult(message) {
+      // Espejo en navegador en segundo plano (no bloquea la redirección)
+      hashPassword(password).then(mirrorLocal).catch(function () { /* ignore */ });
+      return {
+        ok: true,
+        nit: nit,
+        nombre: nombre,
+        message: message || 'Registro exitoso. Ahora inicia sesión.'
+      };
+    }
+
+    // Guardar en data/usuarios.json mediante el servidor local
+    return postAuthFile({ action: 'register', nit: nit, password: password, nombre: nombre })
       .then(function (data) {
-        if (!data.ok) return data;
-        // Espejo local para poder entrar también sin servidor
-        return hashPassword(password).then(function (passwordHash) {
-          var users = readUsersLocal().filter(function (u) {
-            return normalizeNit(u.nit) !== nit;
-          });
-          users.push({
-            nit: nit,
-            nombre: nombre,
-            password_hash: passwordHash,
-            created_at: new Date().toISOString()
-          });
-          writeUsersLocal(users);
-          setSessionNit('', '');
-          return {
-            ok: true,
-            nit: nit,
-            nombre: nombre,
-            message: data.message || 'Registro exitoso. Ahora inicia sesión.'
-          };
-        });
+        if (data && data.ok) {
+          return okResult('Registro exitoso. Guardado en usuarios.json. Ahora inicia sesión.');
+        }
+        if (data && data.error) return data;
+
+        // Servidor respondió raro: intentar solo navegador
+        return registerLocal(nit, password, nombre);
       })
       .catch(function () {
-        return registerLocal(nit, password, nombre);
+        if (isDevHost()) {
+          return {
+            ok: false,
+            error: 'No se pudo guardar en usuarios.json. Ejecuta tools\\ABRIR.bat y abre http://127.0.0.1:8080/registro.html'
+          };
+        }
+        return registerLocal(nit, password, nombre).then(function (data) {
+          if (!data || !data.ok) return data || { ok: false, error: 'No se pudo registrar.' };
+          return {
+            ok: true,
+            nit: data.nit || nit,
+            nombre: data.nombre || nombre,
+            message: 'Registro exitoso. Ahora inicia sesión.'
+          };
+        });
       });
   }
 
@@ -595,14 +695,18 @@
       .replace(/"/g, '&quot;');
   }
 
-  function clearAuthForm(form) {
+  function clearAuthForm(form, opts) {
     if (!form) return;
-    var fields = form.querySelectorAll('input[name="nit"], input[name="password"], input[name="nombre"]');
+    opts = opts || {};
+    var selector = opts.fields || 'input[name="nit"], input[name="password"], input[name="nombre"]';
+    var fields = form.querySelectorAll(selector);
     for (var i = 0; i < fields.length; i++) {
       fields[i].value = '';
     }
-    var msg = document.getElementById('authMessage');
-    setMessage(msg, '', '');
+    if (!opts.keepMessage) {
+      var msg = document.getElementById('authMessage');
+      setMessage(msg, '', '');
+    }
   }
 
   function bindAuthForms() {
@@ -619,10 +723,11 @@
     }
     var regForm = document.getElementById('registroForm');
     if (regForm) {
-      clearAuthForm(regForm);
-      setTimeout(function () { clearAuthForm(regForm); }, 50);
+      // No limpiar registro: el usuario está llenando el formulario
+      regForm.setAttribute('novalidate', 'novalidate');
       regForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        e.stopPropagation();
         submitAuthForm(regForm, 'register');
       });
     }
@@ -639,22 +744,48 @@
     var nombre = nombreInput ? nombreInput.value.trim() : '';
 
     setMessage(msg, '', '');
+
+    if (mode === 'register') {
+      if (!nombre || nombre.length < 2) {
+        setMessage(msg, 'Ingresa un nombre válido (mínimo 2 caracteres).', 'error');
+        if (nombreInput) nombreInput.focus();
+        return;
+      }
+      if (!nit) {
+        setMessage(msg, 'Ingresa el NIT.', 'error');
+        if (nitInput) nitInput.focus();
+        return;
+      }
+      if (!password || password.length < 4) {
+        setMessage(msg, 'La contraseña debe tener al menos 4 caracteres.', 'error');
+        if (passInput) passInput.focus();
+        return;
+      }
+    } else if (!nit || !password) {
+      setMessage(msg, 'Ingresa NIT y contraseña.', 'error');
+      return;
+    }
+
     if (btn) btn.disabled = true;
 
     var action = mode === 'register' ? register(nit, password, nombre) : login(nit, password);
     action.then(function (data) {
+      if (!data) {
+        setMessage(msg, 'No se pudo completar la operación.', 'error');
+        return;
+      }
       if (data.ok) {
         setMessage(msg, data.message || 'Listo.', 'ok');
-        setTimeout(function () {
-          window.location.href = mode === 'register' ? 'login.html' : 'index.html';
-        }, 700);
-      } else {
-        setMessage(msg, data.error || 'No se pudo completar la operación.', 'error');
+        var dest = mode === 'register' ? 'login.html' : 'index.html';
+        // Redirigir de inmediato
+        window.location.replace(dest);
+        return;
       }
+      setMessage(msg, data.error || 'No se pudo completar la operación.', 'error');
     }).catch(function (err) {
       setMessage(msg, 'Ocurrió un error inesperado.', 'error');
       console.error(err);
-    }).finally(function () {
+    }).then(function () {
       if (btn) btn.disabled = false;
     });
   }

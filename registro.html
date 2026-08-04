@@ -12,7 +12,7 @@
       location.replace('http://127.0.0.1:8080/registro.html');
     }
   </script>
-  <script src="assets/js/auth.js?v=19" defer></script>
+  <script src="assets/js/auth.js?v=26" defer></script>
   <script src="assets/js/index.js?v=3" defer></script>
 </head>
 <body>
@@ -35,22 +35,22 @@
   <main class="auth-page">
     <div class="auth-card">
       <h1>Registrarse</h1>
-      <p class="auth-lead">Crea tu cuenta con nombre, NIT y contraseña de cliente.</p>
-      <form id="registroForm" autocomplete="on">
+      <p class="auth-lead">Crea tu cuenta con nombre, NIT y contraseña. Se guarda en usuarios.json del servidor local.</p>
+      <form id="registroForm" autocomplete="on" novalidate>
         <div class="auth-field">
           <label for="regNombre">Nombre</label>
           <input id="regNombre" name="nombre" type="text" placeholder="Nombre o razón social" required minlength="2" autocomplete="name">
         </div>
         <div class="auth-field">
           <label for="regNit">NIT</label>
-          <input id="regNit" name="nit" type="text" inputmode="numeric" placeholder="Ej: 900123456-1" required>
+          <input id="regNit" name="nit" type="text" inputmode="numeric" placeholder="Ej: 900123456-1" required autocomplete="off">
         </div>
         <div class="auth-field">
           <label for="regPassword">Contraseña</label>
-          <input id="regPassword" name="password" type="password" placeholder="Mínimo 4 caracteres" required minlength="4">
+          <input id="regPassword" name="password" type="password" placeholder="Mínimo 4 caracteres" required minlength="4" autocomplete="new-password">
         </div>
-        <button class="auth-submit" type="submit">Crear cuenta</button>
         <p id="authMessage" class="auth-message" role="status"></p>
+        <button class="auth-submit" type="submit">Crear cuenta</button>
       </form>
       <p class="auth-switch">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
     </div>
