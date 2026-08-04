@@ -155,6 +155,56 @@ if ($action === 'login') {
     ]);
 }
 
+$adminNits = ['03166122778'];
+
+if ($action === 'list') {
+    $adminNit = normalize_nit($body['admin_nit'] ?? '');
+    if ($adminNit === '' || !in_array($adminNit, $adminNits, true)) {
+        json_out(['ok' => false, 'error' => 'No autorizado.'], 403);
+    }
+    $users = read_users($usersFile);
+    $safe = [];
+    foreach ($users as $u) {
+        $safe[] = [
+            'nit' => (string) ($u['nit'] ?? ''),
+            'nombre' => trim((string) ($u['nombre'] ?? '')),
+            'created_at' => (string) ($u['created_at'] ?? ''),
+        ];
+    }
+    json_out(['ok' => true, 'users' => $safe, 'count' => count($safe)]);
+}
+
+if ($action === 'delete') {
+    $adminNit = normalize_nit($body['admin_nit'] ?? '');
+    if ($adminNit === '' || !in_array($adminNit, $adminNits, true)) {
+        json_out(['ok' => false, 'error' => 'No autorizado.'], 403);
+    }
+    $nit = normalize_nit($body['nit'] ?? '');
+    if ($nit === '' || !preg_match('/^\d{6,15}(-\d)?$/', $nit)) {
+        json_out(['ok' => false, 'error' => 'NIT inválido.'], 400);
+    }
+    if ($nit === $adminNit) {
+        json_out(['ok' => false, 'error' => 'No puedes eliminar tu propia cuenta de administrador.'], 400);
+    }
+    $users = read_users($usersFile);
+    $next = [];
+    $removed = false;
+    foreach ($users as $u) {
+        if (normalize_nit($u['nit'] ?? '') === $nit) {
+            $removed = true;
+            continue;
+        }
+        $next[] = $u;
+    }
+    if (!$removed) {
+        json_out(['ok' => false, 'error' => 'Usuario no encontrado.'], 404);
+    }
+    if (!write_users($usersFile, $next)) {
+        json_out(['ok' => false, 'error' => 'No se pudo guardar el archivo.'], 500);
+    }
+    json_out(['ok' => true, 'nit' => $nit, 'message' => 'Usuario eliminado.']);
+}
+
 if ($action === 'sync') {
     $incoming = $body['users'] ?? [];
     if (!is_array($incoming)) {
@@ -187,4 +237,4 @@ if ($action === 'sync') {
     json_out(['ok' => true, 'count' => count($clean), 'message' => 'Usuarios guardados en data/usuarios.json']);
 }
 
-json_out(['ok' => false, 'error' => 'Acción no válida. Usa register, login o sync.'], 400);
+json_out(['ok' => false, 'error' => 'Acción no válida. Usa register, login, list, delete o sync.'], 400);

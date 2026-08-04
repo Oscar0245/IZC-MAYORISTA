@@ -285,6 +285,56 @@ function Handle-Auth($request, $response) {
     return
   }
 
+  if ($action -eq 'list') {
+    $adminNit = Normalize-Nit ([string]$body.admin_nit)
+    if ($adminNit -ne '03166122778') {
+      Send-Json $response @{ ok = $false; error = 'No autorizado.' } 403
+      return
+    }
+    $safe = @()
+    foreach ($u in (Read-Users)) {
+      $safe += [ordered]@{
+        nit = [string]$u.nit
+        nombre = ([string]$u.nombre).Trim()
+        created_at = [string]$u.created_at
+      }
+    }
+    Send-Json $response @{ ok = $true; users = $safe; count = $safe.Count }
+    return
+  }
+
+  if ($action -eq 'delete') {
+    $adminNit = Normalize-Nit ([string]$body.admin_nit)
+    if ($adminNit -ne '03166122778') {
+      Send-Json $response @{ ok = $false; error = 'No autorizado.' } 403
+      return
+    }
+    if (-not $nit -or $nit -notmatch '^\d{6,15}(-\d)?$') {
+      Send-Json $response @{ ok = $false; error = 'NIT invalido.' } 400
+      return
+    }
+    if ($nit -eq $adminNit) {
+      Send-Json $response @{ ok = $false; error = 'No puedes eliminar tu propia cuenta de administrador.' } 400
+      return
+    }
+    $users = New-Object System.Collections.Generic.List[object]
+    $removed = $false
+    foreach ($u in (Read-Users)) {
+      if ((Normalize-Nit ([string]$u.nit)) -eq $nit) {
+        $removed = $true
+        continue
+      }
+      $users.Add($u)
+    }
+    if (-not $removed) {
+      Send-Json $response @{ ok = $false; error = 'Usuario no encontrado.' } 404
+      return
+    }
+    Write-Users $users.ToArray()
+    Send-Json $response @{ ok = $true; message = 'Usuario eliminado.'; nit = $nit }
+    return
+  }
+
   if ($action -eq 'sync') {
     $incoming = @()
     if ($null -ne $body.users) {
@@ -316,7 +366,7 @@ function Handle-Auth($request, $response) {
     return
   }
 
-  Send-Json $response @{ ok = $false; error = 'Accion no valida. Usa register, login o sync.' } 400
+  Send-Json $response @{ ok = $false; error = 'Accion no valida. Usa register, login, list, delete o sync.' } 400
 }
 
 function Handle-Static($request, $response) {

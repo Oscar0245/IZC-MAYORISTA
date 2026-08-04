@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil administrador - IZC MAYORISTA</title>
+  <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/index.css?v=29">
+  <link rel="stylesheet" href="assets/css/auth.css?v=9">
+  <link rel="stylesheet" href="assets/css/perfil.css?v=3">
+  <link rel="stylesheet" href="assets/css/admin.css?v=3">
+  <script>
+    if (location.protocol === 'file:') {
+      location.replace('http://127.0.0.1:8080/admin.html');
+    }
+  </script>
+  <script src="assets/js/auth.js?v=20" defer></script>
+  <script src="assets/js/wishlist.js?v=4" defer></script>
+  <script src="assets/js/admin.js?v=3" defer></script>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+      <div class="profile-header-spacer"></div>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
+    </div>
+  </header>
+
+  <main class="admin-page profile-page">
+    <div class="auth-card">
+      <h1><p class="profile-greeting" id="profileGreeting">Hola</h1></p>
+      <p class="profile-lead">Aquí puedes gestionar el sistema</p>
+
+      <button class="auth-submit" type="button" id="profileLogout">Cerrar sesión</button>
+      <p class="auth-switch"><a href="index.html"> · Volver al inicio ·</a></p>
+    </div>
+
+    <div class="admin-card profile-admin-card" id="adminContent">
+      <div class="admin-card-head">
+        <div>
+          <h2>Panel de administración</h2>
+          <p class="admin-lead">Gestión de clientes registrados (solo administrador).</p>
+        </div>
+        <button type="button" class="admin-refresh" id="adminRefresh">Actualizar</button>
+      </div>
+
+      <div class="admin-stats">
+        <div class="admin-stat">
+          <span class="admin-stat-label">Clientes registrados</span>
+          <strong id="adminUserCount">0</strong>
+        </div>
+        <div class="admin-stat">
+          <span class="admin-stat-label">Historial de Cotizaciones</span>
+        </div>
+        <div class="admin-stat">
+          <span class="admin-stat-label">Historial de Cotizaciones</span>
+        </div>
+      </div>
+
+      <p id="adminMessage" class="auth-message" role="status"></p>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="adminUsersTable">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>NIT</th>
+              <th>Registro</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="adminUsersBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -10,6 +10,8 @@
   var USERS_KEY = 'izc_users';
   var NIT_RE = /^\d{6,15}(-\d)?$/;
   var LOCAL_ORIGIN = 'http://127.0.0.1:8080';
+  // NITs con acceso a la página de administrador
+  var ADMIN_NITS = ['03166122778'];
 
   function isDevHost() {
     var h = location.hostname;
@@ -63,6 +65,95 @@
     return !!getSessionNit();
   }
 
+  function isAdmin() {
+    var nit = normalizeNit(getSessionNit());
+    return !!nit && ADMIN_NITS.indexOf(nit) !== -1;
+  }
+
+  function isAdminNit(nit) {
+    return ADMIN_NITS.indexOf(normalizeNit(nit)) !== -1;
+  }
+
+  function publicUserView(user) {
+    return {
+      nit: user && user.nit ? String(user.nit) : '',
+      nombre: user && user.nombre ? String(user.nombre) : '',
+      created_at: user && user.created_at ? String(user.created_at) : ''
+    };
+  }
+
+  function listUsersForAdmin() {
+    if (!isAdmin()) {
+      return Promise.resolve({ ok: false, error: 'No autorizado.' });
+    }
+
+    function fromLocal() {
+      return {
+        ok: true,
+        users: readUsersLocal().map(publicUserView),
+        source: 'navegador'
+      };
+    }
+
+    if (!isDevHost()) {
+      return Promise.resolve(fromLocal());
+    }
+
+    return postAuth({ action: 'list', admin_nit: getSessionNit() })
+      .then(function (data) {
+        if (!data.ok) return fromLocal();
+        var users = Array.isArray(data.users) ? data.users.map(publicUserView) : [];
+        return { ok: true, users: users, source: 'servidor' };
+      })
+      .catch(function () {
+        return fromLocal();
+      });
+  }
+
+  function deleteUserForAdmin(nit) {
+    nit = normalizeNit(nit);
+    if (!isAdmin()) {
+      return Promise.resolve({ ok: false, error: 'No autorizado.' });
+    }
+    if (!nit) {
+      return Promise.resolve({ ok: false, error: 'NIT inválido.' });
+    }
+    if (nit === normalizeNit(getSessionNit())) {
+      return Promise.resolve({ ok: false, error: 'No puedes eliminar tu propia cuenta de administrador.' });
+    }
+
+    function deleteLocal() {
+      var before = readUsersLocal();
+      var after = before.filter(function (u) {
+        return normalizeNit(u.nit) !== nit;
+      });
+      if (after.length === before.length) {
+        return { ok: false, error: 'Usuario no encontrado.' };
+      }
+      writeUsersLocal(after);
+      return { ok: true, message: 'Usuario eliminado.', source: 'navegador' };
+    }
+
+    if (!isDevHost()) {
+      return Promise.resolve(deleteLocal());
+    }
+
+    return postAuth({ action: 'delete', nit: nit, admin_nit: getSessionNit() })
+      .then(function (data) {
+        if (data.ok) {
+          // Espejo local
+          writeUsersLocal(readUsersLocal().filter(function (u) {
+            return normalizeNit(u.nit) !== nit;
+          }));
+          return data;
+        }
+        return deleteLocal();
+      })
+      .catch(function () {
+        return deleteLocal();
+      });
+  }
+
   function requireLogin(message) {
     if (isLoggedIn()) return true;
     var text = message || 'Para continuar debes iniciar sesión con tu NIT.';
@@ -72,26 +163,30 @@
   }
 
   function ensureProfileButton() {
-    if (document.getElementById('headerProfile')) return;
     var heart = document.getElementById('headerWishlist');
     var host = heart && heart.parentNode
       ? heart.parentNode
       : document.querySelector('.main-header-inner');
     if (!host) return;
 
-    var link = document.createElement('a');
-    link.href = 'perfil.html';
-    link.id = 'headerProfile';
-    link.className = 'header-profile';
-    link.title = 'Mi perfil';
-    link.setAttribute('aria-label', 'Mi perfil');
-    link.innerHTML = '<img src="assets/logo/perfil.png" alt="" class="header-profile-img" width="28" height="28">';
+    var link = document.getElementById('headerProfile');
+    if (!link) {
+      link = document.createElement('a');
+      link.id = 'headerProfile';
+      link.className = 'header-profile';
+      link.title = 'Mi perfil';
+      link.setAttribute('aria-label', 'Mi perfil');
+      link.innerHTML = '<img src="assets/logo/perfil.png" alt="" class="header-profile-img" width="28" height="28">';
 
-    if (heart && heart.parentNode === host) {
-      heart.insertAdjacentElement('afterend', link);
-    } else {
-      host.appendChild(link);
+      if (heart && heart.parentNode === host) {
+        heart.insertAdjacentElement('afterend', link);
+      } else {
+        host.appendChild(link);
+      }
     }
+
+    // Admin -> admin.html (su perfil); cliente -> perfil.html
+    link.href = isAdmin() ? 'admin.html' : 'perfil.html';
   }
 
   function applyGuestMode() {
@@ -574,11 +669,15 @@
     getSessionNit: getSessionNit,
     getSessionNombre: getSessionNombre,
     isLoggedIn: isLoggedIn,
+    isAdmin: isAdmin,
+    isAdminNit: isAdminNit,
     requireLogin: requireLogin,
     login: login,
     register: register,
     logout: logout,
     getUsers: readUsersLocal,
+    listUsersForAdmin: listUsersForAdmin,
+    deleteUserForAdmin: deleteUserForAdmin,
     applyGuestMode: applyGuestMode
   };
 

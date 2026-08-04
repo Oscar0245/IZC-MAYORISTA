@@ -1,4 +1,4 @@
-/* Lógica de la página Mi perfil */
+/* Lógica de la página Mi perfil (clientes) */
 (function () {
   'use strict';
 
@@ -21,6 +21,12 @@
       setTimeout(function () {
         window.location.href = 'login.html';
       }, 800);
+      return;
+    }
+
+    // El administrador usa admin.html como su perfil
+    if (window.IZCAuth && IZCAuth.isAdmin && IZCAuth.isAdmin()) {
+      window.location.replace('admin.html');
       return;
     }
 
