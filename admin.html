@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/css/index.css?v=29">
   <link rel="stylesheet" href="assets/css/auth.css?v=9">
   <link rel="stylesheet" href="assets/css/perfil.css?v=3">
-  <link rel="stylesheet" href="assets/css/admin.css?v=3">
+  <link rel="stylesheet" href="assets/css/admin.css?v=4">
   <script>
     if (location.protocol === 'file:') {
       location.replace('http://127.0.0.1:8080/admin.html');
@@ -16,7 +16,7 @@
   </script>
   <script src="assets/js/auth.js?v=20" defer></script>
   <script src="assets/js/wishlist.js?v=4" defer></script>
-  <script src="assets/js/admin.js?v=3" defer></script>
+  <script src="assets/js/admin.js?v=4" defer></script>
 </head>
 <body>
   <div class="top-bar">
@@ -82,5 +82,17 @@
       </div>
     </div>
   </main>
+
+  <div class="admin-modal" id="deleteModal" hidden>
+    <div class="admin-modal-backdrop" data-modal-close></div>
+    <div class="admin-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+      <h3 id="deleteModalTitle">Eliminar cliente</h3>
+      <p id="deleteModalText">¿Seguro que quieres eliminar este cliente?</p>
+      <div class="admin-modal-actions">
+        <button type="button" class="admin-modal-cancel" id="deleteModalCancel" data-modal-close>No, cancelar</button>
+        <button type="button" class="admin-modal-confirm" id="deleteModalConfirm">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

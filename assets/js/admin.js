@@ -112,28 +112,68 @@
 
   function bindTable() {
     var body = document.getElementById('adminUsersBody');
+    var modal = document.getElementById('deleteModal');
+    var modalText = document.getElementById('deleteModalText');
+    var confirmBtn = document.getElementById('deleteModalConfirm');
+    var pendingNit = '';
+    var pendingBtn = null;
+
+    function closeModal() {
+      if (modal) modal.hidden = true;
+      pendingNit = '';
+      pendingBtn = null;
+    }
+
+    function openModal(nit, btn) {
+      pendingNit = nit;
+      pendingBtn = btn;
+      if (modalText) {
+        modalText.textContent = '¿Quieres eliminar el cliente con NIT ' + nit + '?';
+      }
+      if (modal) modal.hidden = false;
+      if (confirmBtn) confirmBtn.focus();
+    }
+
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target.closest('[data-modal-close]')) closeModal();
+      });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal && !modal.hidden) closeModal();
+    });
+
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', function () {
+        var nit = pendingNit;
+        var btn = pendingBtn;
+        closeModal();
+        if (!nit || !window.IZCAuth) return;
+        if (btn) btn.disabled = true;
+        IZCAuth.deleteUserForAdmin(nit).then(function (data) {
+          if (!data.ok) {
+            setMessage('adminMessage', data.error || 'No se pudo eliminar.', 'error');
+            if (btn) btn.disabled = false;
+            return;
+          }
+          setMessage('adminMessage', data.message || 'Usuario eliminado.', 'ok');
+          loadUsers();
+        }).catch(function (err) {
+          console.error(err);
+          setMessage('adminMessage', 'Error al eliminar.', 'error');
+          if (btn) btn.disabled = false;
+        });
+      });
+    }
+
     if (!body) return;
     body.addEventListener('click', function (e) {
       var btn = e.target.closest('.admin-delete');
       if (!btn || !window.IZCAuth) return;
       var nit = btn.getAttribute('data-nit') || '';
       if (!nit) return;
-      if (!window.confirm('¿Eliminar el cliente NIT ' + nit + '?')) return;
-
-      btn.disabled = true;
-      IZCAuth.deleteUserForAdmin(nit).then(function (data) {
-        if (!data.ok) {
-          setMessage('adminMessage', data.error || 'No se pudo eliminar.', 'error');
-          btn.disabled = false;
-          return;
-        }
-        setMessage('adminMessage', data.message || 'Usuario eliminado.', 'ok');
-        loadUsers();
-      }).catch(function (err) {
-        console.error(err);
-        setMessage('adminMessage', 'Error al eliminar.', 'error');
-        btn.disabled = false;
-      });
+      openModal(nit, btn);
     });
   }
 
