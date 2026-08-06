@@ -1,3 +1,4 @@
+/* Estilos de la página de búsqueda de productos. */
 .page-container--search {
   max-width: 1280px;
   margin: 20px auto;
@@ -27,6 +28,7 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 14px;
+  justify-content: center;
 }
 
 .search-type-tags a {

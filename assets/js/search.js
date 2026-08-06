@@ -1,3 +1,4 @@
+/* Buscador del header: sugiere y redirige resultados. */
 (function () {
   'use strict';
 
