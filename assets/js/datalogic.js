@@ -1,3 +1,4 @@
+/* Interacciones UI de la página Datalogic. */
 document.addEventListener('DOMContentLoaded', function () {
 
   // 1. Colapsables del Filtro Lateral
@@ -27,34 +28,130 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (track && prevBtn && nextBtn) {
     let currentSlide = 0;
-    const slides = document.querySelectorAll('.brand-slide');
-    const totalSlides = slides.length;
+    const columns = track.querySelectorAll('.brand-column');
+    const maxSlide = Math.max(0, columns.length - 2);
+    const wrapper = track.parentElement || track;
+    let isDragging = false;
+    let hasDragged = false;
+    let startX = 0;
+    let baseX = 0;
+    let currentX = 0;
+    let pointerId = null;
 
-    function updateCarousel() {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    function stepWidth() {
+      var col = columns[0];
+      return col ? col.getBoundingClientRect().width : 0;
     }
 
-    nextBtn.addEventListener('click', function () {
-      if (currentSlide < totalSlides - 1) {
-        currentSlide++;
-      } else {
-        currentSlide = 0; // Regresa al inicio
+    function syncWrapperHeight() {
+      var left = columns[currentSlide];
+      var right = columns[currentSlide + 1];
+      var maxH = 0;
+      [left, right].forEach(function (col) {
+        if (!col) return;
+        maxH = Math.max(maxH, col.offsetHeight || 0);
+      });
+      if (maxH > 0) {
+        wrapper.style.height = maxH + 'px';
       }
+    }
+
+    function updateCarousel() {
+      var step = stepWidth();
+      baseX = -(currentSlide * step);
+      currentX = baseX;
+      track.style.transition = 'transform 0.4s ease-in-out';
+      track.style.transform = 'translateX(' + baseX + 'px)';
+      syncWrapperHeight();
+    }
+
+    function goNext() {
+      currentSlide = currentSlide < maxSlide ? currentSlide + 1 : 0;
       updateCarousel();
+    }
+
+    function goPrev() {
+      currentSlide = currentSlide > 0 ? currentSlide - 1 : maxSlide;
+      updateCarousel();
+    }
+
+    nextBtn.addEventListener('click', goNext);
+    prevBtn.addEventListener('click', goPrev);
+    window.addEventListener('resize', updateCarousel);
+
+    var DRAG_THRESHOLD = 40;
+
+    track.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
     });
 
-    prevBtn.addEventListener('click', function () {
-      if (currentSlide > 0) {
-        currentSlide--;
-      } else {
-        currentSlide = totalSlides - 1; // Va al final
+    function onPointerDown(e) {
+      if (e.target.closest && e.target.closest('.arrow-btn')) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isDragging = true;
+      hasDragged = false;
+      startX = e.clientX;
+      baseX = -(currentSlide * stepWidth());
+      currentX = baseX;
+      pointerId = e.pointerId;
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
+      var diff = e.clientX - startX;
+
+      if (!hasDragged && Math.abs(diff) > DRAG_THRESHOLD) {
+        hasDragged = true;
+        track.style.transition = 'none';
+        try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
       }
+
+      if (!hasDragged) return;
+      currentX = baseX + diff;
+      track.style.transform = 'translateX(' + currentX + 'px)';
+    }
+
+    function onPointerUp(e) {
+      if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
+      isDragging = false;
+      pointerId = null;
+      var movedBy = currentX - baseX;
+
+      if (hasDragged) {
+        if (movedBy < -DRAG_THRESHOLD) {
+          goNext();
+        } else if (movedBy > DRAG_THRESHOLD) {
+          goPrev();
+        } else {
+          updateCarousel();
+        }
+        setTimeout(function () { hasDragged = false; }, 0);
+        return;
+      }
+
       updateCarousel();
-    });
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var link = el && el.closest ? el.closest('a') : null;
+      if (link && track.contains(link) && link.href) {
+        window.location.href = link.href;
+      }
+    }
+
+    wrapper.style.touchAction = 'pan-y';
+    wrapper.style.cursor = 'grab';
+    wrapper.addEventListener('pointerdown', onPointerDown);
+    wrapper.addEventListener('pointermove', onPointerMove);
+    wrapper.addEventListener('pointerup', onPointerUp);
+    wrapper.addEventListener('pointercancel', onPointerUp);
+    updateCarousel();
   }
 
   // Wishlist: manejado por wishlist.js
-});
 
   // 5. Menú Flyout (Categorías y Paneles)
   const flyouts = document.querySelectorAll('.flyout');
@@ -192,6 +289,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!mapaPrecios) return;
 
+      if (window.IZCPrices && typeof window.IZCPrices.apply === 'function') {
+        window.IZCPrices.apply();
+        return;
+      }
+
+      function formatEntry(entry) {
+        if (entry == null) return null;
+        if (typeof entry === 'object' && entry.currency === 'COP') {
+          return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+        }
+        var amount = typeof entry === 'object' ? entry.amount : entry;
+        if (amount == null) return null;
+        return '$ ' + Number(amount).toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+
       document.querySelectorAll('.product-card, .product-carddatalogic').forEach(tarjeta => {
         const skuElem = tarjeta.querySelector('.sku');
         const priceElem = tarjeta.querySelector('.price');
@@ -200,18 +315,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const skuTexto = skuElem.textContent.replace(/\D/g, '').trim();
         if (!skuTexto) return;
 
-        let precioUSD = mapaPrecios[skuTexto];
-        if (precioUSD == null) {
+        let entry = mapaPrecios[skuTexto];
+        if (entry == null) {
           const skuSinCeros = skuTexto.replace(/^0+/, '');
-          precioUSD = mapaPrecios[skuSinCeros];
+          entry = mapaPrecios[skuSinCeros];
         }
 
-        if (precioUSD != null) {
-          priceElem.textContent = `$ ${Number(precioUSD).toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })}`;
-        }
+        const text = formatEntry(entry);
+        if (text) priceElem.textContent = text;
       });
     } catch (error) {
       console.error('Error al actualizar precios:', error);

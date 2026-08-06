@@ -1,13 +1,48 @@
+/* Favoritos por usuario (NIT). Cada sesión tiene su propia lista. */
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'izc_wishlist_skus';
+  var LEGACY_KEY = 'izc_wishlist_skus';
   var EMPTY = '\u2661';
   var FULL = '\u2665';
 
-  function readSkus() {
+  function currentNit() {
+    if (window.IZCAuth && typeof window.IZCAuth.getSessionNit === 'function') {
+      return String(window.IZCAuth.getSessionNit() || '').trim();
+    }
     try {
-      var raw = localStorage.getItem(STORAGE_KEY);
+      return localStorage.getItem('izc_session_nit') || '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function isLoggedIn() {
+    return !!currentNit();
+  }
+
+  function storageKey() {
+    var nit = currentNit().replace(/[^\d-]/g, '');
+    if (!nit) return '';
+    return 'izc_wishlist_skus__' + nit;
+  }
+
+  function migrateLegacyIfNeeded(key) {
+    try {
+      if (!key || localStorage.getItem(key)) return;
+      var legacy = localStorage.getItem(LEGACY_KEY);
+      if (!legacy) return;
+      localStorage.setItem(key, legacy);
+      localStorage.removeItem(LEGACY_KEY);
+    } catch (e) { /* ignore */ }
+  }
+
+  function readSkus() {
+    var key = storageKey();
+    if (!key) return [];
+    migrateLegacyIfNeeded(key);
+    try {
+      var raw = localStorage.getItem(key);
       var list = raw ? JSON.parse(raw) : [];
       if (!Array.isArray(list)) return [];
       return list.map(String).filter(Boolean);
@@ -17,8 +52,19 @@
   }
 
   function writeSkus(skus) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(skus));
-    document.dispatchEvent(new CustomEvent('izc:wishlist-changed', { detail: { skus: skus } }));
+    var key = storageKey();
+    if (!key) return;
+    localStorage.setItem(key, JSON.stringify(skus));
+    document.dispatchEvent(new CustomEvent('izc:wishlist-changed', {
+      detail: { skus: skus, nit: currentNit() }
+    }));
+  }
+
+  function requireLogin() {
+    if (isLoggedIn()) return true;
+    var go = window.confirm('Para guardar favoritos debes iniciar sesión con tu NIT.\n\n¿Ir a iniciar sesión?');
+    if (go) window.location.href = 'login.html';
+    return false;
   }
 
   function getAll() {
@@ -34,6 +80,7 @@
   }
 
   function add(sku) {
+    if (!requireLogin()) return false;
     sku = String(sku || '');
     if (!sku) return false;
     var skus = readSkus();
@@ -44,6 +91,7 @@
   }
 
   function remove(sku) {
+    if (!isLoggedIn()) return false;
     sku = String(sku || '');
     var skus = readSkus().filter(function (item) {
       return item !== sku;
@@ -53,6 +101,7 @@
   }
 
   function toggle(sku) {
+    if (!requireLogin()) return false;
     if (has(sku)) {
       remove(sku);
       return false;
@@ -83,17 +132,28 @@
       var sku = skuFromCard(card);
       var btn = card.querySelector('.wishlist-btn');
       if (!sku || !btn) return;
-      paintButton(btn, has(sku));
+      paintButton(btn, isLoggedIn() && has(sku));
     });
   }
 
   function updateHeaderBadge() {
     var link = document.getElementById('headerWishlist');
-    var total = count();
+    var total = isLoggedIn() ? count() : 0;
     if (link) {
-      link.setAttribute('aria-label', total ? 'Mis favoritos (' + total + ')' : 'Mis favoritos');
+      link.setAttribute(
+        'aria-label',
+        total ? 'Mis favoritos (' + total + ')' : (isLoggedIn() ? 'Mis favoritos' : 'Favoritos (inicia sesión)')
+      );
       link.classList.toggle('has-items', total > 0);
     }
+  }
+
+  function refreshAll() {
+    updateHeaderBadge();
+    syncCardButtons(document);
+    document.dispatchEvent(new CustomEvent('izc:wishlist-changed', {
+      detail: { skus: readSkus(), nit: currentNit() }
+    }));
   }
 
   function ensureHeaderButton() {
@@ -123,6 +183,8 @@
     var sku = skuFromCard(card);
     if (!sku) return;
 
+    if (!requireLogin()) return;
+
     var liked = toggle(sku);
     paintButton(btn, liked);
     updateHeaderBadge();
@@ -138,8 +200,8 @@
       updateHeaderBadge();
       syncCardButtons(document);
     });
+    document.addEventListener('izc:auth-changed', refreshAll);
 
-    // Re-sync after dynamic grids render
     var observer = new MutationObserver(function (mutations) {
       var needsSync = mutations.some(function (m) {
         return Array.prototype.some.call(m.addedNodes, function (node) {
@@ -169,6 +231,9 @@
     toggle: toggle,
     syncCardButtons: syncCardButtons,
     updateHeaderBadge: updateHeaderBadge,
+    refreshAll: refreshAll,
+    isLoggedIn: isLoggedIn,
+    currentNit: currentNit,
     EMPTY: EMPTY,
     FULL: FULL
   };

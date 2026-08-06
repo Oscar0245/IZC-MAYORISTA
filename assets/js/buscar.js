@@ -1,15 +1,19 @@
 (function () {
   'use strict';
-
+  
   var catalog = null;
   var grid = null;
   var titleEl = null;
   var subtitleEl = null;
-
+  
   var PRODUCT_TYPES = {
     lectores: {
       label: 'Lectores',
       keywords: ['lectores de codigo de barras', 'lector de codigo de barras', 'codigo de barras', 'barcode', 'quickscan', 'magellan', 'voyager', 'xenon', 'escaner', 'scanner', 'scaner', 'lectores', 'lector']
+    },
+    balanzas: {
+      label: 'Balanzas',
+      keywords: ['balanza', 'balanzas', 'scanner balanza', 'escaner balanza']
     },
     impresoras: {
       label: 'Impresoras',
@@ -57,17 +61,28 @@
     },
     equipos: {
       label: 'Equipos POS',
-      keywords: ['equipo pos', 'todo en uno', 'punto de venta']
+      keywords: ['equipo pos', 'todo en uno', 'all in one', 'punto de venta', 'equipos pos']
+    },
+    minipc: {
+      label: 'Mini PC',
+      keywords: ['mini pc', 'minipc', 'mini-pc', 'mini ordenador', 'mini computador']
+    },
+    cajones: {
+      label: 'Cajones Monederos',
+      keywords: ['cajones monederos', 'cajon monedero', 'cajón monedero', 'cajones', 'cajon', 'cajón', 'cash drawer', 'monedero']
     }
   };
-
+  
   var PRODUCT_SUBTYPES = {
     'lectores-de-mano': { label: 'Lectores de Mano', parent: 'lectores' },
     'lectores-inalambricos': { label: 'Lectores Inalámbricos', parent: 'lectores' },
     'lectores-de-mesa': { label: 'Lectores de Mesa', parent: 'lectores' },
     'lectores-empotrables': { label: 'Lectores Empotrables', parent: 'lectores' },
     'equipos-pos': { label: 'Equipos para Punto de Venta', parent: 'equipos' },
-    'monitores-touch': { label: 'Monitores Touch', parent: 'monitores' },    'impresoras-escritorio': { label: 'Impresoras de Escritorio', parent: 'impresoras' },
+    'monitores-touch': { label: 'Monitores Touch', parent: 'monitores' },
+    'mini-pc': { label: 'Mini PC', parent: 'minipc' },
+    'cajones': { label: 'Cajones Monederos', parent: 'cajones' },
+    'impresoras-escritorio': { label: 'Impresoras de Escritorio', parent: 'impresoras' },
     'impresoras-semi-industriales': { label: 'Impresoras Semi Industriales', parent: 'impresoras' },
     'impresoras-industriales': { label: 'Impresoras Industriales', parent: 'impresoras' },
     'impresoras-carnet': { label: 'Impresoras de Carnet', parent: 'impresoras' },
@@ -91,7 +106,7 @@
     'impresoras-portatiles': { label: 'Impresoras Portátiles', parent: 'impresoras' },
     'terminales-moviles': { label: 'Terminales Móviles', parent: 'movilidad' }
   };
-
+  
   function normalize(text) {
     return String(text || '')
       .toLowerCase()
@@ -101,7 +116,7 @@
       .replace(/\s+/g, ' ')
       .trim();
   }
-
+  
   function resolveSubtype(query) {
     var norm = normalize(query).replace(/\s+/g, '-');
     if (!norm) return null;
@@ -109,7 +124,7 @@
     if (Object.prototype.hasOwnProperty.call(PRODUCT_SUBTYPES, query)) return query;
     return null;
   }
-
+  
   function productHasSubtype(product, subtypeId) {
     if (!product || !subtypeId) return false;
     if (product.subtype === subtypeId) return true;
@@ -118,22 +133,22 @@
     }
     return false;
   }
-
+  
   function resolveType(query) {
     var subtypeId = resolveSubtype(query);
     if (subtypeId) return PRODUCT_SUBTYPES[subtypeId].parent || null;
-
+    
     var norm = normalize(query);
     if (!norm) return null;
-
+    
     // Match exact type id first (botones: lectores, tarjetas, etc.)
     if (Object.prototype.hasOwnProperty.call(PRODUCT_TYPES, norm)) {
       return norm;
     }
-
+    
     var bestId = null;
     var bestScore = 0;
-
+    
     Object.keys(PRODUCT_TYPES).forEach(function (id) {
       var type = PRODUCT_TYPES[id];
       type.keywords.forEach(function (keyword) {
@@ -153,10 +168,10 @@
         }
       });
     });
-
+    
     return bestScore >= 70 ? bestId : null;
   }
-
+  
   function textScore(query, text) {
     if (window.IZCSearch && window.IZCSearch.scoreTextMatch) {
       return window.IZCSearch.scoreTextMatch(query, text);
@@ -169,14 +184,34 @@
       return norm.indexOf(word) !== -1;
     }) ? 30 : 0;
   }
-
+  
   function filterProducts(query) {
     if (!catalog) return [];
-
+    
     var subtypeId = resolveSubtype(query);
     if (subtypeId) {
       return catalog.products.filter(function (product) {
-        return productHasSubtype(product, subtypeId);
+        if (productHasSubtype(product, subtypeId)) return true;
+        if (subtypeId === 'mini-pc') {
+          return (
+            product.type === 'mini-pc' ||
+            product.category === 'mini-pc' ||
+            /\bmini\s*pc\b/i.test(product.name || '')
+          );
+        }
+        if (subtypeId === 'cajones') {
+          return (
+            product.type === 'cajones' ||
+            product.category === 'cajones' ||
+            /caj[oó]n\s*monedero/i.test(product.name || '')
+          );
+        }
+        if (subtypeId === 'accesorios-cctv') {
+          return (
+            product.type === 'camaras' && productHasSubtype(product, 'accesorios-cctv')
+          ) || product.subtype === 'accesorios-cctv';
+        }
+        return false;
       });
     }
 
@@ -189,6 +224,22 @@
         'lectores-empotrables'
       ];
       return catalog.products.filter(function (product) {
+        if (typeId === 'minipc') {
+          return (
+            product.type === 'mini-pc' ||
+            product.category === 'mini-pc' ||
+            productHasSubtype(product, 'mini-pc') ||
+            /\bmini\s*pc\b/i.test(product.name || '')
+          );
+        }
+        if (typeId === 'cajones') {
+          return (
+            product.type === 'cajones' ||
+            product.category === 'cajones' ||
+            productHasSubtype(product, 'cajones') ||
+            /caj[oó]n\s*monedero/i.test(product.name || '')
+          );
+        }
         if (product.type === typeId || product.category === typeId) return true;
         if (Array.isArray(product.types) && product.types.indexOf(typeId) !== -1) return true;
         if (typeId === 'tarjetas' && productHasSubtype(product, 'lectores-tarjetas')) return true;
@@ -197,10 +248,17 @@
             return productHasSubtype(product, sub);
           });
         }
+        if (typeId === 'equipos') {
+          return (
+            product.type === 'equipos-pos' ||
+            product.category === 'equipos-pos' ||
+            productHasSubtype(product, 'equipos-pos')
+          );
+        }
         return false;
       });
     }
-
+    
     return catalog.products.filter(function (product) {
       var combined = product.name + ' ' + product.brandName + ' ' + product.sku;
       return textScore(query, combined) >= 16;
@@ -208,7 +266,7 @@
       return textScore(query, b.name) - textScore(query, a.name);
     });
   }
-
+  
   function escapeHtml(text) {
     return String(text)
       .replace(/&/g, '&amp;')
@@ -216,7 +274,7 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
   }
-
+  
   function renderProductCard(product) {
     var brandPage = product.brandPage || (product.brand + '.html');
     var link = 'producto.html?sku=' + encodeURIComponent(product.sku);
@@ -236,7 +294,7 @@
       '</div>'
     );
   }
-
+  
   function updateCount(count) {
     var itemCountDisplay = document.getElementById('itemCountDisplay');
     if (itemCountDisplay) {
@@ -247,16 +305,21 @@
       noProductsMessage.style.display = count === 0 ? 'block' : 'none';
     }
   }
-
+  
   function renderTypeTags(activeQuery) {
     var container = document.getElementById('searchTypeTags');
     if (!container) return;
-
+    
     var activeType = resolveType(activeQuery);
+    var activeSubtype = resolveSubtype(activeQuery);
+    if (activeSubtype === 'mini-pc') activeType = 'minipc';
+    if (activeSubtype === 'cajones') activeType = 'cajones';
+
     container.innerHTML = Object.keys(PRODUCT_TYPES).map(function (id) {
       var type = PRODUCT_TYPES[id];
+      var hrefId = id === 'minipc' ? 'mini-pc' : id;
       var active = activeType === id ? ' active' : '';
-      return '<a href="buscar.html?q=' + encodeURIComponent(id) + '" class="' + active.trim() + '">' + type.label + '</a>';
+      return '<a href="buscar.html?q=' + encodeURIComponent(hrefId) + '" class="' + active.trim() + '">' + type.label + '</a>';
     }).join('');
   }
 

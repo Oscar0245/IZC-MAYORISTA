@@ -1,9 +1,11 @@
+/* Lista los productos favoritos del usuario con sesión activa (por NIT). */
 (function () {
   'use strict';
 
   var grid = null;
   var titleEl = null;
   var subtitleEl = null;
+  var catalogCache = null;
 
   function escapeHtml(text) {
     return String(text || '')
@@ -11,6 +13,22 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  function isLoggedIn() {
+    return !!(window.IZCWishlist && window.IZCWishlist.isLoggedIn
+      ? window.IZCWishlist.isLoggedIn()
+      : (window.IZCAuth && window.IZCAuth.isLoggedIn && window.IZCAuth.isLoggedIn()));
+  }
+
+  function currentNit() {
+    if (window.IZCWishlist && window.IZCWishlist.currentNit) {
+      return window.IZCWishlist.currentNit();
+    }
+    if (window.IZCAuth && window.IZCAuth.getSessionNit) {
+      return window.IZCAuth.getSessionNit();
+    }
+    return '';
   }
 
   function renderCard(product) {
@@ -57,8 +75,25 @@
     }
   }
 
+  function renderLoggedOut() {
+    if (!grid) return;
+    if (titleEl) titleEl.textContent = 'Mis favoritos';
+    if (subtitleEl) {
+      subtitleEl.innerHTML =
+        'Inicia sesión con tu NIT para ver tu panel de favoritos. ' +
+        '<a href="login.html">Iniciar sesión</a>';
+    }
+    grid.innerHTML = '';
+    updateCount(0);
+  }
+
   function renderFavorites(catalog) {
     if (!grid) return;
+
+    if (!isLoggedIn()) {
+      renderLoggedOut();
+      return;
+    }
 
     var liked = window.IZCWishlist ? window.IZCWishlist.getAll() : [];
     var bySku = {};
@@ -72,11 +107,12 @@
       })
       .filter(Boolean);
 
+    var nit = currentNit();
     if (titleEl) titleEl.textContent = 'Mis favoritos';
     if (subtitleEl) {
       subtitleEl.textContent = products.length
-        ? 'Tienes ' + products.length + ' producto(s) guardados.'
-        : 'Aún no has marcado productos con el corazón.';
+        ?  products.length + ' producto(s) guardados.'
+        : ' aún no has marcado productos con el corazón.';
     }
 
     grid.innerHTML = products.map(renderCard).join('');
@@ -103,9 +139,13 @@
 
     loadCatalog
       .then(function (catalog) {
+        catalogCache = catalog;
         renderFavorites(catalog);
         document.addEventListener('izc:wishlist-changed', function () {
-          renderFavorites(catalog);
+          renderFavorites(catalogCache);
+        });
+        document.addEventListener('izc:auth-changed', function () {
+          renderFavorites(catalogCache);
         });
       })
       .catch(function (error) {

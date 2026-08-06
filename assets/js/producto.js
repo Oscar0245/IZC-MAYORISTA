@@ -1,3 +1,4 @@
+/* Muestra la ficha detallada de un producto por SKU. */
 (function () {
   'use strict';
 
@@ -18,8 +19,17 @@
     return new URLSearchParams(window.location.search).get(name);
   }
 
-  function formatUsd(value) {
-    return '$ ' + Number(value).toLocaleString('en-US', {
+  function formatPriceEntry(entry) {
+    if (window.IZCPrices && typeof window.IZCPrices.format === 'function') {
+      return window.IZCPrices.format(entry);
+    }
+    if (entry == null) return null;
+    if (typeof entry === 'object' && entry.currency === 'COP') {
+      return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+    }
+    var amount = typeof entry === 'object' ? entry.amount : entry;
+    if (amount == null) return null;
+    return '$ ' + Number(amount).toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
@@ -146,11 +156,31 @@
   function applyPrice(sku) {
     var priceEl = document.getElementById('productPrice');
     if (!priceEl) return;
+    priceEl.setAttribute('data-sku', String(sku));
+
+    var loggedIn = window.IZCAuth && window.IZCAuth.isLoggedIn && window.IZCAuth.isLoggedIn();
+    if (!loggedIn) {
+      priceEl.textContent = 'Inicia sesión para ver el precio';
+      priceEl.classList.add('price-locked');
+      return;
+    }
+    priceEl.classList.remove('price-locked');
+
+    if (window.IZCPrices && typeof window.IZCPrices.get === 'function') {
+      var cached = window.IZCPrices.get(sku);
+      var cachedText = formatPriceEntry(cached);
+      if (cachedText) {
+        priceEl.textContent = cachedText;
+        return;
+      }
+    }
     loadJson('assets/files/precios.json')
       .then(function (map) {
         if (!map) return;
+        if (!(window.IZCAuth && window.IZCAuth.isLoggedIn && window.IZCAuth.isLoggedIn())) return;
         var value = map[sku] != null ? map[sku] : map[String(sku).replace(/^0+/, '')];
-        if (value != null) priceEl.textContent = formatUsd(value);
+        var text = formatPriceEntry(value);
+        if (text) priceEl.textContent = text;
       })
       .catch(function () {});
   }

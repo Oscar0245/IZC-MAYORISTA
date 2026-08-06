@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -6,11 +6,14 @@
   <title>IZC MAYORISTA - Marcas</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
 
-  <link rel="stylesheet" href="assets/css/marcas.css?v=12">
-  <script src="assets/js/data-loader.js?v=1" defer></script>
+  <link rel="stylesheet" href="assets/css/marcas.css?v=17">
+  <link rel="stylesheet" href="assets/css/auth.css?v=9">
+  <script src="assets/js/data-loader.js?v=2" defer></script>
+  <script src="assets/js/prices.js?v=5" defer></script>
   <script src="assets/js/search.js?v=3" defer></script>
-  <script src="assets/js/wishlist.js?v=2" defer></script>
-  <script src="assets/js/marcas.js?v=2" defer></script>
+  <script src="assets/js/wishlist.js?v=4" defer></script>
+  <script src="assets/js/auth.js?v=19" defer></script>
+  <script src="assets/js/marcas.js?v=7" defer></script>
 </head>
 <body>
 
@@ -83,8 +86,15 @@
                   <div class="flyout-group">
                     <a href="buscar.html?q=monitores-touch" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
                   </div>
-
-
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=mini-pc" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=balanzas" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=cajones" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                  </div>
                 </div>
               </div>
 
@@ -190,13 +200,12 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </li>
-
+        
         <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
+        <li class="nav-item"><a href="cotizador.html">Cotizador</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
@@ -237,10 +246,196 @@
             <li class="brand-card">
               <a href="zkteco.html"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco" class="brand-logo"></a>
             </li>
+            <li class="brand-card">
+              <a href="sat.html"><img src="assets/imgmarcas/SAT.png" alt="SAT" class="brand-logo"></a>
+            </li>
           </ul>
         </div>
 
         <button type="button" class="carousel-btn next-btn" id="nextBrandBtn">❯</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Franja de beneficios debajo del carrusel -->
+  <section class="highlights-bar" aria-label="Ventajas IZC">
+    <div class="highlights-inner">
+      <div class="highlight-item">
+        <span class="highlight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3 12V6.5A1.5 1.5 0 0 1 4.5 5H12l9 9-7.5 7.5L3 12Z"/>
+            <circle cx="8" cy="9" r="1.2" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span class="highlight-text">+2.000 productos</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="9" cy="8" r="3.2"/>
+            <path d="M3.5 19c.6-3.2 2.9-5 5.5-5s4.9 1.8 5.5 5"/>
+            <path d="M17 9v5M14.5 11.5H19.5"/>
+          </svg>
+        </span>
+        <span class="highlight-text">Más de 2000 clientes</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3 13h13l2.2-4.5A1.5 1.5 0 0 1 19.5 7H14"/>
+            <path d="M3 13v4h2.2"/>
+            <path d="M16 17h2.5A1.5 1.5 0 0 0 20 15.5V13"/>
+            <circle cx="7" cy="17" r="2"/>
+            <circle cx="15" cy="17" r="2"/>
+          </svg>
+        </span>
+        <span class="highlight-text">Cobertura nacional</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="m12 3 2.4 5.7 6.1.5-4.7 4 1.4 6L12 16.4 6.8 19.2l1.4-6-4.7-4 6.1-.5L12 3Z"/>
+          </svg>
+        </span>
+        <span class="highlight-text">Registro de oportunidades</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soluciones destacadas por marca -->
+  <section class="solutions-showcase" aria-label="Conoce Nuestras Soluciones">
+    <h2 class="solutions-title">Conoce Nuestras Soluciones</h2>
+    <div class="solutions-grid">
+      <div class="solutions-col">
+        <h3 class="solutions-brand"><a href="zebra.html">ZEBRA</a></h3>
+        <ul class="solutions-list">
+          <li>
+            <a class="solutions-item" href="producto.html?sku=10314">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_ds_2208_1.jpg" alt="Zebra DS2208" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 10314</span>
+                <span class="solutions-name">Lector de Codigo de Barras ZEBRA DS2208...</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=10146">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_tc15_1.jpg" alt="Zebra TC15" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 10146</span>
+                <span class="solutions-name">Terminal Movil ZEBRA TC15 KT-TC15-ROLATAM</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=10306">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_zd230_1.jpg" alt="Zebra ZD230" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 10306</span>
+                <span class="solutions-name">Impresora de Etiquetas Zebra ZD230 ZD23042-...</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="solutions-col">
+        <h3 class="solutions-brand"><a href="honeywell.html">HONEYWELL</a></h3>
+        <ul class="solutions-list">
+          <li>
+            <a class="solutions-item" href="producto.html?sku=10275">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_pd45s.jpg" alt="Honeywell PD45S" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 10275</span>
+                <span class="solutions-name">Impresora de Etiquetas Honeywell PD45S...</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=3381">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_voyager_1200g.jpg" alt="Honeywell Voyager 1200G" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 3381</span>
+                <span class="solutions-name">Lector de Codigo de Barras Honeywell Voyager...</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=10656">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/h/o/honeywell_eda52.jpg" alt="Honeywell EDA52" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 10656</span>
+                <span class="solutions-name">Terminal Movil Honeywell EDA52 EDA52-...</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="solutions-col">
+        <h3 class="solutions-brand"><a href="elo.html">ELO TOUCH</a></h3>
+        <ul class="solutions-list">
+          <li>
+            <a class="solutions-item" href="producto.html?sku=14154">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_15.6__1509l.jpg" alt="Elo 1509L" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 14154</span>
+                <span class="solutions-name">Monitor Touch Elo 15.6" 1509L Tft LCD (Led) Wide...</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=3149">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_15__1515l_lcd.jpg" alt="Elo 1515L" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 3149</span>
+                <span class="solutions-name">Monitor Touch Elo 15" 1515L LCD E700813</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=3151">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/e/l/elo_17__1715l_lcd.jpg" alt="Elo 1715L" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 3151</span>
+                <span class="solutions-name">Monitor Touch Elo 17" 1715L LCD E719160</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="solutions-col">
+        <h3 class="solutions-brand"><a href="topaz.html">TOPAZ</a></h3>
+        <ul class="solutions-list">
+          <li>
+            <a class="solutions-item" href="producto.html?sku=1913">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_lbk460_hsb_r_siglite.jpg" alt="Topaz LBK460" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 1913</span>
+                <span class="solutions-name">Digitalizador de Firmas Topaz T LBK460 HSB R...</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=4748">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_td-lbk070va_gemview.jpg" alt="Topaz Gemview" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 4748</span>
+                <span class="solutions-name">Digitalizador de Firmas Topaz T TD-LBK070VA...</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="solutions-item" href="producto.html?sku=4017">
+              <img src="https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/t/o/topaz_t_s460_hsb_r_siglite.jpg" alt="Topaz S460" loading="lazy">
+              <span class="solutions-meta">
+                <span class="solutions-sku">Sku: 4017</span>
+                <span class="solutions-name">Digitalizador de Firmas Topaz T S460 HSB R...</span>
+              </span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </section>

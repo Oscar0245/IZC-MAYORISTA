@@ -5,44 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IZC MAYORISTA - Marcas</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
-
-  <link rel="stylesheet" href="assets/css/index.css?v=17">
-  <script src="assets/js/data-loader.js?v=1" defer></script>
-  <script src="assets/js/prices.js?v=1" defer></script>
+  
+  <link rel="stylesheet" href="assets/css/index.css?v=29">
+  <link rel="stylesheet" href="assets/css/auth.css?v=9">
+  <script>
+    if (location.protocol === 'file:') {
+      location.replace('http://127.0.0.1:8080/index.html');
+    }
+  </script>
+  <script src="assets/js/data-loader.js?v=2" defer></script>
+  <script src="assets/js/prices.js?v=5" defer></script>
   <script src="assets/js/search.js?v=3" defer></script>
-  <script src="assets/js/wishlist.js?v=2" defer></script>
-  <script src="assets/js/index.js?v=2" defer></script>
+  <script src="assets/js/wishlist.js?v=4" defer></script>
+  <script src="assets/js/auth.js?v=19" defer></script>
+  <script src="assets/js/index.js?v=3" defer></script>
 </head>
-<body>
 
+<body>
   <!-- Top utility bar -->
   <div class="top-bar">
     <div class="top-bar-inner">
       <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
     </div>
   </div>
-
+  
   <!-- Main header -->
   <header class="main-header">
     <div class="main-header-inner">
       <a class="logo" href="index.html">
         <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
       </a>
-
+      
       <!-- Buscador principal redireccionado a IZC -->
       <form class="search-bar" id="searchForm" action="#" method="GET">
         <div class="cat-select"></div>
         <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
         <button type="submit">🔍︎</button>
       </form>
-
+      
       <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
     </div>
   </header>
-
+  
   <!-- Navigation -->
-  <nav class="main-nav">
-    <div class="nav-inner">
+  <nav class="main-nav"> <div class="nav-inner">
       <ul>
         <li class="nav-item has-flyout">
           <a href="#">☰ Nuestros Productos</a>
@@ -56,7 +62,7 @@
                 <li class="flyout-cat" data-panel="movilidad">Movilidad</li>
               </ul>
             </div>
-
+            
             <div class="flyout-panel">
               <!-- Punto de Venta -->
               <div class="flyout-panel-content active" data-panel="pos">
@@ -84,11 +90,18 @@
                   <div class="flyout-group">
                     <a href="buscar.html?q=monitores-touch" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
                   </div>
-
-
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=mini-pc" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=balanzas" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=cajones" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                  </div>
                 </div>
               </div>
-
+              
               <!-- Marcación y Etiquetado -->
               <div class="flyout-panel-content" data-panel="marcacion">
                 <div class="flyout-col">
@@ -122,7 +135,7 @@
                   </div>
                 </div>
               </div>
-
+              
               <!-- Seguridad Electrónica -->
               <div class="flyout-panel-content" data-panel="seguridad">
                 <div class="flyout-col">
@@ -159,7 +172,7 @@
                   </div>
                 </div>
               </div>
-
+              
               <!-- Cables y conectividad -->
               <div class="flyout-panel-content" data-panel="conectividad">
                 <div class="flyout-col">
@@ -178,7 +191,7 @@
                   </div>
                 </div>
               </div>
-
+              
               <!-- Movilidad -->
               <div class="flyout-panel-content" data-panel="movilidad">
                 <div class="flyout-col">
@@ -191,18 +204,17 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </li>
-
+        
         <li class="nav-item"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
+        <li class="nav-item"><a href="cotizador.html">Cotizador</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
   </nav>
-
+  
   <!-- Hero banner -->
   <section class="hero">
     <div class="hero-banner">
@@ -212,6 +224,6 @@
       </div>
     </div>
   </section>
-
+  
 </body>
 </html>

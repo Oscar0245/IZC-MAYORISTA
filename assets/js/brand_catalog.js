@@ -1,3 +1,4 @@
+/* Carga el catálogo de cada marca y aplica filtros/categorías. */
 (function () {
   'use strict';
 
@@ -11,11 +12,15 @@
 
   var CATEGORY_LABELS = {
     lectores: 'Lectores de Códigos de Barras',
-    impresoras: 'Impresoras de Etiquetas',
+    balanzas: 'Balanzas',
+    impresoras: 'Impresoras',
     'impresoras-carnet': 'Impresoras de Carnet',
     'impresoras-manillas': 'Impresoras de Manillas',
     'monitores-touch': 'Monitores Touch',
-    'equipos-pos': 'Equipos POS',    digitalizadores: 'Digitalizadores de Firmas',
+    'equipos-pos': 'Equipos POS',
+    'mini-pc': 'Mini PC',
+    cajones: 'Cajones monederos',
+    digitalizadores: 'Digitalizadores de Firmas',
     movilidad: 'Terminales Móviles',
     consumibles: 'Consumibles',
     cables: 'Cables y conectividad',
@@ -49,14 +54,26 @@
     return /\bsat\b/.test(blob) || product.brand === 'sat';
   }
 
+  function isImouMemoria(product) {
+    var sku = String(product.sku || '');
+    if (sku === '16621' || sku === '16622') return true;
+    var cat = product.category || product.type || '';
+    if (cat === 'memorias') return true;
+    return /memoria|micro\s*sd/i.test(product.name || '');
+  }
+
   function renderCard(product) {
     var brandPage = product.brandPage || ((product.brand || '') + '.html');
     var logo = product.brandLogo || ((product.brandName || product.brand || 'brand') + '.png');
     var category = product.category || product.type || '';
+    if (state.brand === 'imou' && isImouMemoria(product)) {
+      category = 'memorias';
+    }
+    var page = (state.brand === 'imou' && isImouMemoria(product)) ? '2' : '1';
     var link = 'producto.html?sku=' + encodeURIComponent(product.sku);
     var img = product.img || ('assets/imgmarcas/' + logo);
     return (
-      '<div class="product-card" data-category="' + escapeHtml(category) + '" data-sku="' + escapeHtml(product.sku) + '">' +
+      '<div class="product-card" data-category="' + escapeHtml(category) + '" data-sku="' + escapeHtml(product.sku) + '" data-page="' + page + '">' +
         '<button class="wishlist-btn" type="button">♡</button>' +
         '<div class="product-img">' +
           '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(product.name) + '" onerror="this.src=\'assets/imgmarcas/' + escapeHtml(logo) + '\'">' +
@@ -86,8 +103,17 @@
     }
   }
 
-  function formatUsd(value) {
-    return '$ ' + Number(value).toLocaleString('en-US', {
+  function formatPriceEntry(entry) {
+    if (window.IZCPrices && typeof window.IZCPrices.format === 'function') {
+      return window.IZCPrices.format(entry);
+    }
+    if (entry == null) return null;
+    if (typeof entry === 'object' && entry.currency === 'COP') {
+      return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+    }
+    var amount = typeof entry === 'object' ? entry.amount : entry;
+    if (amount == null) return null;
+    return '$ ' + Number(amount).toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
@@ -101,13 +127,12 @@
       if (!skuElem || !priceElem) return;
       var skuTexto = skuElem.textContent.replace(/\D/g, '').trim();
       if (!skuTexto) return;
-      var precioUSD = mapaPrecios[skuTexto];
-      if (precioUSD == null) {
-        precioUSD = mapaPrecios[skuTexto.replace(/^0+/, '')];
+      var entry = mapaPrecios[skuTexto];
+      if (entry == null) {
+        entry = mapaPrecios[skuTexto.replace(/^0+/, '')];
       }
-      if (precioUSD != null) {
-        priceElem.textContent = formatUsd(precioUSD);
-      }
+      var text = formatPriceEntry(entry);
+      if (text) priceElem.textContent = text;
     });
   }
 
@@ -310,6 +335,12 @@
     if (empty) {
       empty.style.display = products.length ? 'none' : 'block';
     }
+
+    try {
+      document.dispatchEvent(new CustomEvent('izc:brand-products-rendered', {
+        detail: { brand: state.brand, count: products.length }
+      }));
+    } catch (e) { /* ignore */ }
   }
 
   function applyActiveFilter() {

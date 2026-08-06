@@ -1,3 +1,4 @@
+/* Interacciones UI de la página IMOU. */
 document.addEventListener('DOMContentLoaded', function () {
 
   const filterHeaders = document.querySelectorAll('.filter-header');
@@ -25,26 +26,130 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (track && prevBtn && nextBtn) {
     let currentSlide = 0;
-    const slides = document.querySelectorAll('.brand-slide');
-    const totalSlides = slides.length;
+    const columns = track.querySelectorAll('.brand-column');
+    const maxSlide = Math.max(0, columns.length - 2);
+    const wrapper = track.parentElement || track;
+    let isDragging = false;
+    let hasDragged = false;
+    let startX = 0;
+    let baseX = 0;
+    let currentX = 0;
+    let pointerId = null;
 
-    function updateCarousel() {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    function stepWidth() {
+      var col = columns[0];
+      return col ? col.getBoundingClientRect().width : 0;
     }
 
-    nextBtn.addEventListener('click', function () {
-      currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+    function syncWrapperHeight() {
+      var left = columns[currentSlide];
+      var right = columns[currentSlide + 1];
+      var maxH = 0;
+      [left, right].forEach(function (col) {
+        if (!col) return;
+        maxH = Math.max(maxH, col.offsetHeight || 0);
+      });
+      if (maxH > 0) {
+        wrapper.style.height = maxH + 'px';
+      }
+    }
+
+    function updateCarousel() {
+      var step = stepWidth();
+      baseX = -(currentSlide * step);
+      currentX = baseX;
+      track.style.transition = 'transform 0.4s ease-in-out';
+      track.style.transform = 'translateX(' + baseX + 'px)';
+      syncWrapperHeight();
+    }
+
+    function goNext() {
+      currentSlide = currentSlide < maxSlide ? currentSlide + 1 : 0;
       updateCarousel();
+    }
+
+    function goPrev() {
+      currentSlide = currentSlide > 0 ? currentSlide - 1 : maxSlide;
+      updateCarousel();
+    }
+
+    nextBtn.addEventListener('click', goNext);
+    prevBtn.addEventListener('click', goPrev);
+    window.addEventListener('resize', updateCarousel);
+
+    var DRAG_THRESHOLD = 40;
+
+    track.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
     });
 
-    prevBtn.addEventListener('click', function () {
-      currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+    function onPointerDown(e) {
+      if (e.target.closest && e.target.closest('.arrow-btn')) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isDragging = true;
+      hasDragged = false;
+      startX = e.clientX;
+      baseX = -(currentSlide * stepWidth());
+      currentX = baseX;
+      pointerId = e.pointerId;
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
+      var diff = e.clientX - startX;
+
+      if (!hasDragged && Math.abs(diff) > DRAG_THRESHOLD) {
+        hasDragged = true;
+        track.style.transition = 'none';
+        try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+
+      if (!hasDragged) return;
+      currentX = baseX + diff;
+      track.style.transform = 'translateX(' + currentX + 'px)';
+    }
+
+    function onPointerUp(e) {
+      if (!isDragging || (pointerId != null && e.pointerId !== pointerId)) return;
+      isDragging = false;
+      pointerId = null;
+      var movedBy = currentX - baseX;
+
+      if (hasDragged) {
+        if (movedBy < -DRAG_THRESHOLD) {
+          goNext();
+        } else if (movedBy > DRAG_THRESHOLD) {
+          goPrev();
+        } else {
+          updateCarousel();
+        }
+        setTimeout(function () { hasDragged = false; }, 0);
+        return;
+      }
+
       updateCarousel();
-    });
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var link = el && el.closest ? el.closest('a') : null;
+      if (link && track.contains(link) && link.href) {
+        window.location.href = link.href;
+      }
+    }
+
+    wrapper.style.touchAction = 'pan-y';
+    wrapper.style.cursor = 'grab';
+    wrapper.addEventListener('pointerdown', onPointerDown);
+    wrapper.addEventListener('pointermove', onPointerMove);
+    wrapper.addEventListener('pointerup', onPointerUp);
+    wrapper.addEventListener('pointercancel', onPointerUp);
+    updateCarousel();
   }
 
   // Wishlist: manejado por wishlist.js
-});
 
   document.querySelectorAll('.flyout').forEach(function (flyout) {
     const cats = flyout.querySelectorAll('.flyout-cat');
@@ -76,20 +181,42 @@ document.addEventListener('DOMContentLoaded', function () {
   const prevPageBtn = document.querySelector('.prev-page');
   const nextPageBtn = document.querySelector('.next-page');
   const perPageSelect = document.getElementById('perPageSelect');
-  const productCards = document.querySelectorAll('#productGrid .product-card');
   const itemCountDisplay = document.getElementById('itemCountDisplay');
   const catFilterBtns = document.querySelectorAll('.cat-filter-btn');
   const sortSelect = document.getElementById('sortSelect');
   const noProductsMsg = document.getElementById('noProductsMessage');
 
   const TOTAL_PAGES = 2;
+  const PAGE2_SKUS = { '16621': true, '16622': true };
 
   let currentActivePage = 1;
   let currentCategory = 'all';
   let itemsPerPage = 32;
 
+  function getProductCards() {
+    return document.querySelectorAll('#productGrid .product-card');
+  }
+
+  function ensureCardPages() {
+    getProductCards().forEach(function (card) {
+      var sku = card.getAttribute('data-sku') || '';
+      var cat = card.getAttribute('data-category') || '';
+      var title = '';
+      var titleEl = card.querySelector('.product-title');
+      if (titleEl) title = titleEl.textContent || '';
+
+      var isMemoria = PAGE2_SKUS[sku] || cat === 'memorias' || /memoria|micro\s*sd/i.test(title);
+      if (isMemoria) {
+        card.setAttribute('data-category', 'memorias');
+        card.setAttribute('data-page', '2');
+      } else if (!card.getAttribute('data-page')) {
+        card.setAttribute('data-page', '1');
+      }
+    });
+  }
+
   function getCardsForCategory(categoria) {
-    return Array.from(productCards).filter(card => {
+    return Array.from(getProductCards()).filter(card => {
       const cardCat = card.getAttribute('data-category');
       return categoria === 'all' || cardCat === categoria;
     });
@@ -111,7 +238,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function cambiarPagina(pagina) {
+    ensureCardPages();
     currentActivePage = pagina;
+    const productCards = getProductCards();
     const cards = getCardsForCategory(currentCategory);
     let visibles = 0;
 
@@ -267,6 +396,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  document.addEventListener('izc:brand-products-rendered', function () {
+    ensureCardPages();
+    cambiarPagina(currentActivePage || 1);
+  });
+
   cambiarPagina(1);
 
   // Precios USD: intenta precios.php (XAMPP); si no es JSON valido usa precios.json (GitHub Pages)
@@ -304,6 +438,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!mapaPrecios) return;
 
+      if (window.IZCPrices && typeof window.IZCPrices.apply === 'function') {
+        window.IZCPrices.apply();
+        return;
+      }
+
+      function formatEntry(entry) {
+        if (entry == null) return null;
+        if (typeof entry === 'object' && entry.currency === 'COP') {
+          return '$ ' + Math.round(Number(entry.amount)).toLocaleString('es-CO') + ' COP';
+        }
+        var amount = typeof entry === 'object' ? entry.amount : entry;
+        if (amount == null) return null;
+        return '$ ' + Number(amount).toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+
       document.querySelectorAll('.product-card, .product-carddatalogic').forEach(tarjeta => {
         const skuElem = tarjeta.querySelector('.sku');
         const priceElem = tarjeta.querySelector('.price');
@@ -312,18 +464,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const skuTexto = skuElem.textContent.replace(/\D/g, '').trim();
         if (!skuTexto) return;
 
-        let precioUSD = mapaPrecios[skuTexto];
-        if (precioUSD == null) {
+        let entry = mapaPrecios[skuTexto];
+        if (entry == null) {
           const skuSinCeros = skuTexto.replace(/^0+/, '');
-          precioUSD = mapaPrecios[skuSinCeros];
+          entry = mapaPrecios[skuSinCeros];
         }
 
-        if (precioUSD != null) {
-          priceElem.textContent = `$ ${Number(precioUSD).toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })}`;
-        }
+        const text = formatEntry(entry);
+        if (text) priceElem.textContent = text;
       });
     } catch (error) {
       console.error('Error al actualizar precios:', error);

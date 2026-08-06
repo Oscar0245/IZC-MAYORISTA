@@ -6,15 +6,16 @@
   <title>IZC MAYORISTA - Datalogic</title>
   <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
 
-  <link rel="stylesheet" href="assets/css/datalogic.css?v=11">
-  <link rel="stylesheet" href="assets/css/index.css?v=16">
+  <link rel="stylesheet" href="assets/css/datalogic.css?v=15">
+  <link rel="stylesheet" href="assets/css/index.css?v=29">
   <!-- Script principal de tu lógica -->
-  <script src="assets/js/data-loader.js?v=1" defer></script>
+  <script src="assets/js/data-loader.js?v=2" defer></script>
+  <script src="assets/js/prices.js?v=4" defer></script>
   <script src="assets/js/search.js?v=3" defer></script>
   <script src="assets/js/wishlist.js?v=2" defer></script>
-  <script src="assets/js/brand_catalog.js?v=5" defer></script>
-  <script src="assets/js/datalogic.js?v=2" defer></script>
-  <script src="assets/js/index.js?v=2" defer></script>
+  <script src="assets/js/brand_catalog.js?v=8" defer></script>
+  <script src="assets/js/datalogic.js?v=9" defer></script>
+  <script src="assets/js/index.js?v=3" defer></script>
 </head>
 <body data-brand="datalogic">
 
@@ -86,8 +87,15 @@
                   <div class="flyout-group">
                     <a href="buscar.html?q=monitores-touch" class="flyout-group-title"><span class="icon">🖥</span>Monitores Touch</a>
                   </div>
-
-
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=mini-pc" class="flyout-group-title"><span class="icon">🖨</span>Mini PC</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=balanzas" class="flyout-group-title"><span class="icon">⚖</span>Balanzas</a>
+                  </div>
+                  <div class="flyout-group">
+                    <a href="buscar.html?q=cajones" class="flyout-group-title"><span class="icon">🏷</span>Cajones monederos</a>
+                  </div>
                 </div>
               </div>
 
@@ -199,7 +207,7 @@
         </li>
 
         <li class="nav-item active"><a href="marcas.html">Marcas</a></li>
-        <li class="nav-item"><a href="marcas.html">Promociones</a></li>
+        <li class="nav-item"><a href="cotizador.html">Cotizador</a></li>
         <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
       </ul>
     </div>
@@ -271,32 +279,28 @@
         <div class="featured-header">
           <span>MARCAS DESTACADAS</span>
           <div class="nav-arrows">
-            <button class="arrow-btn" id="prevBrand">❮</button>
-            <button class="arrow-btn" id="nextBrand">❯</button>
+            <button type="button" class="arrow-btn" id="prevBrand">❮</button>
+            <button type="button" class="arrow-btn" id="nextBrand">❯</button>
           </div>
         </div>
 
         <div class="brands-carousel-wrapper">
           <div class="brands-carousel-track" id="brandsTrack">
-            <div class="brand-slide active">
-              <div class="featured-grid">
-                <a href="datalogic.html" class="brand-item"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic"></a>
-                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
-                <a href="elo.html" class="brand-item"><img src="assets/imgmarcas/Elo.png" alt="Elo"></a>
-                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
-                <a href="hid.html" class="brand-item"><img src="assets/imgmarcas/HID.png" alt="HID"></a>
-                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
-              </div>
+            <div class="brand-column">
+              <a href="datalogic.html" class="brand-item"><img src="assets/imgmarcas/Datalogic.png" alt="Datalogic"></a>
+              <a href="elo.html" class="brand-item"><img src="assets/imgmarcas/Elo.png" alt="Elo"></a>
+              <a href="hid.html" class="brand-item"><img src="assets/imgmarcas/HID.png" alt="HID"></a>
             </div>
-            <div class="brand-slide">
-              <div class="featured-grid">
-                <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
-                <a href="topaz.html" class="brand-item"><img src="assets/imgmarcas/Topaz.png" alt="Topaz Systems"></a>
-                <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
-                <a href="zkteco.html" class="brand-item"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco"></a>
-                <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
-                <a href="zebra.html" class="brand-item"><img src="assets/imgmarcas/Zebra.png" alt="Zebra"></a>
-              </div>
+            <div class="brand-column">
+              <a href="honeywell.html" class="brand-item"><img src="assets/imgmarcas/Honeywell.png" alt="Honeywell"></a>
+              <a href="imou.html" class="brand-item"><img src="assets/imgmarcas/IMOU.png" alt="IMOU"></a>
+              <a href="ruijie.html" class="brand-item"><img src="assets/imgmarcas/Ruijie.png" alt="Ruijie"></a>
+            </div>
+            <div class="brand-column">
+              <a href="topaz.html" class="brand-item"><img src="assets/imgmarcas/Topaz.png" alt="Topaz Systems"></a>
+              <a href="zebra.html" class="brand-item"><img src="assets/imgmarcas/Zebra.png" alt="Zebra"></a>
+              <a href="zkteco.html" class="brand-item"><img src="assets/imgmarcas/ZKTeco.png" alt="ZKTeco"></a>
+              <a href="sat.html" class="brand-item"><img src="assets/imgmarcas/SAT.png" alt="SAT"></a>
             </div>
           </div>
         </div>
@@ -326,7 +330,7 @@
         <p><strong>Datalogic</strong> es un líder tecnológico global en los mercados de captura automática de datos, especializado en el diseño y fabricación de lectores de códigos de barras.</p>
         <p>La cercanía y la rápida respuesta a las necesidades de cada cliente, junto con la continua innovación y la oferta de alta calidad, son los elementos distintivos en la base del éxito de <strong>Datalogic</strong> en más de 40 años. Sus soluciones de vanguardia ayudan a aumentar la eficiencia y la calidad de los procesos en las industrias Retail, Empresas Fabricacantes, Transporte &amp; Logística y Sanidad, a lo largo de toda la cadena de valor.</p>
         <p>Datalogic hizo historia ese día al fabricar el primer escáner de código de barras comercial y el ahora famoso "pitido" de lectura correcta. Este primer "pitido" marcó el inicio de la industria de captura automática de datos. Desde su primera lectura, el código de barras revolucionó la industria retail y provocó una rápida adopción de la tecnología de códigos de barras para mejorar la productividad y avanzar en la gestión de inventario, al tiempo que permitió reducir los errores de gestión de precios y la tensión física en los cajeros.</p>
-        <h3 class="slogan">¡POTENCIA TU VISIÓN!</h3>
+        <h2 class="slogan">¡POTENCIA TU VISIÓN!</h2>
       </section>
 
       <!-- Barra de Herramientas del Catálogo -->
@@ -338,7 +342,8 @@
           <select id="sortSelect">
             <option value="all">Todas las Categorías</option>
             <option value="lectores">Lectores de Código de Barras</option>
-<option value="impresoras">Impresoras</option>
+            <option value="balanzas">Balanzas y Escáner Balanza</option>
+            <option value="impresoras">Impresoras</option>
             <option value="movilidad">Computadoras Móviles</option>
           </select>
           <button class="sort-dir-btn">↑</button>
