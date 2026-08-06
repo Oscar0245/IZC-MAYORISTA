@@ -5,14 +5,34 @@
     brand: null,
     allProducts: [],
     filterData: null,
-    active: null // { groupSlug, optionSlug, label, groupTitle, skus }
+    active: null, // { groupSlug, optionSlug, label, groupTitle, skus }
+    category: null // type/category id from toolbar select
+  };
+
+  var CATEGORY_LABELS = {
+    lectores: 'Lectores de Códigos de Barras',
+    impresoras: 'Impresoras de Etiquetas',
+    'impresoras-carnet': 'Impresoras de Carnet',
+    'impresoras-manillas': 'Impresoras de Manillas',
+    'monitores-touch': 'Monitores Touch',
+    'equipos-pos': 'Equipos POS',    digitalizadores: 'Digitalizadores de Firmas',
+    movilidad: 'Terminales Móviles',
+    consumibles: 'Consumibles',
+    cables: 'Cables y conectividad',
+    energia: 'Energía / UPS',
+    seguridad: 'Seguridad electrónica',
+    control: 'Control de acceso',
+    tarjetas: 'Lectores de Tarjetas',
+    camaras: 'Cámaras',
+    grabadores: 'Grabadores',
+    otros: 'Otros'
   };
 
   function detectBrand() {
     var bodyBrand = document.body && document.body.getAttribute('data-brand');
     if (bodyBrand) return bodyBrand.toLowerCase();
     var page = (location.pathname.split('/').pop() || '').replace(/\.html$/i, '').toLowerCase();
-    var known = ['datalogic', 'elo', 'hid', 'honeywell', 'imou', 'ruijie', 'topaz', 'zebra', 'zkteco'];
+    var known = ['datalogic', 'elo', 'hid', 'honeywell', 'imou', 'ruijie', 'sat', 'topaz', 'zebra', 'zkteco'];
     return known.indexOf(page) !== -1 ? page : null;
   }
 
@@ -153,7 +173,94 @@
     } else {
       url.searchParams.set('filtro', active.groupSlug + ':' + active.optionSlug);
     }
+    if (state.category) {
+      url.searchParams.set('cat', state.category);
+    } else {
+      url.searchParams.delete('cat');
+    }
     history.replaceState({}, '', url.pathname + url.search + url.hash);
+  }
+
+  function productCategoryId(product) {
+    return product.type || product.category || 'otros';
+  }
+
+  function productMatchesCategory(product, categoryId) {
+    if (!categoryId || categoryId === 'all') return true;
+    if (productCategoryId(product) === categoryId) return true;
+    var subtypes = product.subtypes || [];
+    if (subtypes.indexOf(categoryId) !== -1) return true;
+    if (product.subtype === categoryId) return true;
+    return false;
+  }
+
+  function collectBrandCategories() {
+    var counts = {};
+    state.allProducts.forEach(function (product) {
+      var id = productCategoryId(product);
+      counts[id] = (counts[id] || 0) + 1;
+    });
+    return Object.keys(counts)
+      .sort(function (a, b) {
+        if (counts[b] !== counts[a]) return counts[b] - counts[a];
+        return String(CATEGORY_LABELS[a] || a).localeCompare(String(CATEGORY_LABELS[b] || b), 'es');
+      })
+      .map(function (id) {
+        return {
+          id: id,
+          label: CATEGORY_LABELS[id] || id,
+          count: counts[id]
+        };
+      });
+  }
+
+  function bindCategorySelect() {
+    var select = document.getElementById('sortSelect');
+    if (!select || !select.parentNode) return;
+
+    // Quita listeners viejos de *-brand.js (capturaban la grilla vacía)
+    var fresh = select.cloneNode(false);
+    fresh.id = 'sortSelect';
+    select.parentNode.replaceChild(fresh, select);
+    select = fresh;
+
+    var cats = collectBrandCategories();
+    var html = '<option value="all">Todas las Categorías</option>';
+    cats.forEach(function (cat) {
+      html +=
+        '<option value="' +
+        escapeHtml(cat.id) +
+        '">' +
+        escapeHtml(cat.label) +
+        '</option>';
+    });
+    select.innerHTML = html;
+
+    var params = new URLSearchParams(window.location.search);
+    var fromUrl = params.get('cat');
+    if (fromUrl && countsHas(cats, fromUrl)) {
+      state.category = fromUrl;
+      select.value = fromUrl;
+    } else {
+      state.category = null;
+      select.value = 'all';
+    }
+
+    select.addEventListener('change', function () {
+      var value = select.value || 'all';
+      state.category = value === 'all' ? null : value;
+      setUrlFilter(state.active);
+      applyActiveFilter();
+      var grid = document.getElementById('productGrid');
+      if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  function countsHas(cats, id) {
+    for (var i = 0; i < cats.length; i++) {
+      if (cats[i].id === id) return true;
+    }
+    return false;
   }
 
   function renderActiveFilterBar() {
@@ -207,6 +314,11 @@
 
   function applyActiveFilter() {
     var products = state.allProducts;
+    if (state.category) {
+      products = products.filter(function (p) {
+        return productMatchesCategory(p, state.category);
+      });
+    }
     if (state.active && state.active.skus && state.active.skus.length) {
       var allow = {};
       state.active.skus.forEach(function (sku) {
@@ -219,6 +331,16 @@
     renderProducts(products);
     renderActiveFilterBar();
     highlightSidebar();
+    syncCategorySelectValue();
+  }
+
+  function syncCategorySelectValue() {
+    var select = document.getElementById('sortSelect');
+    if (!select) return;
+    var wanted = state.category || 'all';
+    if (select.value !== wanted) {
+      select.value = wanted;
+    }
   }
 
   function clearFilter() {
@@ -406,7 +528,10 @@
         var filters = results[1];
 
         state.allProducts = (catalog.products || []).filter(function (product) {
-          return product.brand === brand && !isSat(product);
+          if (product.brand !== brand) return false;
+          // En la página SAT sí mostramos SAT; en otras marcas se excluyen cruces
+          if (brand === 'sat') return true;
+          return !isSat(product);
         });
 
         if (filters && filters[brand]) {
@@ -415,6 +540,7 @@
           readFilterFromUrl();
         }
 
+        bindCategorySelect();
         applyActiveFilter();
         focusSkuFromQuery();
       })
@@ -431,6 +557,11 @@
 
   window.IZCBrandCatalog = {
     detectBrand: detectBrand,
-    clearFilter: clearFilter
+    clearFilter: clearFilter,
+    setCategory: function (categoryId) {
+      state.category = !categoryId || categoryId === 'all' ? null : categoryId;
+      setUrlFilter(state.active);
+      applyActiveFilter();
+    }
   };
 })();

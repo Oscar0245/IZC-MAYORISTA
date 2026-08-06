@@ -49,17 +49,14 @@
   },
   "lectores-empotrables": {
     "url": "https://izc.com.co/es/punto-de-venta-pos/lector-de-codigo-de-barras/empotrables.html",
-    "count": 9,
+    "count": 6,
     "skus": [
-      "4031",
-      "10927",
       "8289",
       "3367",
       "4210",
       "7487",
       "10309",
-      "10311",
-      "15361"
+      "10311"
     ],
     "parent": "lectores"
   },
@@ -101,28 +98,6 @@
       "3184"
     ],
     "parent": "monitores"
-  },
-  "mini-pc": {
-    "url": "https://izc.com.co/es/punto-de-venta-pos/mini-pc.html",
-    "count": 0,
-    "skus": [],
-    "parent": "equipos"
-  },
-  "balanzas": {
-    "url": "https://izc.com.co/es/punto-de-venta-pos/balanzas.html",
-    "count": 3,
-    "skus": [
-      "4031",
-      "10927",
-      "15361"
-    ],
-    "parent": "balanzas"
-  },
-  "cajones": {
-    "url": "https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html",
-    "count": 0,
-    "skus": [],
-    "parent": "equipos"
   },
   "impresoras-escritorio": {
     "url": "https://izc.com.co/es/identificacion-y-marcacion/impresoras-de-etiquetas/escritorio.html",

@@ -11,10 +11,6 @@
       label: 'Lectores',
       keywords: ['lectores de codigo de barras', 'lector de codigo de barras', 'codigo de barras', 'barcode', 'quickscan', 'magellan', 'voyager', 'xenon', 'escaner', 'scanner', 'scaner', 'lectores', 'lector']
     },
-    balanzas: {
-      label: 'Balanzas',
-      keywords: ['balanza', 'balanzas', 'scanner balanza', 'escaner balanza']
-    },
     impresoras: {
       label: 'Impresoras',
       keywords: ['impresora', 'impresoras', 'etiqueta', 'termica']
@@ -61,7 +57,7 @@
     },
     equipos: {
       label: 'Equipos POS',
-      keywords: ['equipo pos', 'todo en uno', 'punto de venta', 'mini pc']
+      keywords: ['equipo pos', 'todo en uno', 'punto de venta']
     }
   };
 
@@ -71,10 +67,7 @@
     'lectores-de-mesa': { label: 'Lectores de Mesa', parent: 'lectores' },
     'lectores-empotrables': { label: 'Lectores Empotrables', parent: 'lectores' },
     'equipos-pos': { label: 'Equipos para Punto de Venta', parent: 'equipos' },
-    'monitores-touch': { label: 'Monitores Touch', parent: 'monitores' },
-    'mini-pc': { label: 'Mini PC', parent: 'equipos' },
-    'cajones': { label: 'Cajones monederos', parent: 'equipos' },
-    'impresoras-escritorio': { label: 'Impresoras de Escritorio', parent: 'impresoras' },
+    'monitores-touch': { label: 'Monitores Touch', parent: 'monitores' },    'impresoras-escritorio': { label: 'Impresoras de Escritorio', parent: 'impresoras' },
     'impresoras-semi-industriales': { label: 'Impresoras Semi Industriales', parent: 'impresoras' },
     'impresoras-industriales': { label: 'Impresoras Industriales', parent: 'impresoras' },
     'impresoras-carnet': { label: 'Impresoras de Carnet', parent: 'impresoras' },

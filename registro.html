@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarse - IZC MAYORISTA</title>
+  <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/index.css?v=29">
+  <link rel="stylesheet" href="assets/css/auth.css?v=9">
+  <script>
+    if (location.protocol === 'file:') {
+      location.replace('http://127.0.0.1:8080/registro.html');
+    }
+  </script>
+  <script src="assets/js/auth.js?v=31" defer></script>
+  <script src="assets/js/index.js?v=3" defer></script>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+      <div style="flex:1"></div>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <h1>Registrarse</h1>
+      <p class="auth-lead">Crea tu cuenta con nombre, NIT y contraseña. Se guarda en usuarios.json del servidor local.</p>
+      <form id="registroForm" autocomplete="on" novalidate>
+        <div class="auth-field">
+          <label for="regNombre">Nombre</label>
+          <input id="regNombre" name="nombre" type="text" placeholder="Nombre o razón social" required minlength="2" autocomplete="name">
+        </div>
+        <div class="auth-field">
+          <label for="regNit">NIT</label>
+          <input id="regNit" name="nit" type="text" inputmode="numeric" placeholder="Ej: 900123456-1" required autocomplete="off">
+        </div>
+        <div class="auth-field">
+          <label for="regPassword">Contraseña</label>
+          <input id="regPassword" name="password" type="password" placeholder="Mínimo 4 caracteres" required minlength="4" autocomplete="new-password">
+        </div>
+        <p id="authMessage" class="auth-message" role="status"></p>
+        <button class="auth-submit" type="submit">Crear cuenta</button>
+      </form>
+      <p class="auth-switch">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </div>
+  </main>
+</body>
+</html>

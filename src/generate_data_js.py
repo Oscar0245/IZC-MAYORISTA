@@ -14,6 +14,7 @@ TARGETS = [
     "product_details.json",
     "categoria_skus.json",
     "brand_products.json",
+    "productos.json",
 ]
 
 

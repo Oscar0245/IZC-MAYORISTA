@@ -18,8 +18,10 @@ import pandas as pd
 BASE_DIR = Path(__file__).resolve().parent.parent
 RUTA_EXCEL = BASE_DIR / "assets" / "files" / "lista-precios-izc.xlsb"
 RUTA_JSON = BASE_DIR / "assets" / "files" / "precios.json"
+RUTA_PRODUCTOS_JSON = BASE_DIR / "assets" / "files" / "productos.json"
 
 STONE_COL = 0
+NAME_COL = 2
 USD_COL = 64  # Columna BM
 START_ROW = 3
 
@@ -72,6 +74,33 @@ def extraer_precios_stone_usd() -> dict[str, float]:
     return mapa_precios
 
 
+def extraer_nombres_stone() -> dict[str, str]:
+    if not RUTA_EXCEL.exists():
+        raise FileNotFoundError(f"No se encontro el Excel en {RUTA_EXCEL}")
+
+    df = pd.read_excel(RUTA_EXCEL, engine="pyxlsb", header=None)
+    mapa_nombres: dict[str, str] = {}
+
+    for i in range(START_ROW, len(df)):
+        fila = df.iloc[i]
+        sku = limpiar_sku(fila[STONE_COL])
+        if not sku or len(fila) <= NAME_COL:
+            continue
+        nombre = fila[NAME_COL]
+        if pd.isna(nombre):
+            continue
+        texto = str(nombre).strip()
+        if not texto:
+            continue
+
+        mapa_nombres[sku] = texto
+        sku_sin_ceros = sku.lstrip("0")
+        if sku_sin_ceros:
+            mapa_nombres[sku_sin_ceros] = texto
+
+    return mapa_nombres
+
+
 def guardar_precios(mapa: dict[str, float]) -> None:
     RUTA_JSON.parent.mkdir(parents=True, exist_ok=True)
     RUTA_JSON.write_text(
@@ -80,11 +109,24 @@ def guardar_precios(mapa: dict[str, float]) -> None:
     )
 
 
+def guardar_productos(mapa: dict[str, str]) -> None:
+    RUTA_PRODUCTOS_JSON.parent.mkdir(parents=True, exist_ok=True)
+    RUTA_PRODUCTOS_JSON.write_text(
+        json.dumps(mapa, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 if __name__ == "__main__":
     print(f"Leyendo Excel: {RUTA_EXCEL}")
     precios = extraer_precios_stone_usd()
+    productos = extraer_nombres_stone()
     guardar_precios(precios)
-    print(f"Listo: {len(precios)} SKUs -> {RUTA_JSON}")
-    for sku in ("4031", "6513", "13"):
+    guardar_productos(productos)
+    print(f"Listo: {len(precios)} precios -> {RUTA_JSON}")
+    print(f"Listo: {len(productos)} nombres -> {RUTA_PRODUCTOS_JSON}")
+    for sku in ("4031", "6513", "4041", "13"):
         if sku in precios:
             print(f"  {sku}: ${precios[sku]:.2f}")
+        if sku in productos:
+            print(f"  {sku}: {productos[sku][:60]}...")

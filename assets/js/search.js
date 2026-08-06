@@ -254,7 +254,6 @@
     var norm = normalize(query);
     var types = {
       lectores: ['lector', 'lectores', 'escaner', 'scanner', 'scaner', 'codigo de barras', 'barcode'],
-      balanzas: ['balanza', 'balanzas'],
       impresoras: ['impresora', 'impresoras'],
       monitores: ['monitor', 'monitores', 'touch'],
       camaras: ['camara', 'camaras', 'cctv'],

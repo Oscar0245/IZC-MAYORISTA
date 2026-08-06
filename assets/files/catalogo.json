@@ -84,22 +84,6 @@
   ],
   "products": [
     {
-      "sku": "4031",
-      "name": "Lector Balanza Datalogic Magellan 9300 9320450110 020213",
-      "brand": "datalogic",
-      "brandName": "Datalogic",
-      "brandLogo": "Datalogic.png",
-      "brandPage": "datalogic.html",
-      "img": "https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/d/a/datalogic_magellan_9300.jpg",
-      "category": "lectores",
-      "type": "lectores",
-      "subtype": "lectores-empotrables",
-      "subtypes": [
-        "lectores-empotrables",
-        "balanzas"
-      ]
-    },
-    {
       "sku": "6513",
       "name": "Lector de Codigo de Barras Datalogic Magellan 1500I MG1501-10211-0200",
       "brand": "datalogic",
@@ -202,22 +186,6 @@
       "subtype": "lectores-de-mano",
       "subtypes": [
         "lectores-de-mano"
-      ]
-    },
-    {
-      "sku": "15361",
-      "name": "SCANER BALANZA IMAGER DATALOGIC MAGELLAN 9556",
-      "brand": "datalogic",
-      "brandName": "Datalogic",
-      "brandLogo": "Datalogic.png",
-      "brandPage": "datalogic.html",
-      "img": "https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/s/c/scanner-balanza-magellan-9550i-1.jpg",
-      "category": "lectores",
-      "type": "lectores",
-      "subtype": "lectores-empotrables",
-      "subtypes": [
-        "lectores-empotrables",
-        "balanzas"
       ]
     },
     {
@@ -2638,22 +2606,6 @@
       ]
     },
     {
-      "sku": "10927",
-      "name": "Lector de Código de Barras Balanza ZEBRA MP7000 MP7001-LCSLM00SG",
-      "brand": "zebra",
-      "brandName": "Zebra",
-      "brandLogo": "Zebra.png",
-      "brandPage": "zebra.html",
-      "img": "https://izc.com.co/pub/media/catalog/product/cache/bb7696f33c0507e199458c931a841b31/z/e/zebra_mp7000_1.jpg",
-      "category": "lectores",
-      "type": "lectores",
-      "subtype": "lectores-empotrables",
-      "subtypes": [
-        "lectores-empotrables",
-        "balanzas"
-      ]
-    },
-    {
       "sku": "9908",
       "name": "Lector de Código de Barras ZEBRA CS6080 BT CS6080-SR40004VZWW",
       "brand": "zebra",
@@ -4029,28 +3981,6 @@
         "3150",
         "3184"
       ]
-    },
-    "mini-pc": {
-      "label": "Mini Pc",
-      "parent": "equipos",
-      "url": "https://izc.com.co/es/punto-de-venta-pos/mini-pc.html",
-      "skus": []
-    },
-    "balanzas": {
-      "label": "Balanzas",
-      "parent": "balanzas",
-      "url": "https://izc.com.co/es/punto-de-venta-pos/balanzas.html",
-      "skus": [
-        "4031",
-        "10927",
-        "15361"
-      ]
-    },
-    "cajones": {
-      "label": "Cajones",
-      "parent": "equipos",
-      "url": "https://izc.com.co/es/punto-de-venta-pos/cajones-monederos.html",
-      "skus": []
     },
     "impresoras-escritorio": {
       "label": "Impresoras Escritorio",

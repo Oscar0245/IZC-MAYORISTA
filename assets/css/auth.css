@@ -1,0 +1,239 @@
+/* Estilos de autenticación (login / registro) y links junto al buscador. */
+.header-auth {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.header-auth[hidden] {
+  display: none !important;
+}
+
+.header-auth-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-right: auto;
+}
+
+.header-auth-top[hidden] {
+  display: none !important;
+}
+
+.header-auth-top .header-auth-nit {
+  color: #dce8ff;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.95;
+}
+
+.header-auth-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue-deep, #1653a0);
+  border: 0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-auth-link:hover {
+  background: var(--blue-bright, #1d72db);
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .header-auth {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin: 4px 0 0;
+    gap: 20px;
+  }
+
+  .header-auth-link {
+    font-size: 0.92rem;
+  }
+}
+
+.auth-page {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px 64px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid #e7f0e3;
+  border-radius: 8px;
+  padding: 32px 28px;
+  box-shadow: 0 8px 24px rgba(22, 83, 160, 0.08);
+}
+
+.auth-card h1 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  color: #16233f;
+}
+
+.auth-card .auth-lead {
+  margin: 0 0 24px;
+  color: #5a6b85;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.auth-field {
+  margin-bottom: 16px;
+}
+
+.auth-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #16233f;
+}
+
+.auth-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #c2d1e5;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #16233f;
+  background: #fff;
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: #1d72db;
+  box-shadow: 0 0 0 3px rgba(29, 114, 219, 0.15);
+}
+
+.auth-submit {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 4px;
+  background: #1653a0;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-submit:hover {
+  background: #124587;
+}
+
+.auth-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-message {
+  min-height: 1.25em;
+  margin: 14px 0 0;
+  font-size: 0.9rem;
+}
+
+.auth-message.is-ok {
+  color: #1b7a3d;
+}
+
+.auth-message.is-error {
+  color: #c62828;
+}
+
+.auth-switch {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: #5a6b85;
+}
+
+.auth-switch a {
+  color: #1653a0;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Modo invitado: acciones comerciales bloqueadas visualmente */
+body.is-guest .wishlist-btn,
+body.is-guest #productWishlistBtn {
+  opacity: 0.55;
+}
+
+body.is-guest .btn-download {
+  opacity: 0.75;
+}
+
+/* Favoritos y perfil del header: solo con sesión */
+#headerWishlist,
+.header-wishlist,
+#headerProfile,
+.header-profile {
+  display: none !important;
+}
+
+body.is-logged-in #headerWishlist,
+body.is-logged-in .header-wishlist,
+body.is-logged-in #headerProfile,
+body.is-logged-in .header-profile {
+  display: inline-flex !important;
+}
+
+.header-profile {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  margin-left: 8px;
+  border: 1px solid #c2d1e5;
+  border-radius: 4px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+
+.header-profile:hover {
+  background: #eef5ff;
+  border-color: #9bb8e0;
+}
+
+.header-profile-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  border-radius: 50%;
+}
+
+.price-locked {
+  color: #5a6b85 !important;
+  font-size: 0.92em !important;
+  font-weight: 600 !important;
+}

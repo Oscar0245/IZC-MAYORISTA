@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizador - IZC MAYORISTA</title>
+  <link rel="icon" href="assets/logo/iconoizc.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/index.css?v=29">
+  <link rel="stylesheet" href="assets/css/auth.css?v=9">
+  <link rel="stylesheet" href="assets/css/cotizador.css?v=1">
+  <script>
+    if (location.protocol === 'file:') {
+      location.replace('http://127.0.0.1:8080/cotizador.html');
+    }
+  </script>
+  <script src="assets/js/data-loader.js?v=2" defer></script>
+  <script src="assets/js/search.js?v=3" defer></script>
+  <script src="assets/js/prices.js?v=5" defer></script>
+  <script src="assets/js/wishlist.js?v=4" defer></script>
+  <script src="assets/js/auth.js?v=26" defer></script>
+  <script src="assets/js/cotizador.js?v=1" defer></script>
+  <script src="assets/js/index.js?v=3" defer></script>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://api.whatsapp.com/send?phone=573144355391" target="_blank">Soporte Técnico</a>
+    </div>
+  </div>
+  
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo/logoizc.png" alt="IZC Mayorista" class="logo-img">
+      </a>
+      <form class="search-bar" id="searchForm" action="#" method="GET">
+        <div class="cat-select"></div>
+        <input type="text" name="q" id="searchInput" placeholder="Buscar en toda la tienda..." required>
+        <button type="submit">🔍︎</button>
+      </form>
+      <a href="favoritos.html" class="header-wishlist" id="headerWishlist" title="Mis favoritos" aria-label="Mis favoritos"><span class="header-wishlist-icon" aria-hidden="true">♥</span></a>
+    </div>
+  </header>
+  
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <ul>
+        <li class="nav-item"><a href="index.html">Inicio</a></li>
+        <li class="nav-item"><a href="marcas.html">Marcas</a></li>
+        <li class="nav-item"><a href="cotizador.html" aria-current="page">Cotizador</a></li>
+        <li class="nav-item"><a href="index.html">Lista de Precios</a></li>
+      </ul>
+    </div>
+  </nav>+
+  
+  <main class="cotizador-page">
+    <div class="cotizador-wrap">
+      <header class="cotizador-head">
+        <div>
+          <h1>Cotizador</h1>
+          <p class="cotizador-lead">Agrega productos por código de SKU.</p>
+        </div>
+        <div class="cotizador-trm">
+          <label for="cotizadorTrm">TRM (COP por 1 USD)</label>
+          <input id="cotizadorTrm" type="number" min="1" step="0.01" value="3204">
+        </div>
+      </header>
+      
+      <p id="cotizadorGate" class="cotizador-gate" hidden>
+        Debes iniciar sesión para cotizar con precios.
+        <a href="login.html">Iniciar sesión</a>
+      </p>
+      
+      <section id="cotizadorPanel" class="cotizador-panel" hidden>
+        <form id="cotizadorAddForm" class="cotizador-add">
+          <div class="cotizador-field">
+            <label for="cotizadorSku">Código de producto (SKU)</label>
+            <input id="cotizadorSku" name="sku" type="text" inputmode="numeric" placeholder="Ej: 4031" required autocomplete="off">
+          </div>
+          <div class="cotizador-field cotizador-field-qty">
+            <label for="cotizadorQty">Cantidad</label>
+            <input id="cotizadorQty" name="qty" type="number" min="1" step="1" value="1" required>
+          </div>
+          <button type="submit" class="cotizador-add-btn">Agregar</button>
+        </form>
+        <p id="cotizadorMessage" class="cotizador-message" role="status"></p>
+        
+        <div class="cotizador-table-wrap">
+          <table class="cotizador-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Cant.</th>
+                <th>USD und.</th>
+                <th>COP und.</th>
+                <th>USD + IVA</th>
+                <th>COP + IVA</th>
+                <th>Total USD + IVA</th>
+                <th>Total COP + IVA</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cotizadorBody">
+              <tr class="cotizador-empty-row"><td colspan="9">Aún no hay productos en la cotización.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="cotizador-totals">
+          <div class="cotizador-total-card">
+            <span>Cantidad total</span>
+            <strong id="totalQty">0</strong>
+          </div>
+          <div class="cotizador-total-card">
+            <span>Total USD</span>
+            <strong id="totalUsd">$ 0.00</strong>
+          </div>
+          <div class="cotizador-total-card">
+            <span>Total COP</span>
+            <strong id="totalCop">$ 0 COP</strong>
+          </div>
+          <div class="cotizador-total-card is-iva">
+            <span>Total USD + IVA</span>
+            <strong id="totalUsdIva">$ 0.00</strong>
+          </div>
+          <div class="cotizador-total-card is-iva">
+            <span>Total COP + IVA</span>
+            <strong id="totalCopIva">$ 0 COP</strong>
+          </div>
+        </div>
+        
+        <div class="cotizador-actions">
+          <button type="button" class="cotizador-clear" id="cotizadorClear">Vaciar cotización</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
